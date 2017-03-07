@@ -3,13 +3,18 @@
     <ion-title>
       Dashboard
     </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="presentPopover($event)">
+        <ion-icon name="settings"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
   <div id="map" class="map" ion-fixed></div>
   <ion-fab class="fab" bottom right ion-fixed>
-    <button ion-fab>
+    <button ion-fab (click)="addField()">
       <ion-icon name="add"></ion-icon>
     </button>
   </ion-fab>
@@ -19,10 +24,10 @@
       <p>Get started by adding a field</p>
     </ion-slide>
     <ion-slide padding>
-      <h2>Field 1 Name</h2>
+      <h2>Field Name</h2>
       <h3>1 hectare</h3>
       <p>Last spread: 01/01/1970</p>
-      <button ion-button block>View Field</button>
+      <button ion-button block (click)="viewField()">View Field</button>
     </ion-slide>
   </ion-slides>
 </ion-content>
