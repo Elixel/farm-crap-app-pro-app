@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 import { Map } from 'mapbox-gl';
-
-import { NavController, PopoverController } from 'ionic-angular';
+import { ViewChild } from '@angular/core';
+import { NavController, PopoverController, Slides } from 'ionic-angular';
 import { FieldAddPage } from '../field-add/field-add';
 import { FieldDetailPage } from '../field-detail/field-detail';
 import { AboutPage } from '../about/about';
@@ -14,6 +14,7 @@ import { SettingsPage } from '../settings/settings';
   templateUrl: 'home.html'
 })
 export class HomePage {
+  @ViewChild(Slides) slides: Slides;
   map: Map<any, any>;
 
   constructor(public navCtrl: NavController, public popoverCtrl: PopoverController) {
@@ -22,6 +23,8 @@ export class HomePage {
   }
 
   ngOnInit() {
+    // Enable pager on slide carousel
+    this.slides.pager = true;
     // Create map instance
     this.map = new mapboxgl.Map({
       container: 'map',
