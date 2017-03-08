@@ -56,6 +56,7 @@ import { ViewController, App } from 'ionic-angular';
       <button ion-item (click)="about()">About</button>
       <button ion-item (click)="settings()">Settings</button>
       <button ion-item (click)="calculator()">Calculator</button>
+      <button ion-item (click)="export()">Export Data</button>
     </ion-list>
   `
 })
@@ -76,6 +77,11 @@ export class PopoverPage {
   calculator() {
     this.viewCtrl.dismiss();
     this.appCtrl.getRootNav().push(CalculatorPage);
+  }
+
+  export() {
+    this.viewCtrl.dismiss();
+    // Export data here
   }
 
 }
