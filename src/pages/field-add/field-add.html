@@ -14,14 +14,76 @@
 
 
 <ion-content>
-  <div id="map-add" class="map" ion-fixed></div>
+  <ion-slides ion-fixed class="swiper-no-swiping">
+    <ion-slide>
+      <div padding>
+        <h1>Create boundaries</h1>
+        <p>Create the boundaries of your field below by creating points in a clockwise fashion.</p>
+      </div>
+      <div id="map-add" class="map"></div>
+    </ion-slide>
+    <ion-slide>
+      <ion-list>
+        <ion-list-header>Basic Details</ion-list-header>
+        <ion-item>
+          <ion-label stacked>Field Name</ion-label>
+          <ion-input type="text" placeholder="My Field"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label stacked>Hectares</ion-label>
+          <ion-input type="text" value="0"></ion-input>
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+    <ion-slide>
+      <ion-list>
+        <ion-list-header>Soil Details</ion-list-header>
+        <ion-item>
+          <ion-label>Soil Type</ion-label>
+          <ion-select [(ngModel)]="soiltype">
+            <ion-option value="1">1</ion-option>
+            <ion-option value="2">2</ion-option>
+            <ion-option value="3">3</ion-option>
+            <ion-option value="4">4</ion-option>
+            <ion-option value="5">5</ion-option>
+            <ion-option value="6">6</ion-option>
+            <ion-option value="7">7</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>Organic Manures<p>Have you applied OM in the past?</p></ion-label>
+          <ion-checkbox checked="true"></ion-checkbox>
+        </ion-item>
+      </ion-list>
+      <ion-list>
+        <ion-list-header>Results of previous soil tests</ion-list-header>
+        <ion-item>
+          <ion-label>Phorphorous (P)</ion-label>
+          <ion-select [(ngModel)]="soilp">
+            <ion-option value="1">0</ion-option>
+            <ion-option value="1">1</ion-option>
+            <ion-option value="2">2</ion-option>
+            <ion-option value="3">3</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>Potash (K)</ion-label>
+          <ion-select [(ngModel)]="soilk">
+            <ion-option value="1">0</ion-option>
+            <ion-option value="1">1</ion-option>
+            <ion-option value="2">1-2</ion-option>
+            <ion-option value="3">2-3</ion-option>
+            <ion-option value="3">3+</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+    <ion-slide>
+      <ion-list>
+        <ion-list-header>Crop Details</ion-list-header>
+      </ion-list>
+    </ion-slide>
+  </ion-slides>
+  <button ion-button clear small class="prev" ion-fixed (click)="prev()">Previous</button>
+  <button ion-button clear small class="next" ion-fixed (click)="next()">Next</button>
 </ion-content>
-
-<ion-footer>
-  <ion-toolbar position="bottom">
-    <ion-item>
-      <ion-input type="text" placeholder="Field Name"></ion-input>
-      <button ion-button item-right (click)="addField()">Add</button>
-    </ion-item>
-  </ion-toolbar>
-</ion-footer>

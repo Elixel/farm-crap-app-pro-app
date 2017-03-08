@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 import { Map } from 'mapbox-gl';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, Slides } from 'ionic-angular';
+import { ViewChild } from '@angular/core';
 
 /*
   Generated class for the FieldAdd page.
@@ -14,6 +15,7 @@ import { NavController, NavParams } from 'ionic-angular';
   templateUrl: 'field-add.html'
 })
 export class FieldAddPage {
+  @ViewChild(Slides) slides: Slides;
   map: Map<any, any>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
@@ -22,6 +24,8 @@ export class FieldAddPage {
   }
 
   ngOnInit() {
+    // Enable pager on slide carousel
+    this.slides.pager = true;
     // Create map instance
     this.map = new mapboxgl.Map({
       container: 'map-add',
@@ -31,8 +35,14 @@ export class FieldAddPage {
     });
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad FieldAddPage');
+  // Previous button
+  prev() {
+    this.slides.slidePrev();
+  }
+
+  // Next button
+  next() {
+    this.slides.slideNext();
   }
 
   addField() {
