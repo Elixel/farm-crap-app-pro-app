@@ -35,17 +35,18 @@ export class FieldAddPage {
     });
   }
 
-  // Previous button
-  prev() {
+  // Previous button handler
+  prevPressed() {
     this.slides.slidePrev();
   }
 
-  // Next button
-  next() {
+  // Next button handler
+  nextPressed() {
     this.slides.slideNext();
   }
 
-  addField() {
+  // Finish button handler
+  finishPressed() {
     this.navCtrl.pop();
   }
 

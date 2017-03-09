@@ -51,12 +51,12 @@
           </ion-select>
         </ion-item>
         <ion-item>
-          <ion-label>Organic Manures<p>Have you applied OM in the past?</p></ion-label>
+          <ion-label>Organic Manures<p>Do you regularly add organic manures?</p></ion-label>
           <ion-checkbox checked="true"></ion-checkbox>
         </ion-item>
       </ion-list>
       <ion-list>
-        <ion-list-header>Results of previous soil tests</ion-list-header>
+        <ion-list-header>Results of soil tests (if available)</ion-list-header>
         <ion-item>
           <ion-label>Phorphorous (P)</ion-label>
           <ion-select [(ngModel)]="soilp">
@@ -81,9 +81,75 @@
     <ion-slide>
       <ion-list>
         <ion-list-header>Crop Details</ion-list-header>
+        <ion-item>
+          <ion-label>Grass Grown<p>Has grass grown in the last 3 years?</p></ion-label>
+          <ion-checkbox checked="true"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>Old Crop Type</ion-label>
+          <ion-select [(ngModel)]="oldcroptype">
+            <ion-option value="0">0</ion-option>
+            <ion-option value="1">1</ion-option>
+            <ion-option value="2">2</ion-option>
+            <ion-option value="3">3</ion-option>
+            <ion-option value="4">4</ion-option>
+            <ion-option value="5">5</ion-option>
+            <ion-option value="6">6</ion-option>
+            <ion-option value="7">7</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>New Crop Type</ion-label>
+          <ion-select [(ngModel)]="newcroptype">
+            <ion-option value="0">0</ion-option>
+            <ion-option value="1">1</ion-option>
+            <ion-option value="2">2</ion-option>
+            <ion-option value="3">3</ion-option>
+            <ion-option value="4">4</ion-option>
+            <ion-option value="5">5</ion-option>
+            <ion-option value="6">6</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+    <ion-slide>
+      <ion-list>
+        <ion-list-header>Soil N Supply</ion-list-header>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <h1>N Kg/ha</h1>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>0</ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+      <ion-list>
+        <ion-list-header>Crop nutrient requirements</ion-list-header>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <h1>N Kg/ha</h1>
+            </ion-col>
+            <ion-col>
+              <h1>P&#x2082;O&#x2085; Kg/ha</h1>
+            </ion-col>
+            <ion-col>
+              <h1>K&#x2082;O Kg/ha</h1>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>0</ion-col>
+            <ion-col>0</ion-col>
+            <ion-col>0</ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-list>
     </ion-slide>
   </ion-slides>
-  <button ion-button clear small class="prev" ion-fixed (click)="prev()">Previous</button>
-  <button ion-button clear small class="next" ion-fixed (click)="next()">Next</button>
+  <button ion-button clear small class="prev" ion-fixed (click)="prevPressed()">Previous</button>
+  <button ion-button clear small class="next" ion-fixed (click)="nextPressed()" *ngIf="slides.getActiveIndex() !== 4">Next</button>
+  <button ion-button clear small class="next" ion-fixed (click)="finishPressed()" *ngIf="slides.getActiveIndex() == 4">Finish</button>
 </ion-content>
