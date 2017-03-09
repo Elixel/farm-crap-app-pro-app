@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 import { Map } from 'mapbox-gl';
 import { NavController, NavParams } from 'ionic-angular';
+import { SpreadAddPage } from '../spread-add/spread-add';
 
 /*
   Generated class for the FieldDetail page.
@@ -33,6 +34,10 @@ export class FieldDetailPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FieldDetailPage');
+  }
+
+  addSpreadPressed() {
+    this.navCtrl.push(SpreadAddPage);
   }
 
 }

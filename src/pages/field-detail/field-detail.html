@@ -22,25 +22,24 @@
   </div>
   <!-- Spreading Events -->
   <ion-list>
-    <ion-list-header>Spreading events <button ion-button item-right>Add</button></ion-list-header>
-    <ion-item>
+    <ion-list-header>Spreading events<button ion-button item-right (click)="addSpreadPressed()">Add</button></ion-list-header>
+    <button ion-item (click)="addSpreadPressed()">
       <h2>01/01/1970</h2>
       <p>Cattle Slurry</p>
-    </ion-item>
-    <ion-item>
+    </button>
+    <button ion-item (click)="addSpreadPressed()">
       <h2>01/01/1970</h2>
       <p>Compost</p>
-    </ion-item>
+    </button>
   </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button block>Delete Field</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button block>Edit Field</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
-
-<ion-footer>
-  <ion-toolbar>
-    <ion-buttons left>
-      <button ion-button>Delete Field</button>
-    </ion-buttons>
-    <ion-buttons right>
-      <button ion-button>Edit Field</button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-footer>

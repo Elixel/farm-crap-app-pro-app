@@ -24,8 +24,6 @@ export class FieldAddPage {
   }
 
   ngOnInit() {
-    // Enable pager on slide carousel
-    this.slides.pager = true;
     // Create map instance
     this.map = new mapboxgl.Map({
       container: 'map-add',

@@ -12,7 +12,18 @@
 </ion-header>
 
 <ion-content>
-  <div id="map" class="map" ion-fixed></div>
+  <ion-list>
+    <ion-list-header>Fields<button ion-button item-right (click)="addField()">Add</button></ion-list-header>
+    <button ion-item (click)="viewField()">
+      <h2>Field Name</h2>
+      <p>0 ha</p>
+    </button>
+    <button ion-item (click)="viewField()">
+      <h2>Field Name</h2>
+      <p>0 ha</p>
+    </button>
+  </ion-list>
+  <!--div id="map" class="map" ion-fixed></div>
   <ion-fab class="fab" bottom right ion-fixed>
     <button ion-fab (click)="addField()">
       <ion-icon name="add"></ion-icon>
@@ -29,5 +40,6 @@
       <p>Last spread: 01/01/1970</p>
       <button ion-button block (click)="viewField()">View Field</button>
     </ion-slide>
-  </ion-slides>
+  </ion-slides-->
+
 </ion-content>

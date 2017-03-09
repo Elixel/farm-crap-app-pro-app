@@ -13,6 +13,99 @@
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-slides ion-fixed pager class="swiper-no-swiping">
+    <ion-slide>
+      <ion-list>
+        <ion-list-header>Basic Details</ion-list-header>
+        <ion-item>
+          <ion-label>Date</ion-label>
+          <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="spreadDate"></ion-datetime>
+        </ion-item>
+      </ion-list>
+      <ion-list>
+        <ion-list-header>Manure Details</ion-list-header>
+        <ion-item>
+          <ion-label>Type</ion-label>
+          <ion-select [(ngModel)]="manureType">
+            <ion-option value="1">1</ion-option>
+            <ion-option value="2">2</ion-option>
+            <ion-option value="3">3</ion-option>
+            <ion-option value="4">4</ion-option>
+            <ion-option value="5">5</ion-option>
+            <ion-option value="6">6</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>Quality</ion-label>
+          <ion-select [(ngModel)]="manureQuality">
+            <ion-option value="1">1</ion-option>
+            <ion-option value="2">2</ion-option>
+            <ion-option value="3">3</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label>Application Method</ion-label>
+          <ion-select [(ngModel)]="manureApplicationMethod">
+            <ion-option value="1">1</ion-option>
+            <ion-option value="2">2</ion-option>
+            <ion-option value="3">3</ion-option>
+            <ion-option value="4">4</ion-option>
+            <ion-option value="5">5</ion-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+    <ion-slide>
+      <!-- Calculations -->
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6></ion-col>
+          <ion-col col-2>N</ion-col>
+          <ion-col col-2>P&#x2082;O&#x2085;</ion-col>
+          <ion-col col-2>K&#x2082;O</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>Crop nutrient requirements (Kg/ha)</ion-col>
+          <ion-col col-2>0</ion-col>
+          <ion-col col-2>0</ion-col>
+          <ion-col col-2>0</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>Crop available (Kg/ha)</ion-col>
+          <ion-col col-2>0</ion-col>
+          <ion-col col-2>0</ion-col>
+          <ion-col col-2>0</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>Fertiliser still needed (Kg/ha)</ion-col>
+          <ion-col col-2>0</ion-col>
+          <ion-col col-2>0</ion-col>
+          <ion-col col-2>0</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-6>Fertiliser savings</ion-col>
+          <ion-col col-2>£0</ion-col>
+          <ion-col col-2>£0</ion-col>
+          <ion-col col-2>£0</ion-col>
+        </ion-row>
+      </ion-grid>
+      <!-- Density Slider -->
+      <ion-list>
+        <ion-list-header>
+          <ion-label>Density</ion-label>
+          <ion-badge item-right>{{manureDensity}} m&#179;/ha</ion-badge>
+        </ion-list-header>
+        <ion-item>
+          <ion-range min="1" max="99" [(ngModel)]="manureDensity" color="secondary">
+            <ion-label range-left>1</ion-label>
+            <ion-label range-right>99</ion-label>
+          </ion-range>
+        </ion-item>
+      </ion-list>
+    </ion-slide>
+  </ion-slides>
+  <button ion-button clear small class="prev" ion-fixed (click)="prevPressed()">Previous</button>
+  <button ion-button clear small class="next" ion-fixed (click)="nextPressed()" *ngIf="slides.getActiveIndex() !== 1">Next</button>
+  <button ion-button clear small class="next" ion-fixed (click)="finishPressed()" *ngIf="slides.getActiveIndex() == 1">Finish</button>
 </ion-content>
