@@ -49,7 +49,19 @@
   </ion-list>
   <ion-list>
     <ion-list-header>Custom Manures<button ion-button item-right (click)="addCustomManurePressed()">Add</button></ion-list-header>
-    <button ion-item>Manure 1</button>
-    <button ion-item>Manure 2</button>
+    <ion-item-sliding>
+      <button ion-item (click)="addCustomManurePressed()">Manure 1</button>
+      <ion-item-options side="right">
+        <button ion-button>Edit</button>
+        <button ion-button color="danger">Delete</button>
+      </ion-item-options>
+    </ion-item-sliding>
+    <ion-item-sliding>
+      <button ion-item (click)="addCustomManurePressed()">Manure 2</button>
+      <ion-item-options side="right">
+        <button ion-button>Edit</button>
+        <button ion-button color="danger">Delete</button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 </ion-content>
