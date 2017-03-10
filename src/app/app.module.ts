@@ -11,6 +11,7 @@ import { DisclaimerPage } from '../pages/disclaimer/disclaimer';
 import { FieldEditPage } from '../pages/field-edit/field-edit';
 import { SpreadAddPage } from '../pages/spread-add/spread-add';
 import { SpreadEditPage } from '../pages/spread-edit/spread-edit';
+import { ManureAddPage } from '../pages/manure-add/manure-add';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SpreadEditPage } from '../pages/spread-edit/spread-edit';
     DisclaimerPage,
     FieldEditPage,
     SpreadAddPage,
-    SpreadEditPage
+    SpreadEditPage,
+    ManureAddPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -43,7 +45,8 @@ import { SpreadEditPage } from '../pages/spread-edit/spread-edit';
     DisclaimerPage,
     FieldEditPage,
     SpreadAddPage,
-    SpreadEditPage
+    SpreadEditPage,
+    ManureAddPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })

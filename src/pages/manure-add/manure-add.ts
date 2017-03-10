@@ -1,27 +1,26 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { ManureAddPage } from '../manure-add/manure-add';
 
 /*
-  Generated class for the Settings page.
+  Generated class for the ManureAdd page.
 
   See http://ionicframework.com/docs/v2/components/#navigation for more info on
   Ionic pages and navigation.
 */
 @Component({
-  selector: 'page-settings',
-  templateUrl: 'settings.html'
+  selector: 'page-manure-add',
+  templateUrl: 'manure-add.html'
 })
-export class SettingsPage {
+export class ManureAddPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {}
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SettingsPage');
+    console.log('ionViewDidLoad ManureAddPage');
   }
 
-  addCustomManurePressed() {
-    this.navCtrl.push(ManureAddPage);
+  finishPressed() {
+    this.navCtrl.pop();
   }
 
 }

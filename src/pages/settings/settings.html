@@ -13,6 +13,43 @@
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-list>
+    <ion-list-header>General settings</ion-list-header>
+    <ion-item>
+      <ion-label>Units</ion-label>
+      <ion-select>
+        <ion-option value="1">Metric</ion-option>
+        <ion-option value="2">Imperial</ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Farm Rainfall</ion-label>
+      <ion-select>
+        <ion-option value="1">High</ion-option>
+        <ion-option value="2">Medium</ion-option>
+        <ion-option value="3">Low</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>Fertiliser costs</ion-list-header>
+    <ion-item>
+      <ion-label>N</ion-label>
+      <ion-input value="0"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>P&#x2082;O&#x2085;</ion-label>
+      <ion-input value="0"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>K&#x2082;O</ion-label>
+      <ion-input value="0"></ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+    <ion-list-header>Custom Manures<button ion-button item-right (click)="addCustomManurePressed()">Add</button></ion-list-header>
+    <button ion-item>Manure 1</button>
+    <button ion-item>Manure 2</button>
+  </ion-list>
 </ion-content>
