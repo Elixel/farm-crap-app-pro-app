@@ -45,8 +45,8 @@
           </ion-select>
         </ion-item>
         <ion-item>
-          <ion-label>Application Method</ion-label>
-          <ion-select [(ngModel)]="manureApplicationMethod">
+          <ion-label>Application Type</ion-label>
+          <ion-select [(ngModel)]="manureApplicationType">
             <ion-option value="1">1</ion-option>
             <ion-option value="2">2</ion-option>
             <ion-option value="3">3</ion-option>
@@ -58,7 +58,9 @@
     </ion-slide>
     <ion-slide>
       <!-- Calculations -->
-      <ion-list-header>Results</ion-list-header>
+      <ion-card>
+        <img src="assets/images/crap/compost/compost_10t.jpg" />
+      </ion-card>
       <ion-grid no-padding>
         <ion-row>
           <ion-col col-6></ion-col>
@@ -67,25 +69,25 @@
           <ion-col col-2>K&#x2082;O</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-6 class="row-title">Crop nutrient requirements<br />(Kg/ha)</ion-col>
+          <ion-col col-6 class="row-title">Crop nutrient reqs (Kg/ha)</ion-col>
           <ion-col col-2 class="row-value">-0.000</ion-col>
           <ion-col col-2 class="row-value">-0.000</ion-col>
           <ion-col col-2 class="row-value">-0.000</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-6 class="row-title">Crop available<br />(Kg/ha)</ion-col>
+          <ion-col col-6 class="row-title">Crop available (Kg/ha)</ion-col>
           <ion-col col-2 class="row-value">-0.000</ion-col>
           <ion-col col-2 class="row-value">-0.000</ion-col>
           <ion-col col-2 class="row-value">-0.000</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-6 class="row-title">Fertiliser still needed<br />(Kg/ha)</ion-col>
+          <ion-col col-6 class="row-title">Fert still needed (Kg/ha)</ion-col>
           <ion-col col-2 class="row-value">-0.000</ion-col>
           <ion-col col-2 class="row-value">-0.000</ion-col>
           <ion-col col-2 class="row-value">-0.000</ion-col>
         </ion-row>
         <ion-row>
-          <ion-col col-6 class="row-title">Fertiliser savings<br />(&pound;)</ion-col>
+          <ion-col col-6 class="row-title">Fertiliser savings (&pound;)</ion-col>
           <ion-col col-2 class="row-value">-0.000</ion-col>
           <ion-col col-2 class="row-value">-0.000</ion-col>
           <ion-col col-2 class="row-value">-0.000</ion-col>
