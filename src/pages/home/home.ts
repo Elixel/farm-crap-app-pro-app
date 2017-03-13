@@ -17,11 +17,15 @@ import { Field } from '../../providers/field';
 export class HomePage {
   // @ViewChild(Slides) slides: Slides;
   // map: Map<any, any>;
+  public fields:Object[];
 
   constructor(public navCtrl: NavController, public popoverCtrl: PopoverController, private fieldProvider: Field) {
+    this.fields = this.fieldProvider.fields;
+    console.log(this.fields);
     // Set public access token
     // mapboxgl.accessToken = 'pk.eyJ1IjoiY29va2llY29va3NvbiIsImEiOiJjaXp6b3dvZnEwMDNqMnFsdTdlbmJtcHY0In0.OeHfq5_gzEIW13JzzsZJEA';
   }
+
 
   /*ngOnInit() {
     // Enable pager on slide carousel

@@ -18,17 +18,17 @@
     <ion-list-header>General settings</ion-list-header>
     <ion-item>
       <ion-label>Units</ion-label>
-      <ion-select>
-        <ion-option value="1">Metric</ion-option>
-        <ion-option value="2">Imperial</ion-option>
+      <ion-select [(ngModel)]="units" (ionChange)="setUnits(units)">
+        <ion-option value="metric">Metric</ion-option>
+        <ion-option value="imperial">Imperial</ion-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>Farm Rainfall</ion-label>
-      <ion-select>
-        <ion-option value="1">High</ion-option>
-        <ion-option value="2">Medium</ion-option>
-        <ion-option value="3">Low</ion-option>
+      <ion-select [(ngModel)]="rainfall" (ionChange)="setRainfall(rainfall)">
+        <ion-option value="high">High</ion-option>
+        <ion-option value="medium">Medium</ion-option>
+        <ion-option value="low">Low</ion-option>
       </ion-select>
     </ion-item>
   </ion-list>
@@ -36,31 +36,26 @@
     <ion-list-header>Fertiliser costs</ion-list-header>
     <ion-item>
       <ion-label>N</ion-label>
-      <ion-input value="0"></ion-input>
+      <ion-input type="number" [(ngModel)]="fertiliserCostNitrogen" (input)="setFertiliserCostNitrogen(fertiliserCostNitrogen)"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>P&#x2082;O&#x2085;</ion-label>
-      <ion-input value="0"></ion-input>
+      <ion-input [(ngModel)]="fertiliserCostPhosphorous" (input)="setFertiliserCostPhosphorous(fertiliserCostPhosphorous)"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>K&#x2082;O</ion-label>
-      <ion-input value="0"></ion-input>
+      <ion-input [(ngModel)]="fertiliserCostPotassium" (input)="setFertiliserCostPotassium(fertiliserCostPotassium)"></ion-input>
     </ion-item>
   </ion-list>
   <ion-list>
     <ion-list-header>Custom Manures<button ion-button item-right (click)="addCustomManurePressed()">Add</button></ion-list-header>
-    <ion-item-sliding>
-      <button ion-item (click)="addCustomManurePressed()">Manure 1</button>
+    <ion-item *ngIf="!customManure.length" no-lines>
+      <p>No items</p>
+    </ion-item>
+    <ion-item-sliding *ngFor="let manure of customManure; let customManureIndex = index;">
+      <button ion-item (click)="editCustomManure(customManureIndex)">{{manure.name}}</button>
       <ion-item-options side="right">
-        <button ion-button>Edit</button>
-        <button ion-button color="danger">Delete</button>
-      </ion-item-options>
-    </ion-item-sliding>
-    <ion-item-sliding>
-      <button ion-item (click)="addCustomManurePressed()">Manure 2</button>
-      <ion-item-options side="right">
-        <button ion-button>Edit</button>
-        <button ion-button color="danger">Delete</button>
+        <button ion-button color="danger" (click)="deleteCustomManure(customManureIndex)">Delete</button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>

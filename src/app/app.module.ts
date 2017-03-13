@@ -12,7 +12,9 @@ import { FieldEditPage } from '../pages/field-edit/field-edit';
 import { SpreadAddPage } from '../pages/spread-add/spread-add';
 import { SpreadEditPage } from '../pages/spread-edit/spread-edit';
 import { ManureAddPage } from '../pages/manure-add/manure-add';
+import { ManureEditPage } from '../pages/manure-edit/manure-edit';
 import { Field } from '../providers/field';
+import { Settings } from '../providers/settings';
 import { LocalStorageModule, LocalStorageService } from 'angular-2-local-storage';
 
 @NgModule({
@@ -29,7 +31,8 @@ import { LocalStorageModule, LocalStorageService } from 'angular-2-local-storage
     FieldEditPage,
     SpreadAddPage,
     SpreadEditPage,
-    ManureAddPage
+    ManureAddPage,
+    ManureEditPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -52,8 +55,15 @@ import { LocalStorageModule, LocalStorageService } from 'angular-2-local-storage
     FieldEditPage,
     SpreadAddPage,
     SpreadEditPage,
-    ManureAddPage
+    ManureAddPage,
+    ManureEditPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Field, LocalStorageService]
+  providers: [{
+    provide: ErrorHandler,
+    useClass: IonicErrorHandler
+  },
+  Field,
+  LocalStorageService,
+  Settings]
 })
 export class AppModule {}
