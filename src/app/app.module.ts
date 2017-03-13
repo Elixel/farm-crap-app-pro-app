@@ -12,6 +12,8 @@ import { FieldEditPage } from '../pages/field-edit/field-edit';
 import { SpreadAddPage } from '../pages/spread-add/spread-add';
 import { SpreadEditPage } from '../pages/spread-edit/spread-edit';
 import { ManureAddPage } from '../pages/manure-add/manure-add';
+import { Field } from '../providers/field';
+import { LocalStorageModule, LocalStorageService } from 'angular-2-local-storage';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,11 @@ import { ManureAddPage } from '../pages/manure-add/manure-add';
     ManureAddPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    LocalStorageModule.withConfig({
+      prefix: 'fca',
+      storageType: 'localStorage'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -48,6 +54,6 @@ import { ManureAddPage } from '../pages/manure-add/manure-add';
     SpreadEditPage,
     ManureAddPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}, Field, LocalStorageService]
 })
 export class AppModule {}

@@ -8,6 +8,7 @@ import { FieldDetailPage } from '../field-detail/field-detail';
 import { AboutPage } from '../about/about';
 import { CalculatorPage } from '../calculator/calculator';
 import { SettingsPage } from '../settings/settings';
+import { Field } from '../../providers/field';
 
 @Component({
   selector: 'page-home',
@@ -17,7 +18,7 @@ export class HomePage {
   // @ViewChild(Slides) slides: Slides;
   // map: Map<any, any>;
 
-  constructor(public navCtrl: NavController, public popoverCtrl: PopoverController) {
+  constructor(public navCtrl: NavController, public popoverCtrl: PopoverController, private fieldProvider: Field) {
     // Set public access token
     // mapboxgl.accessToken = 'pk.eyJ1IjoiY29va2llY29va3NvbiIsImEiOiJjaXp6b3dvZnEwMDNqMnFsdTdlbmJtcHY0In0.OeHfq5_gzEIW13JzzsZJEA';
   }
