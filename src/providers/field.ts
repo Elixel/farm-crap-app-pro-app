@@ -22,9 +22,18 @@ export class Field {
     return this._fields;
   }
 
-  public set fields(newValue) {
-    this._fields = newValue;
-    this.localStorageService.set(this._fieldsKey, newValue);
+  public add(fieldObject) {
+    // Add field object to field array
+    this._fields.push(fieldObject);
+    // Save to localStorage
+    this.localStorageService.set(this._fieldsKey, this._fields);
+  }
+
+  public deleteField(fieldIndex) {
+    // Splice field object from field array
+    this._fields.splice(fieldIndex, 1);
+    // Save to localStorage
+    this.localStorageService.set(this._fieldsKey, this._fields);
   }
 
 }

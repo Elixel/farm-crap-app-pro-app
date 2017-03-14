@@ -15,6 +15,8 @@
 
 <ion-content>
   <ion-slides ion-fixed pager class="swiper-no-swiping">
+
+    <!-- Draw boundaries on map to estimate hectares -->
     <ion-slide>
       <div padding>
         <h1>Create boundaries</h1>
@@ -22,96 +24,91 @@
       </div>
       <div id="map-add" class="map"></div>
     </ion-slide>
+
+    <!-- Collect basic details (Field name, override calculated hectares) -->
     <ion-slide>
-      <ion-list>
-        <ion-list-header>Basic Details</ion-list-header>
-        <ion-item>
-          <ion-label stacked>Field Name</ion-label>
-          <ion-input type="text" [(ngModel)]="name" placeholder="My Field"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label stacked>Hectares</ion-label>
-          <ion-input type="number" [(ngModel)]="hectares"></ion-input>
-        </ion-item>
-      </ion-list>
+      <form [formGroup]="basicDetailsForm">
+        <ion-list>
+          <ion-list-header>Basic Details</ion-list-header>
+          <ion-item>
+            <ion-label stacked>Field Name</ion-label>
+            <ion-input type="text" formControlName="name" placeholder="My Field"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>Hectares</ion-label>
+            <ion-input type="number" formControlName="hectares"></ion-input>
+          </ion-item>
+        </ion-list>
+      </form>
     </ion-slide>
+
+    <!-- Collect soil details (Soil type, whether organic manures have been used and results of soil tests) -->
     <ion-slide>
-      <ion-list>
-        <ion-list-header>Soil Details</ion-list-header>
-        <ion-item>
-          <ion-label>Soil Type</ion-label>
-          <ion-select [(ngModel)]="soiltype">
-            <ion-option value="1">1</ion-option>
-            <ion-option value="2">2</ion-option>
-            <ion-option value="3">3</ion-option>
-            <ion-option value="4">4</ion-option>
-            <ion-option value="5">5</ion-option>
-            <ion-option value="6">6</ion-option>
-            <ion-option value="7">7</ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label>Organic Manures<p>Do you regularly add organic manures?</p></ion-label>
-          <ion-checkbox checked="true"></ion-checkbox>
-        </ion-item>
-      </ion-list>
-      <ion-list>
-        <ion-list-header>Results of soil tests (if available)</ion-list-header>
-        <ion-item>
-          <ion-label>Phorphorous (P)</ion-label>
-          <ion-select [(ngModel)]="soilp">
-            <ion-option value="1">0</ion-option>
-            <ion-option value="1">1</ion-option>
-            <ion-option value="2">2</ion-option>
-            <ion-option value="3">3</ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label>Potash (K)</ion-label>
-          <ion-select [(ngModel)]="soilk">
-            <ion-option value="1">0</ion-option>
-            <ion-option value="1">1</ion-option>
-            <ion-option value="2">1-2</ion-option>
-            <ion-option value="3">2-3</ion-option>
-            <ion-option value="3">3+</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-list>
+      <form [formGroup]="soilDetailsForm">
+        <ion-list>
+          <ion-list-header>Soil Details</ion-list-header>
+          <ion-item>
+            <ion-label>Soil Type</ion-label>
+            <ion-select formControlName="soilType">
+              <ion-option *ngFor="let soil of soilTypeList" [value]="soil.choice">{{soilTypeLabelsList[soil.choice]}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Organic Manures<p>Do you regularly add organic manures?</p></ion-label>
+            <ion-checkbox formControlName="organicManures"></ion-checkbox>
+          </ion-item>
+        </ion-list>
+        <ion-list>
+          <ion-list-header>Results of soil tests (if available)</ion-list-header>
+          <ion-item>
+            <ion-label>Phorphorous (P)</ion-label>
+            <ion-select formControlName="soilTestP">
+              <ion-option value="soil-p-0">0</ion-option>
+              <ion-option value="soil-p-1">1</ion-option>
+              <ion-option value="soil-p-2">2</ion-option>
+              <ion-option value="soil-p-3">3</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Potash (K)</ion-label>
+            <ion-select formControlName="soilTestK">
+              <ion-option value="soil-k-0">0</ion-option>
+              <ion-option value="soil-k-1">1</ion-option>
+              <ion-option value="soil-k-2-">2-</ion-option>
+              <ion-option value="soil-k-2+">2+</ion-option>
+              <ion-option value="soil-k-3">3</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </form>
     </ion-slide>
+
+    <!-- Collect crop details (Has grass grown in the last 3 years on the soil, the previous crops grown and the new crops to be grown) -->
     <ion-slide>
-      <ion-list>
-        <ion-list-header>Crop Details</ion-list-header>
-        <ion-item>
-          <ion-label>Grass Grown<p>Has grass grown in the last 3 years?</p></ion-label>
-          <ion-checkbox checked="true"></ion-checkbox>
-        </ion-item>
-        <ion-item>
-          <ion-label>Old Crop Type</ion-label>
-          <ion-select [(ngModel)]="oldcroptype">
-            <ion-option value="0">0</ion-option>
-            <ion-option value="1">1</ion-option>
-            <ion-option value="2">2</ion-option>
-            <ion-option value="3">3</ion-option>
-            <ion-option value="4">4</ion-option>
-            <ion-option value="5">5</ion-option>
-            <ion-option value="6">6</ion-option>
-            <ion-option value="7">7</ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label>New Crop Type</ion-label>
-          <ion-select [(ngModel)]="newcroptype">
-            <ion-option value="0">0</ion-option>
-            <ion-option value="1">1</ion-option>
-            <ion-option value="2">2</ion-option>
-            <ion-option value="3">3</ion-option>
-            <ion-option value="4">4</ion-option>
-            <ion-option value="5">5</ion-option>
-            <ion-option value="6">6</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-list>
+      <form [formGroup]="cropDetailsForm">
+        <ion-list>
+          <ion-list-header>Crop Details</ion-list-header>
+          <ion-item>
+            <ion-label>Grass Grown<p>Has grass grown in the last 3 years?</p></ion-label>
+            <ion-checkbox formControlName="grassGrown"></ion-checkbox>
+          </ion-item>
+          <ion-item>
+            <ion-label>Old Crop Type</ion-label>
+            <ion-select formControlName="oldCropType">
+              <ion-option *ngFor="let crop of cropTypeList" [value]="crop.choice">{{cropTypeLabelsList[crop.choice]}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>New Crop Type</ion-label>
+            <ion-select formControlName="newCropType">
+              <ion-option *ngFor="let crop of cropRequirementsList" [value]="crop.choice">{{cropRequirementsLabelsList[crop.choice]}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </form>
     </ion-slide>
+
+    <!-- Show field information summary (Supply of nitrogen from the soil details, crop nutrient requirements from the crop details) -->
     <ion-slide>
       <ion-list>
         <ion-list-header>Soil N Supply</ion-list-header>
@@ -149,10 +146,12 @@
       </ion-list>
     </ion-slide>
   </ion-slides>
+
+  <!-- Navigation controls to allow the user to advance to the next slide -->
   <button ion-button clear small class="prev" ion-fixed (click)="prevPressed()" *ngIf="slides.getActiveIndex() !== 0">Previous</button>
-  <button ion-button clear small class="next" ion-fixed (click)="nextPressed()" *ngIf="slides.getActiveIndex() == 0" [disabled]="!hectares">Next</button>
-  <button ion-button clear small class="next" ion-fixed (click)="nextPressed()" *ngIf="slides.getActiveIndex() == 1">Next</button>
-  <button ion-button clear small class="next" ion-fixed (click)="nextPressed()" *ngIf="slides.getActiveIndex() == 2">Next</button>
-  <button ion-button clear small class="next" ion-fixed (click)="nextPressed()" *ngIf="slides.getActiveIndex() == 3">Next</button>
-  <button ion-button clear small class="next" ion-fixed (click)="finishPressed()" *ngIf="slides.getActiveIndex() == 4">Finish</button>
+  <button ion-button clear small class="next" ion-fixed (click)="nextPressed()" *ngIf="slides.getActiveIndex() == 0">Next</button><!-- [disabled]="!polygon" -->
+  <button ion-button clear small class="next" ion-fixed (click)="nextPressed()" *ngIf="slides.getActiveIndex() == 1">Next</button><!-- [disabled]="!basicDetailsForm.valid" -->
+  <button ion-button clear small class="next" ion-fixed (click)="nextPressed()" *ngIf="slides.getActiveIndex() == 2">Next</button><!-- [disabled]="!soilDetailsForm.valid" -->
+  <button ion-button clear small class="next" ion-fixed (click)="nextPressed()" *ngIf="slides.getActiveIndex() == 3">Next</button><!-- [disabled]="!cropDetailsForm.valid" -->
+  <button ion-button clear small class="next" ion-fixed (click)="addPressed()" *ngIf="slides.getActiveIndex() == 4">Add</button>
 </ion-content>

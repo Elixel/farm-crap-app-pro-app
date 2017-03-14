@@ -16,6 +16,8 @@ import { ManureEditPage } from '../pages/manure-edit/manure-edit';
 import { Field } from '../providers/field';
 import { Settings } from '../providers/settings';
 import { LocalStorageModule, LocalStorageService } from 'angular-2-local-storage';
+import { SoilNitrogenSupply } from '../providers/soil-nitrogen-supply';
+import { CropRequirements } from '../providers/crop-requirements';
 
 @NgModule({
   declarations: [
@@ -64,6 +66,8 @@ import { LocalStorageModule, LocalStorageService } from 'angular-2-local-storage
   },
   Field,
   LocalStorageService,
-  Settings]
+  Settings,
+  SoilNitrogenSupply,
+  CropRequirements]
 })
 export class AppModule {}

@@ -14,44 +14,16 @@
 <ion-content>
   <ion-list>
     <ion-list-header>Fields<button ion-button item-right (click)="addField()">Add</button></ion-list-header>
-    <ion-item-sliding>
+    <ion-item-sliding *ngFor="let field of fields; let fieldIndex = index;">
       <button ion-item (click)="viewField()">
-        <h2>Field Name</h2>
-        <p>0 ha</p>
+        <h2>{{field.name}}</h2>
+        <p>{{field.hectares}} ha</p>
       </button>
       <ion-item-options side="right">
         <button ion-button>Edit</button>
-        <button ion-button color="danger">Delete</button>
-      </ion-item-options>
-    </ion-item-sliding>
-    <ion-item-sliding>
-      <button ion-item (click)="viewField()">
-        <h2>Field Name</h2>
-        <p>0 ha</p>
-      </button>
-      <ion-item-options side="right">
-        <button ion-button>Edit</button>
-        <button ion-button color="danger">Delete</button>
+        <button ion-button color="danger" (click)="deleteField(fieldIndex)">Delete</button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
-  <!--div id="map" class="map" ion-fixed></div>
-  <ion-fab class="fab" bottom right ion-fixed>
-    <button ion-fab (click)="addField()">
-      <ion-icon name="add"></ion-icon>
-    </button>
-  </ion-fab>
-  <ion-slides class="swiper" ion-fixed>
-    <ion-slide padding>
-      <h2>No fields</h2>
-      <p>Get started by adding a field</p>
-    </ion-slide>
-    <ion-slide padding>
-      <h2>Field Name</h2>
-      <h3>1 hectare</h3>
-      <p>Last spread: 01/01/1970</p>
-      <button ion-button block (click)="viewField()">View Field</button>
-    </ion-slide>
-  </ion-slides-->
 
 </ion-content>
