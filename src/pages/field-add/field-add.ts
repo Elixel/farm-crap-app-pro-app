@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
-import { Map } from 'mapbox-gl';
 import { NavController, NavParams, Slides } from 'ionic-angular';
 import { ViewChild } from '@angular/core';
+
+import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
+import MapboxDraw from '@mapbox/mapbox-gl-draw';
+import TurfArea from '@turf/area';
 
 /*
   Generated class for the FieldAdd page.
@@ -16,7 +18,12 @@ import { ViewChild } from '@angular/core';
 })
 export class FieldAddPage {
   @ViewChild(Slides) slides: Slides;
-  map: Map<any, any>;
+  map: any;
+  draw: any;
+
+  polygon: any;
+  hectares: number;
+  name: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     // Set public access token
@@ -24,13 +31,47 @@ export class FieldAddPage {
   }
 
   ngOnInit() {
-    // Create map instance
+    // Create map
     this.map = new mapboxgl.Map({
       container: 'map-add',
       style: 'mapbox://styles/mapbox/satellite-v9',
       zoom: 12,
       center: [-4.146236, 50.373528]
     });
+    // Create draw tools
+    this.draw = new MapboxDraw({
+      displayControlsDefault: false,
+      controls: {
+          polygon: true,
+          trash: true
+      }
+    });
+    // Add draw tools to map
+    this.map.addControl(this.draw);
+    // When a polygon is created
+    this.map.on('draw.create', () => {
+      this.calculatePolygons(this.draw);
+    });
+    // When a polygon is removed
+    this.map.on('draw.delete', () => {
+      this.calculatePolygons(this.draw);
+    });
+  }
+
+  // Calculates the area within the drawn polygon(s)
+  calculatePolygons(draw) {
+    let featureCollection = draw.getAll();
+    // Get area size
+    if (featureCollection.features.length > 0) {
+      let squareMetres = TurfArea(featureCollection);
+      let hectares = squareMetres / 10000;
+      let roundedArea = Math.round(hectares * 100) / 100;
+      this.polygon = featureCollection.features;
+      this.hectares = roundedArea;
+    } else {
+      this.polygon = null;
+      this.hectares = null;
+    }
   }
 
   // Previous button handler

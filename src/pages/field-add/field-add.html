@@ -27,11 +27,11 @@
         <ion-list-header>Basic Details</ion-list-header>
         <ion-item>
           <ion-label stacked>Field Name</ion-label>
-          <ion-input type="text" placeholder="My Field"></ion-input>
+          <ion-input type="text" [(ngModel)]="name" placeholder="My Field"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label stacked>Hectares</ion-label>
-          <ion-input type="text" value="0"></ion-input>
+          <ion-input type="number" [(ngModel)]="hectares"></ion-input>
         </ion-item>
       </ion-list>
     </ion-slide>
@@ -150,6 +150,9 @@
     </ion-slide>
   </ion-slides>
   <button ion-button clear small class="prev" ion-fixed (click)="prevPressed()" *ngIf="slides.getActiveIndex() !== 0">Previous</button>
-  <button ion-button clear small class="next" ion-fixed (click)="nextPressed()" *ngIf="slides.getActiveIndex() !== 4">Next</button>
+  <button ion-button clear small class="next" ion-fixed (click)="nextPressed()" *ngIf="slides.getActiveIndex() == 0" [disabled]="!hectares">Next</button>
+  <button ion-button clear small class="next" ion-fixed (click)="nextPressed()" *ngIf="slides.getActiveIndex() == 1">Next</button>
+  <button ion-button clear small class="next" ion-fixed (click)="nextPressed()" *ngIf="slides.getActiveIndex() == 2">Next</button>
+  <button ion-button clear small class="next" ion-fixed (click)="nextPressed()" *ngIf="slides.getActiveIndex() == 3">Next</button>
   <button ion-button clear small class="next" ion-fixed (click)="finishPressed()" *ngIf="slides.getActiveIndex() == 4">Finish</button>
 </ion-content>
