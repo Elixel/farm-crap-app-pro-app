@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, NavParams, Slides } from 'ionic-angular';
-import { ViewChild } from '@angular/core';
 
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 import MapboxDraw from '@mapbox/mapbox-gl-draw';
@@ -9,8 +9,6 @@ import TurfArea from '@turf/area';
 import { SoilNitrogenSupply } from '../../providers/soil-nitrogen-supply';
 import { CropRequirements } from '../../providers/crop-requirements';
 import { Field } from '../../providers/field';
-
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 /*
   Generated class for the FieldAdd page.
@@ -129,7 +127,7 @@ export class FieldAddPage {
       let hectares = squareMetres / 10000;
       let roundedArea = Math.round(hectares * 100) / 100;
       // Save polygon shape
-      this.polygon = featureCollection.features;
+      this.polygon = featureCollection;
       // Update hectares form field for next view
       this.basicDetailsForm.get('hectares').setValue(roundedArea);
     } else {

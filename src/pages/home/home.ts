@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { NavController, PopoverController } from 'ionic-angular';
+import { ItemSliding } from 'ionic-angular';
+
+import { Field } from '../../providers/field';
+
 import { FieldAddPage } from '../field-add/field-add';
+import { FieldEditPage } from '../field-edit/field-edit';
 import { FieldDetailPage } from '../field-detail/field-detail';
 import { AboutPage } from '../about/about';
 import { CalculatorPage } from '../calculator/calculator';
 import { SettingsPage } from '../settings/settings';
-import { Field } from '../../providers/field';
 
 @Component({
   selector: 'page-home',
@@ -24,6 +28,15 @@ export class HomePage {
 
   addField() {
     this.navCtrl.push(FieldAddPage);
+  }
+
+  editField(slidingItem: ItemSliding, fieldIndex) {
+    // Close sliding drawer
+    slidingItem.close();
+    // Go to edit view
+    this.navCtrl.push(FieldEditPage, {
+      fieldIndex: fieldIndex
+    })
   }
 
   viewField(fieldIndex) {

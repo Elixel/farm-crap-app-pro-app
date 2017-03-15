@@ -1,3 +1,38 @@
 page-field-edit {
+    // Align slide content to the top
+    .swiper-slide {
+        -webkit-align-items: flex-start;
+        -ms-flex-align: flex-start;
+        align-items: flex-start;
+    }
+    // Move slider pagination up
+    .swiper-container-horizontal > .swiper-pagination-bullets {
+        bottom: 18px;
+        .swiper-pagination-bullet {
+            pointer-events: none;
+        }
+    }
+    // Position slider controls
+    button.prev {
+        bottom: 8px;
+        left: 8px;
+    }
+    button.next {
+        bottom: 8px;
+        right: 8px;
+    }
 
+    // Slide 1: Map
+    .map {
+        position: absolute;
+        top: 150px;
+        right: 0px;
+        bottom: 50px;
+        left: 0px;
+        overflow: hidden;
+        // Fix weird 50% left offset
+        canvas.mapboxgl-canvas {
+            left: 0px;
+        }
+    }
 }

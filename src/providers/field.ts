@@ -29,6 +29,13 @@ export class Field {
     this.localStorageService.set(this._fieldsKey, this._fields);
   }
 
+  public set(fieldObject, fieldIndex) {
+    // Overwrite field object in field array
+    this._fields[fieldIndex] = fieldObject;
+    // Save to localStorage
+    this.localStorageService.set(this._fieldsKey, this._fields);
+  }
+
   public deleteField(fieldIndex) {
     // Splice field object from field array
     this._fields.splice(fieldIndex, 1);
