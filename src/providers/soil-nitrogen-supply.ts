@@ -53,4 +53,32 @@ export class SoilNitrogenSupply {
     })
   }
 
+  lookup(rainfallChoice, soilChoice, previousCropChoice) {
+    let rainfallTree = this.data.choices;
+    // Ascend down tree leaves
+    for (let rainfallIndex in rainfallTree) {
+      // Compare rainfall choice
+      if (rainfallTree[rainfallIndex].choice === rainfallChoice) {
+        let soilTree = rainfallTree[rainfallIndex].value.choices;
+        for (let soilIndex in soilTree) {
+          // Compare soil choice
+          if (soilTree[soilIndex].choice === soilChoice) {
+            // Check if the value is a number or deeper tree
+            if (isNaN(soilTree[soilIndex].value)) {
+              let previousCropTree = soilTree[soilIndex].value.choices;
+              for (let previousCropIndex in previousCropTree) {
+                if (previousCropTree[previousCropIndex].choice === previousCropChoice) {
+                  return previousCropTree[previousCropIndex].value;
+                }
+              }
+            } else {
+              // Return value
+              return soilTree[soilIndex].value;
+            }
+          }
+        }
+      }
+    }
+  }
+
 }

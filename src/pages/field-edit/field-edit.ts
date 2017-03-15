@@ -10,6 +10,7 @@ import TurfBbox from '@turf/bbox';
 import { SoilNitrogenSupply } from '../../providers/soil-nitrogen-supply';
 import { CropRequirements } from '../../providers/crop-requirements';
 import { Field } from '../../providers/field';
+import { Settings } from '../../providers/settings';
 
 /*
   Generated class for the FieldEdit page.
@@ -40,13 +41,19 @@ export class FieldEditPage {
   private soilDetailsForm: FormGroup;
   private cropDetailsForm: FormGroup;
 
+  // Summary details
+  private requirementsNitrogen: number = 0;
+  private requirementsPhosphorous: number = 0;
+  private requirementsPotassium: number = 0;
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private soilNitrogenSupply: SoilNitrogenSupply,
     private formBuilder: FormBuilder,
     private cropRequirements: CropRequirements,
-    private fieldProvider: Field
+    private fieldProvider: Field,
+    private settingsProvider:Settings
     ) {
     // Set public access token
     mapboxgl.accessToken = 'pk.eyJ1IjoiY29va2llY29va3NvbiIsImEiOiJjaXp6b3dvZnEwMDNqMnFsdTdlbmJtcHY0In0.OeHfq5_gzEIW13JzzsZJEA';
@@ -182,6 +189,18 @@ export class FieldEditPage {
     this.fieldProvider.set(field, this.navParams.data.fieldIndex);
     // Navigate back to home
     this.navCtrl.pop();
+  }
+
+  slideChanged() {
+    // If last slide
+    if (this.slides.isEnd()) {
+      // Calculate soil nitrogen supply for calculations
+      let sns = this.soilNitrogenSupply.lookup(this.settingsProvider.rainfall, this.soilDetailsForm.value.soilType, this.cropDetailsForm.value.oldCropType);
+      // Update calculated values to view
+      this.requirementsNitrogen = this.cropRequirements.lookup(this.cropDetailsForm.value.newCropType, 'nitrogen', this.soilDetailsForm.value.soilType, sns);
+      this.requirementsPhosphorous = this.cropRequirements.lookup(this.cropDetailsForm.value.newCropType, 'phosphorous', this.soilDetailsForm.value.soilTestP, null);
+      this.requirementsPotassium = this.cropRequirements.lookup(this.cropDetailsForm.value.newCropType, 'potassium', this.soilDetailsForm.value.soilTestK, null);
+    }
   }
 
 }

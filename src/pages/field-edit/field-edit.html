@@ -14,7 +14,7 @@
 
 
 <ion-content>
-  <ion-slides ion-fixed pager class="swiper-no-swiping">
+  <ion-slides ion-fixed pager class="swiper-no-swiping" (ionSlideDidChange)="slideChanged()">
 
     <!-- Draw boundaries on map to estimate hectares -->
     <ion-slide>
@@ -138,9 +138,9 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col>0</ion-col>
-            <ion-col>0</ion-col>
-            <ion-col>0</ion-col>
+            <ion-col>{{requirementsNitrogen}}</ion-col>
+            <ion-col>{{requirementsPhosphorous}}</ion-col>
+            <ion-col>{{requirementsPotassium}}</ion-col>
           </ion-row>
         </ion-grid>
       </ion-list>

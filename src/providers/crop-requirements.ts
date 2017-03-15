@@ -11,6 +11,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class CropRequirements {
   data: any;
+  dataPK: any;
 
   public cropRequirementsLabelMap = {
     'spring-barley-incorporated': 'Spring barley, straw incorporated',
@@ -23,6 +24,7 @@ export class CropRequirements {
 
   constructor(public http: Http) {
     this.data = null;
+    this.dataPK = null;
   }
 
   load() {
@@ -31,12 +33,72 @@ export class CropRequirements {
     }
     return new Promise(resolve => {
       this.http.get('assets/json/crop-requirements-n.json')
-      .map(res => res.json())
-      .subscribe(data => {
-        this.data = data;
-        resolve(this.data);
+      .map(resN => resN.json())
+      .subscribe(dataN => {
+        this.data = dataN;
+        this.http.get('assets/json/crop-requirements-pk.json')
+        .map(resPK => resPK.json())
+        .subscribe(dataPK => {
+          this.dataPK = dataPK;
+          resolve(this.data);
+        })
       });
     })
+  }
+
+  lookup(cropChoice, nutrientChoice, soilChoice, snsChoice) {
+    if (nutrientChoice === 'nitrogen') {
+      // Select the N dataset (crop-requirements-n.json)
+      let cropTree = this.data.choices;
+      // Ascend down tree leaves
+      for (let cropIndex in cropTree) {
+        // Compare crop choice
+        if (cropTree[cropIndex].choice === cropChoice) {
+          // Check if the value is a number or deeper tree
+          if (isNaN(cropTree[cropIndex].value)) {
+            // Progress down tree
+            let soilTree = cropTree[cropIndex].value.choices;
+            for (let soilIndex in soilTree) {
+              // Compare soil choice
+              if (soilTree[soilIndex].choice === soilChoice) {
+                let snsTree = soilTree[soilIndex].value.choices;
+                for (let snsIndex in snsTree) {
+                  // Compare soil nitrogen supply choice
+                  if (snsTree[snsIndex].choice === snsChoice) {
+                    return snsTree[snsIndex].value;
+                  }
+                }
+              }
+            }
+          } else {
+            // Return value
+            return cropTree[cropIndex].value;
+          }
+        }
+      }
+    } else if (nutrientChoice === 'phosphorous' || nutrientChoice === 'potassium') {
+      // Select the PK dataset (crop-requirements-pk.json)
+      let cropTree = this.dataPK.choices;
+      // Ascend down tree leaves
+      for (let cropIndex in cropTree) {
+        // Compare crop choice
+        if (cropTree[cropIndex].choice === cropChoice) {
+          let nutrientTree = cropTree[cropIndex].value.choices;
+          for (let nutrientIndex in nutrientTree) {
+            // Compare nutrient choice
+            if (nutrientTree[nutrientIndex].choice === nutrientChoice) {
+              let soilIndexTree = nutrientTree[nutrientIndex].value.choices;
+              for (let soilIndexIndex in soilIndexTree) {
+                // Compare soil index choice
+                if (soilIndexTree[soilIndexIndex].choice === soilChoice) {
+                  return soilIndexTree[soilIndexIndex].value;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 
 }
