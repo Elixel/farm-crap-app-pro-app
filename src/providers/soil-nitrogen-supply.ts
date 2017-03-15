@@ -12,29 +12,6 @@ import 'rxjs/add/operator/map';
 export class SoilNitrogenSupply {
   data: any;
 
-  public soilTypeLabelMap = {
-    sandyshallow: 'Sandy/Shallow',
-    mediumshallow: 'Medium/Shallow',
-    deepclay: 'Deep Clay',
-    deepsilt: 'Deep Silt',
-    organic: 'Organic (10-20% organic matter)',
-    peat: 'Peat'
-  };
-
-  public cropTypeLabelMap = {
-    cereals: 'Cereals',
-    'low-n-veg': 'Low nitrogen veg',
-    forage: 'Forage',
-    sugarbeet: 'Sugar beet',
-    oilseed: 'Oilseed rape',
-    potatoes: 'Potatoes',
-    peas: 'Peas',
-    beans: 'Beans',
-    uncropped: 'Uncropped',
-    'medium-n-veg': 'Medium nitrogen veg',
-    'high-n-veg': 'High nitrogen veg'
-  };
-
   constructor(public http: Http) {
     this.data = null;
   }
@@ -53,7 +30,8 @@ export class SoilNitrogenSupply {
     })
   }
 
-  lookup(rainfallChoice, soilChoice, previousCropChoice) {
+  // Calculate soil nitrogen supply
+  calculateSNS(rainfallChoice, soilChoice, previousCropChoice) {
     let rainfallTree = this.data.choices;
     // Ascend down tree leaves
     for (let rainfallIndex in rainfallTree) {

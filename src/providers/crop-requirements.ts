@@ -13,15 +13,6 @@ export class CropRequirements {
   data: any;
   dataPK: any;
 
-  public cropRequirementsLabelMap = {
-    'spring-barley-incorporated': 'Spring barley, straw incorporated',
-    'spring-barley-removed': 'Spring barley, straw removed',
-    'winter-wheat-incorporated': 'Winter wheat, straw incorporated',
-    'winter-wheat-removed': 'Winter whea, straw removed',
-    'grass-cut': 'Grass cut (yield 6-8k, conc 1.5, stock med)',
-    'grass-grazed': 'Grass grazed (yield 6-8k, conc 1.5, stock med)'
-  };
-
   constructor(public http: Http) {
     this.data = null;
     this.dataPK = null;
@@ -46,7 +37,8 @@ export class CropRequirements {
     })
   }
 
-  lookup(cropChoice, nutrientChoice, soilChoice, snsChoice) {
+  // Gets the crop requirements for nitrogen, phosphorous or potassium
+  getCropRequirements(cropChoice, nutrientChoice, soilChoice, snsChoice) {
     if (nutrientChoice === 'nitrogen') {
       // Select the N dataset (crop-requirements-n.json)
       let cropTree = this.data.choices;

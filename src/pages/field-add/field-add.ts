@@ -10,6 +10,7 @@ import { SoilNitrogenSupply } from '../../providers/soil-nitrogen-supply';
 import { CropRequirements } from '../../providers/crop-requirements';
 import { Field } from '../../providers/field';
 import { Settings } from '../../providers/settings';
+import { Strings } from '../../providers/strings';
 
 /*
   Generated class for the FieldAdd page.
@@ -25,12 +26,10 @@ export class FieldAddPage {
   @ViewChild(Slides) slides: Slides;
   map: any;
   draw: any;
+  strings: Object[];
   soilTypeList: Object[];
-  soilTypeLabelsList: Object;
   cropTypeList: Object[];
-  cropTypeLabelsList: Object;
   cropRequirementsList: Object[];
-  cropRequirementsLabelsList: Object;
 
   // Field Details
   polygon: any;
@@ -50,7 +49,8 @@ export class FieldAddPage {
     private formBuilder: FormBuilder,
     private cropRequirements: CropRequirements,
     private fieldProvider: Field,
-    private settingsProvider:Settings
+    private settingsProvider:Settings,
+    private stringsProvider: Strings
     ) {
     // Set public access token
     mapboxgl.accessToken = 'pk.eyJ1IjoiY29va2llY29va3NvbiIsImEiOiJjaXp6b3dvZnEwMDNqMnFsdTdlbmJtcHY0In0.OeHfq5_gzEIW13JzzsZJEA';
@@ -76,9 +76,13 @@ export class FieldAddPage {
       newCropType: ['', Validators.required]
     });
 
+    // Load strings
+    stringsProvider.load()
+    .then((result) => {
+      this.strings = result;
+    });
+
     // Load soil / crop types
-    this.soilTypeLabelsList = soilNitrogenSupply.soilTypeLabelMap;
-    this.cropTypeLabelsList = soilNitrogenSupply.cropTypeLabelMap;
     soilNitrogenSupply.load()
     .then((result) => {
       // Get soil types for 'low' rainfall (All options are the same, we are not considering the value yet)
@@ -86,8 +90,8 @@ export class FieldAddPage {
       // Get crop types for 'low' rainfall and 'sandyshallow' soil (All options are the same, we are not considering the value yet)
       this.cropTypeList = result.choices[0].value.choices[0].value.choices;
     });
+
     // Load crop requirements
-    this.cropRequirementsLabelsList = cropRequirements.cropRequirementsLabelMap;
     cropRequirements.load()
     .then((result) => {
       // Get crop types
@@ -178,11 +182,11 @@ export class FieldAddPage {
     // If last slide
     if (this.slides.isEnd()) {
       // Calculate soil nitrogen supply for calculations
-      let sns = this.soilNitrogenSupply.lookup(this.settingsProvider.rainfall, this.soilDetailsForm.value.soilType, this.cropDetailsForm.value.oldCropType);
+      let sns = this.soilNitrogenSupply.calculateSNS(this.settingsProvider.rainfall, this.soilDetailsForm.value.soilType, this.cropDetailsForm.value.oldCropType);
       // Update calculated values to view
-      this.requirementsNitrogen = this.cropRequirements.lookup(this.cropDetailsForm.value.newCropType, 'nitrogen', this.soilDetailsForm.value.soilType, sns);
-      this.requirementsPhosphorous = this.cropRequirements.lookup(this.cropDetailsForm.value.newCropType, 'phosphorous', this.soilDetailsForm.value.soilTestP, null);
-      this.requirementsPotassium = this.cropRequirements.lookup(this.cropDetailsForm.value.newCropType, 'potassium', this.soilDetailsForm.value.soilTestK, null);
+      this.requirementsNitrogen = this.cropRequirements.getCropRequirements(this.cropDetailsForm.value.newCropType, 'nitrogen', this.soilDetailsForm.value.soilType, sns);
+      this.requirementsPhosphorous = this.cropRequirements.getCropRequirements(this.cropDetailsForm.value.newCropType, 'phosphorous', this.soilDetailsForm.value.soilTestP, null);
+      this.requirementsPotassium = this.cropRequirements.getCropRequirements(this.cropDetailsForm.value.newCropType, 'potassium', this.soilDetailsForm.value.soilTestK, null);
     }
   }
 

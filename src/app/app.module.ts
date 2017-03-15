@@ -18,6 +18,7 @@ import { Settings } from '../providers/settings';
 import { LocalStorageModule, LocalStorageService } from 'angular-2-local-storage';
 import { SoilNitrogenSupply } from '../providers/soil-nitrogen-supply';
 import { CropRequirements } from '../providers/crop-requirements';
+import { Strings } from '../providers/strings';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { CropRequirements } from '../providers/crop-requirements';
   LocalStorageService,
   Settings,
   SoilNitrogenSupply,
-  CropRequirements]
+  CropRequirements,
+  Strings]
 })
 export class AppModule {}
