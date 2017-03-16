@@ -50,7 +50,7 @@
           <ion-item>
             <ion-label>Soil Type</ion-label>
             <ion-select formControlName="soilType">
-              <ion-option *ngFor="let soil of soilTypeList" [value]="soil.choice">{{strings.soil[soil.choice]}}</ion-option>
+              <ion-option *ngFor="let soil of strings.soil | keys" [value]="soil.key">{{soil.value}}</ion-option>
             </ion-select>
           </ion-item>
           <ion-item>
@@ -95,13 +95,13 @@
           <ion-item>
             <ion-label>Old Crop Type</ion-label>
             <ion-select formControlName="oldCropType">
-              <ion-option *ngFor="let crop of cropTypeList" [value]="crop.choice">{{strings.previousCrop[crop.choice]}}</ion-option>
+              <ion-option *ngFor="let crop of strings.previousCrop | keys" [value]="crop.key">{{crop.value}}</ion-option>
             </ion-select>
           </ion-item>
           <ion-item>
             <ion-label>New Crop Type</ion-label>
             <ion-select formControlName="newCropType">
-              <ion-option *ngFor="let crop of cropRequirementsList" [value]="crop.choice">{{strings.crop[crop.choice]}}</ion-option>
+              <ion-option *ngFor="let crop of strings.crop | keys" [value]="crop.key">{{crop.value}}</ion-option>
             </ion-select>
           </ion-item>
         </ion-list>

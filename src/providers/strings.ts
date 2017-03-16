@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
-import 'rxjs/add/operator/map';
 
 /*
   Generated class for the Strings provider.
@@ -10,24 +8,42 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class Strings {
-  data: any;
-
-  constructor(public http: Http) {
-    this.data = null;
-  }
-
-  load() {
-    if (this.data) {
-      return Promise.resolve(this.data);
+  data: Object = {
+    'crop': {
+        'spring-barley-incorporated': 'Spring barley, straw incorporated',
+        'spring-barley-removed': 'Spring barley, straw removed',
+        'winter-wheat-incorporated': 'Winter wheat, straw incorporated',
+        'winter-wheat-removed': 'Winter whea, straw removed',
+        'grass-cut': 'Grass cut (yield 6-8k, conc 1.5, stock med)',
+        'grass-grazed': 'Grass grazed (yield 6-8k, conc 1.5, stock med)'
+    },
+    'soil': {
+        'sandyshallow': 'Sandy/Shallow',
+        'mediumshallow': 'Medium/Shallow',
+        'deepclay': 'Deep Clay',
+        'deepsilt': 'Deep Silt',
+        'organic': 'Organic (10-20% organic matter)',
+        'peat': 'Peat',
+        'medium': 'Medium'
+    },
+    'previousCrop': {
+        'cereals': 'Cereals',
+        'low-n-veg': 'Low nitrogen veg',
+        'forage': 'Forage crops (cut)',
+        'sugarbeet': 'Sugar beet',
+        'oilseed': 'Oilseed rape',
+        'potatoes': 'Potatoes',
+        'peas': 'Peas',
+        'beans': 'Beans',
+        'uncropped': 'Uncropped land',
+        'medium-n-veg': 'Medium nitrogen veg',
+        'high-n-veg': 'High nitrogen veg',
+        'grass-low-n': 'Grass (low N/1 or more cuts)',
+        'grass-high-n': 'Grass (3-5yr, high N, grazed)',
+        'grass-other': 'Any other grass'
     }
-    return new Promise(resolve => {
-      this.http.get('assets/json/strings.json')
-      .map(res => res.json())
-      .subscribe(data => {
-        this.data = data;
-        resolve(this.data);
-      });
-    })
-  }
+  };
+
+  constructor() {}
 
 }

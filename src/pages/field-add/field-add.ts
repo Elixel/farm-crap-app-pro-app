@@ -6,11 +6,10 @@ import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 import MapboxDraw from '@mapbox/mapbox-gl-draw';
 import TurfArea from '@turf/area';
 
-import { SoilNitrogenSupply } from '../../providers/soil-nitrogen-supply';
-import { CropRequirements } from '../../providers/crop-requirements';
 import { Field } from '../../providers/field';
 import { Settings } from '../../providers/settings';
 import { Strings } from '../../providers/strings';
+import { CalcCore } from '../../providers/calc-core';
 
 /*
   Generated class for the FieldAdd page.
@@ -26,10 +25,7 @@ export class FieldAddPage {
   @ViewChild(Slides) slides: Slides;
   map: any;
   draw: any;
-  strings: Object[];
-  soilTypeList: Object[];
-  cropTypeList: Object[];
-  cropRequirementsList: Object[];
+  strings: Object;
 
   // Field Details
   polygon: any;
@@ -38,19 +34,16 @@ export class FieldAddPage {
   private cropDetailsForm: FormGroup;
 
   // Summary details
-  private requirementsNitrogen: number = 0;
-  private requirementsPhosphorous: number = 0;
-  private requirementsPotassium: number = 0;
+  private cropRequirementsSupply: Object;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    private soilNitrogenSupply: SoilNitrogenSupply,
     private formBuilder: FormBuilder,
-    private cropRequirements: CropRequirements,
     private fieldProvider: Field,
     private settingsProvider:Settings,
-    private stringsProvider: Strings
+    private stringsProvider: Strings,
+    private calcCore: CalcCore
     ) {
     // Set public access token
     mapboxgl.accessToken = 'pk.eyJ1IjoiY29va2llY29va3NvbiIsImEiOiJjaXp6b3dvZnEwMDNqMnFsdTdlbmJtcHY0In0.OeHfq5_gzEIW13JzzsZJEA';
@@ -59,7 +52,7 @@ export class FieldAddPage {
     this.basicDetailsForm = this.formBuilder.group({
       name: ['', Validators.required],
       hectares: [0, Validators.required]
-    })
+    });
 
     // Create Soil Details Form
     this.soilDetailsForm = this.formBuilder.group({
@@ -77,26 +70,7 @@ export class FieldAddPage {
     });
 
     // Load strings
-    stringsProvider.load()
-    .then((result) => {
-      this.strings = result;
-    });
-
-    // Load soil / crop types
-    soilNitrogenSupply.load()
-    .then((result) => {
-      // Get soil types for 'low' rainfall (All options are the same, we are not considering the value yet)
-      this.soilTypeList = result.choices[0].value.choices;
-      // Get crop types for 'low' rainfall and 'sandyshallow' soil (All options are the same, we are not considering the value yet)
-      this.cropTypeList = result.choices[0].value.choices[0].value.choices;
-    });
-
-    // Load crop requirements
-    cropRequirements.load()
-    .then((result) => {
-      // Get crop types
-      this.cropRequirementsList = result.choices;
-    });
+    this.strings = stringsProvider.data;
   }
 
   ngOnInit() {
@@ -179,14 +153,20 @@ export class FieldAddPage {
   }
 
   slideChanged() {
+
     // If last slide
     if (this.slides.isEnd()) {
-      // Calculate soil nitrogen supply for calculations
-      let sns = this.soilNitrogenSupply.calculateSNS(this.settingsProvider.rainfall, this.soilDetailsForm.value.soilType, this.cropDetailsForm.value.oldCropType);
-      // Update calculated values to view
-      this.requirementsNitrogen = this.cropRequirements.getCropRequirements(this.cropDetailsForm.value.newCropType, 'nitrogen', this.soilDetailsForm.value.soilType, sns);
-      this.requirementsPhosphorous = this.cropRequirements.getCropRequirements(this.cropDetailsForm.value.newCropType, 'phosphorous', this.soilDetailsForm.value.soilTestP, null);
-      this.requirementsPotassium = this.cropRequirements.getCropRequirements(this.cropDetailsForm.value.newCropType, 'potassium', this.soilDetailsForm.value.soilTestK, null);
+      // Get and display crop supply/requirements
+      this.cropRequirementsSupply = this.calcCore.getCropRequirementsSupply(
+        this.settingsProvider.rainfall,
+        this.cropDetailsForm.value.newCropType,
+        this.soilDetailsForm.value.soilType,
+        this.cropDetailsForm.value.oldCropType,
+        this.soilDetailsForm.value.organicManures,
+        this.soilDetailsForm.value.soilTestP,
+        this.soilDetailsForm.value.soilTestK,
+        this.cropDetailsForm.value.grassGrown
+      );
     }
   }
 

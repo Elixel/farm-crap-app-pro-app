@@ -8,7 +8,7 @@ import { AboutPage } from '../pages/about/about';
 import { CalculatorPage } from '../pages/calculator/calculator';
 import { SettingsPage } from '../pages/settings/settings';
 import { DisclaimerPage } from '../pages/disclaimer/disclaimer';
-import { FieldEditPage } from '../pages/field-edit/field-edit';
+import { FieldEditPage, KeysPipe } from '../pages/field-edit/field-edit';
 import { SpreadAddPage } from '../pages/spread-add/spread-add';
 import { SpreadEditPage } from '../pages/spread-edit/spread-edit';
 import { ManureAddPage } from '../pages/manure-add/manure-add';
@@ -16,9 +16,8 @@ import { ManureEditPage } from '../pages/manure-edit/manure-edit';
 import { Field } from '../providers/field';
 import { Settings } from '../providers/settings';
 import { LocalStorageModule, LocalStorageService } from 'angular-2-local-storage';
-import { SoilNitrogenSupply } from '../providers/soil-nitrogen-supply';
-import { CropRequirements } from '../providers/crop-requirements';
 import { Strings } from '../providers/strings';
+import { CalcCore } from '../providers/calc-core';
 
 @NgModule({
   declarations: [
@@ -35,7 +34,8 @@ import { Strings } from '../providers/strings';
     SpreadAddPage,
     SpreadEditPage,
     ManureAddPage,
-    ManureEditPage
+    ManureEditPage,
+    KeysPipe
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -68,8 +68,7 @@ import { Strings } from '../providers/strings';
   Field,
   LocalStorageService,
   Settings,
-  SoilNitrogenSupply,
-  CropRequirements,
+  CalcCore,
   Strings]
 })
 export class AppModule {}
