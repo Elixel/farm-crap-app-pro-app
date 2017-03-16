@@ -8,7 +8,7 @@ import { AboutPage } from '../pages/about/about';
 import { CalculatorPage } from '../pages/calculator/calculator';
 import { SettingsPage } from '../pages/settings/settings';
 import { DisclaimerPage } from '../pages/disclaimer/disclaimer';
-import { FieldEditPage, KeysPipe } from '../pages/field-edit/field-edit';
+import { FieldEditPage } from '../pages/field-edit/field-edit';
 import { SpreadAddPage } from '../pages/spread-add/spread-add';
 import { SpreadEditPage } from '../pages/spread-edit/spread-edit';
 import { ManureAddPage } from '../pages/manure-add/manure-add';
@@ -18,6 +18,7 @@ import { Settings } from '../providers/settings';
 import { LocalStorageModule, LocalStorageService } from 'angular-2-local-storage';
 import { Strings } from '../providers/strings';
 import { CalcCore } from '../providers/calc-core';
+import { KeysPipe } from '../pipes/keys';
 
 @NgModule({
   declarations: [

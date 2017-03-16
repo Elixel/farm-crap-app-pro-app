@@ -12,8 +12,6 @@ import { Settings } from '../../providers/settings';
 import { Strings } from '../../providers/strings';
 import { CalcCore } from '../../providers/calc-core';
 
-import { PipeTransform, Pipe } from '@angular/core';
-
 /*
   Generated class for the FieldEdit page.
 
@@ -53,16 +51,13 @@ export class FieldEditPage {
   ) {
     // Set public access token
     mapboxgl.accessToken = 'pk.eyJ1IjoiY29va2llY29va3NvbiIsImEiOiJjaXp6b3dvZnEwMDNqMnFsdTdlbmJtcHY0In0.OeHfq5_gzEIW13JzzsZJEA';
-
     // Get field data
     this.field = this.fieldProvider.fields[this.navParams.data.fieldIndex];
-
     // Create Basic Details Form
     this.basicDetailsForm = this.formBuilder.group({
       name: [this.field.name, Validators.required],
       hectares: [this.field.hectares, Validators.required]
     });
-
     // Create Soil Details Form
     this.soilDetailsForm = this.formBuilder.group({
       soilType: [this.field.soilType, Validators.required],
@@ -70,14 +65,12 @@ export class FieldEditPage {
       soilTestP: [this.field.soilTestP],
       soilTestK: [this.field.soilTestK]
     });
-
     // Create Crop Details Form
     this.cropDetailsForm = this.formBuilder.group({
       grassGrown: [this.field.grassGrown],
       oldCropType: [this.field.oldCropType, Validators.required],
       newCropType: [this.field.newCropType, Validators.required]
     });
-
     // Load strings
     this.strings = stringsProvider.data;
   }
@@ -186,19 +179,7 @@ export class FieldEditPage {
         this.soilDetailsForm.value.soilTestK,
         this.cropDetailsForm.value.grassGrown
       );
-      console.log(this.cropRequirementsSupply);
     }
   }
 
-}
-
-@Pipe({name: 'keys'})
-export class KeysPipe implements PipeTransform {
-  transform(value, args:string[]) : any {
-    let keys = [];
-    for (let key in value) {
-      keys.push({key: key, value: value[key]});
-    }
-    return keys;
-  }
 }

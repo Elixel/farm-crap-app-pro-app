@@ -41,6 +41,30 @@ export class Strings {
         'grass-low-n': 'Grass (low N/1 or more cuts)',
         'grass-high-n': 'Grass (3-5yr, high N, grazed)',
         'grass-other': 'Any other grass'
+    },
+    'soilNutrientCodeToText': {
+      '0': '<60',
+      '1': '61-80',
+      '2': '81-100',
+      '3': '101-120',
+      '4': '121-160',
+      '5': '161-240',
+      '6': '>240',
+      'grassland-high-sns': 'Grassland high SNS',
+      'grassland-med-sns': 'Grassland medium SNS',
+      'grassland-low-sns': 'Grassland low SNS'
+    },
+    'soilNutrientCodeToTextImperial': {
+      '0': '<48',
+      '1': '49-64',
+      '2': '65-80',
+      '3': '81-96',
+      '4': '97-128',
+      '5': '129-192',
+      '6': '>193',
+      'grassland-high-sns': 'Grassland high SNS',
+      'grassland-med-sns': 'Grassland medium SNS',
+      'grassland-low-sns': 'Grassland low SNS'
     }
   };
 

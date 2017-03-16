@@ -47,13 +47,11 @@ export class FieldAddPage {
     ) {
     // Set public access token
     mapboxgl.accessToken = 'pk.eyJ1IjoiY29va2llY29va3NvbiIsImEiOiJjaXp6b3dvZnEwMDNqMnFsdTdlbmJtcHY0In0.OeHfq5_gzEIW13JzzsZJEA';
-
     // Create Basic Details Form
     this.basicDetailsForm = this.formBuilder.group({
       name: ['', Validators.required],
       hectares: [0, Validators.required]
     });
-
     // Create Soil Details Form
     this.soilDetailsForm = this.formBuilder.group({
       soilType: ['', Validators.required],
@@ -61,14 +59,12 @@ export class FieldAddPage {
       soilTestP: ['soil-p-0'],
       soilTestK: ['soil-k-0']
     });
-
     // Create Crop Details Form
     this.cropDetailsForm = this.formBuilder.group({
       grassGrown: [false],
       oldCropType: ['', Validators.required],
       newCropType: ['', Validators.required]
     });
-
     // Load strings
     this.strings = stringsProvider.data;
   }
@@ -153,7 +149,6 @@ export class FieldAddPage {
   }
 
   slideChanged() {
-
     // If last slide
     if (this.slides.isEnd()) {
       // Get and display crop supply/requirements

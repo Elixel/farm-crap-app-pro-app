@@ -14,7 +14,7 @@
 
 
 <ion-content>
-  <ion-slides ion-fixed pager class="swiper-no-swiping">
+  <ion-slides ion-fixed pager class="swiper-no-swiping" (ionSlideDidChange)="slideChanged()">
 
     <!-- Draw boundaries on map to estimate hectares -->
     <ion-slide>
@@ -110,7 +110,7 @@
 
     <!-- Show field information summary (Supply of nitrogen from the soil details, crop nutrient requirements from the crop details) -->
     <ion-slide>
-      <ion-list>
+      <ion-list *ngIf="cropRequirementsSupply">
         <ion-list-header>Soil N Supply</ion-list-header>
         <ion-grid>
           <ion-row>
@@ -119,11 +119,11 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col>0</ion-col>
+            <ion-col>{{strings.soilNutrientCodeToText[cropRequirementsSupply.nitrogenSupply]}}</ion-col>
           </ion-row>
         </ion-grid>
       </ion-list>
-      <ion-list>
+      <ion-list *ngIf="cropRequirementsSupply">
         <ion-list-header>Crop nutrient requirements</ion-list-header>
         <ion-grid>
           <ion-row>
@@ -138,9 +138,9 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col>{{requirementsNitrogen}}</ion-col>
-            <ion-col>{{requirementsPhosphorous}}</ion-col>
-            <ion-col>{{requirementsPotassium}}</ion-col>
+            <ion-col>{{cropRequirementsSupply.nitrogenRequirement}}</ion-col>
+            <ion-col>{{cropRequirementsSupply.phosphorousRequirement}}</ion-col>
+            <ion-col>{{cropRequirementsSupply.potassiumRequirement}}</ion-col>
           </ion-row>
         </ion-grid>
       </ion-list>
