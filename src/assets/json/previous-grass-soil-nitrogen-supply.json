@@ -1,58 +1,138 @@
 {
-   "decision":"type",
+   "decision":"soil",
    "choices":[
       {
-         "choice":"cattle",
+         "choice":"sandyshallow",
          "value":{
-            "decision":"quality",
+            "decision":"previous-crop",
             "choices":[
                {
-                  "choice":"dm2",
-                  "value":1.5
+                  "choice":"grass-low-n",
+                  "value":0
                },
                {
-                  "choice":"dm6",
-                  "value":2.6
+                  "choice":"grass-other",
+                  "value":1
                },
                {
-                  "choice":"dm10",
-                  "value":3.6
+                  "choice":"grass-high-n",
+                  "value":3
                }
             ]
          }
       },
       {
-         "choice":"pig",
+         "choice":"deepclay",
          "value":{
-            "decision":"quality",
+            "decision":"rainfall",
             "choices":[
                {
-                  "choice":"dm2",
-                  "value":3.0
+                  "choice":"low",
+                  "value":{
+                     "decision":"previous-crop",
+                     "choices":[
+                        {
+                           "choice":"grass-low-n",
+                           "value":2
+                        },
+                        {
+                           "choice":"grass-other",
+                           "value":3
+                        },
+                        {
+                           "choice":"grass-high-n",
+                           "value":5
+                        }
+                     ]
+                  }
                },
                {
-                  "choice":"dm6",
-                  "value":3.6
-               },
-               {
-                  "choice":"dm10",
-                  "value":4.7
+                  "choice":"default",
+                  "value":{
+                     "decision":"previous-crop",
+                     "choices":[
+                        {
+                           "choice":"grass-low-n",
+                           "value":1
+                        },
+                        {
+                           "choice":"grass-other",
+                           "value":3
+                        },
+                        {
+                           "choice":"grass-high-n",
+                           "value":4
+                        }
+                     ]
+                  }
                }
             ]
          }
       },
       {
-         "choice":"poultry",
+         "choice":"deepsilt",
          "value":{
-            "decision":"quality",
+            "decision":"rainfall",
             "choices":[
                {
-                  "choice":"layer",
-                  "value":19
+                  "choice":"low",
+                  "value":{
+                     "decision":"previous-crop",
+                     "choices":[
+                        {
+                           "choice":"grass-low-n",
+                           "value":2
+                        },
+                        {
+                           "choice":"grass-other",
+                           "value":3
+                        },
+                        {
+                           "choice":"grass-high-n",
+                           "value":5
+                        }
+                     ]
+                  }
                },
                {
-                  "choice":"broiler",
-                  "value":28
+                  "choice":"default",
+                  "value":{
+                     "decision":"previous-crop",
+                     "choices":[
+                        {
+                           "choice":"grass-low-n",
+                           "value":1
+                        },
+                        {
+                           "choice":"grass-other",
+                           "value":3
+                        },
+                        {
+                           "choice":"grass-high-n",
+                           "value":4
+                        }
+                     ]
+                  }
+               }
+            ]
+         }
+      },
+      {
+         "choice":"mediumshallow",
+         "value":{
+            "decision":"previous-crop",
+            "choices":[
+               {
+                  "choice":"grass-low-n",
+                  "value":1
+               },
+               {
+                  "choice":"grass-other",
+                  "value":2
+               },
+               {
+                  "choice":"grass-high-n",
+                  "value":3
                }
             ]
          }
