@@ -19,7 +19,6 @@ export class CalcCore {
   grasslandMedSNS: number = 101;
   grasslandLowSNS: number = 102;
 
-
   constructor(public http: Http) {
     // Load SNS dataset
     this.http.get('assets/json/soil-nitrogen-supply.json')
@@ -74,14 +73,12 @@ export class CalcCore {
   }
 
   snsSearch(tree, params, regularlyManure) {
-    console.log('snsSearch: START', tree, params);
     // do sns lookup on tree with params
     let sns = this.decision(tree, params);
     // If regularlyManure is true and the sns value is less than 6 (max) then add one
     if (regularlyManure && sns < 6) {
       sns++;
     }
-    console.log('snsSearch: RESULT', sns);
     return sns;
   }
 
@@ -127,63 +124,6 @@ export class CalcCore {
     }
   }
 
-
-  // Gets the crop requirements for nitrogen, phosphorous or potassium (OLD)
-  /*getCropRequirements(cropChoice, nutrientChoice, soilChoice, snsChoice) {
-    if (nutrientChoice === 'nitrogen') {
-      // Select the N dataset (crop-requirements-n.json)
-      let cropTree = this.cropRequirementsNitrogenTree.choices;
-      // Ascend down tree leaves
-      for (let cropIndex in cropTree) {
-        // Compare crop choice
-        if (cropTree[cropIndex].choice === cropChoice) {
-          // Check if the value is a number or deeper tree
-          if (isNaN(cropTree[cropIndex].value)) {
-            // Progress down tree
-            let soilTree = cropTree[cropIndex].value.choices;
-            for (let soilIndex in soilTree) {
-              // Compare soil choice
-              if (soilTree[soilIndex].choice === soilChoice) {
-                let snsTree = soilTree[soilIndex].value.choices;
-                for (let snsIndex in snsTree) {
-                  // Compare soil nitrogen supply choice
-                  if (snsTree[snsIndex].choice === snsChoice) {
-                    return snsTree[snsIndex].value;
-                  }
-                }
-              }
-            }
-          } else {
-            // Return value
-            return cropTree[cropIndex].value;
-          }
-        }
-      }
-    } else if (nutrientChoice === 'phosphorous' || nutrientChoice === 'potassium') {
-      // Select the PK dataset (crop-requirements-pk.json)
-      let cropTree = this.cropRequirementsPhosphorousPotassium.choices;
-      // Ascend down tree leaves
-      for (let cropIndex in cropTree) {
-        // Compare crop choice
-        if (cropTree[cropIndex].choice === cropChoice) {
-          let nutrientTree = cropTree[cropIndex].value.choices;
-          for (let nutrientIndex in nutrientTree) {
-            // Compare nutrient choice
-            if (nutrientTree[nutrientIndex].choice === nutrientChoice) {
-              let soilIndexTree = nutrientTree[nutrientIndex].value.choices;
-              for (let soilIndexIndex in soilIndexTree) {
-                // Compare soil index choice
-                if (soilIndexTree[soilIndexIndex].choice === soilChoice) {
-                  return soilIndexTree[soilIndexIndex].value;
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }*/
-
   getNutrients(type, amount, quality, season, crop, soil, application, soilTest) {
     
   }
@@ -207,32 +147,6 @@ export class CalcCore {
     // Start recursive search using first tree decision
     let end = getBranch(sourceTree, params[sourceTree.decision]);
     return end;
-    // Lookup SNS value from decision trees
-    /*let rainfallTree = this.data.choices;
-    for (let rainfallIndex in rainfallTree) {
-      // Compare rainfall choice
-      if (rainfallTree[rainfallIndex].choice === rainfallChoice) {
-        let soilTree = rainfallTree[rainfallIndex].value.choices;
-        for (let soilIndex in soilTree) {
-          // Compare soil choice
-          if (soilTree[soilIndex].choice === soilChoice) {
-            // Check if the value is a number or deeper in the tree
-            if (isNaN(soilTree[soilIndex].value)) {
-              let previousCropTree = soilTree[soilIndex].value.choices;
-              for (let previousCropIndex in previousCropTree) {
-                // Compare previous-crop choice
-                if (previousCropTree[previousCropIndex].choice === previousCropChoice) {
-                  sns = previousCropTree[previousCropIndex].value;
-                }
-              }
-            } else {
-              // Soil choice is grassy
-              sns = soilTree[soilIndex].value;
-            }
-          }
-        }
-      }
-    }*/
   }
 
 }
