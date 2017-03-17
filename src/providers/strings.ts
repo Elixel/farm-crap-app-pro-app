@@ -13,7 +13,7 @@ export class Strings {
         'spring-barley-incorporated': 'Spring barley, straw incorporated',
         'spring-barley-removed': 'Spring barley, straw removed',
         'winter-wheat-incorporated': 'Winter wheat, straw incorporated',
-        'winter-wheat-removed': 'Winter whea, straw removed',
+        'winter-wheat-removed': 'Winter wheat, straw removed',
         'grass-cut': 'Grass cut (yield 6-8k, conc 1.5, stock med)',
         'grass-grazed': 'Grass grazed (yield 6-8k, conc 1.5, stock med)'
     },
@@ -65,6 +65,65 @@ export class Strings {
       'grassland-high-sns': 'Grassland high SNS',
       'grassland-med-sns': 'Grassland medium SNS',
       'grassland-low-sns': 'Grassland low SNS'
+    },
+    'type': {
+      'cattle': 'Cattle Slurry',
+      'pig': 'Pig Slurry',
+      'fym': 'Farmyard Manure',
+      'poultry': 'Poultry Litter',
+      'compost': 'Compost',
+      'custom': 'Custom'
+    },
+    'quality': {
+      'cattle': {
+        'dm2': '2% DM (Thin soup)',
+        'dm6': '6% DM (Thick soup)',
+        'dm10': '10% DM (Porridge)'
+      },
+      'pig': {
+        'dm2': '2% DM (Thin soup)',
+        'dm4': '4% DM (Medium soup)',
+        'dm6': '6% DM (Thick soup)'
+      },
+      'fym': {
+        'fym-cattle': 'Cattle',
+        'fym-pig': 'Pig',
+        'fym-sheep': 'Sheep',
+        'fym-duck': 'Duck',
+        'fym-horse': 'Horse',
+        'fym-goat': 'Goat'
+      },
+      'poultry': {
+        'layer': 'Layer manure',
+        'broiler': 'Broiler litter'
+      },
+      'compost': {
+        'green': 'Green compost',
+        'green-food': 'Green and foodwaste'
+      }
+    },
+    'application': {
+      'cattle': {
+        'splash-surface': 'Splash plate/surface',
+        'splash-incorporated': 'Splash plate/incorporated',
+        'shoe-bar-spreader': 'Trailing shoe/dribble bar/band spreader',
+        'shallow-injected': 'Shallow injected'
+      },
+      'pig': {
+        'splash-surface': 'Splash plate/surface',
+        'splash-incorporated': 'Splash plate/incorporated',
+        'shoe-bar-spreader': 'Trailing shoe/dribble bar/band spreader',
+        'shallow-injected': 'Shallow injected'
+      },
+      'fym': {
+        'straight-surface': 'Straight to surface',
+        'straight-ploughed': 'Straight and ploughed',
+        'stored-spread': 'Stored to surface',
+        'stored-ploughed': 'Stored and ploughed'
+      },
+      'poultry': null,
+      'compost': null,
+      'custom': null
     }
   };
 

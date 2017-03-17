@@ -11,6 +11,7 @@ import { AboutPage } from '../about/about';
 import { CalculatorPage } from '../calculator/calculator';
 import { SettingsPage } from '../settings/settings';
 import { Settings } from '../../providers/settings';
+import { CalcCore } from '../../providers/calc-core';
 
 @Component({
   selector: 'page-home',
@@ -19,13 +20,20 @@ import { Settings } from '../../providers/settings';
 export class HomePage {
   public fields:Object[];
 
-  constructor(public navCtrl: NavController, public popoverCtrl: PopoverController, private fieldProvider: Field, private settingsProvider:Settings, private modalCtrl:ModalController) {
+  constructor(public navCtrl: NavController,
+  public popoverCtrl: PopoverController,
+  private fieldProvider: Field,
+  private settingsProvider: Settings,
+  private modalCtrl: ModalController,
+  private calcCore: CalcCore) {
     // Get fields
     this.fields = this.fieldProvider.fields;
     // Show disclaimer if not accepted
     if (!settingsProvider.disclaimerAccepted) {
       this.showDisclaimerModal();
     }
+    // Pre-load all JSON datasets
+    calcCore.load();
   }
 
   deleteField(fieldIndex) {

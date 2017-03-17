@@ -157,7 +157,8 @@ export class FieldEditPage {
       soilTestK: this.soilDetailsForm.value.soilTestK,
       grassGrown: this.cropDetailsForm.value.grassGrown,
       oldCropType: this.cropDetailsForm.value.oldCropType,
-      newCropType: this.cropDetailsForm.value.newCropType
+      newCropType: this.cropDetailsForm.value.newCropType,
+      spreads: this.field.spreads
     };
     // Edit field in fields list
     this.fieldProvider.set(field, this.navParams.data.fieldIndex);

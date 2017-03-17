@@ -23,13 +23,15 @@
   <!-- Spreading Events -->
   <ion-list>
     <ion-list-header>Spreading events<button ion-button item-right (click)="addSpreadPressed()">Add</button></ion-list-header>
-    <ion-item-sliding>
-      <button ion-item (click)="addSpreadPressed()">
+    <ion-item *ngIf="!field.spreads.length" no-lines>
+      <p>No spreading events</p>
+    </ion-item>
+    <!--ion-item-sliding *ngFor="let spread of field.spreads; let spreadIndex = index;" #slidingItem>
+      <button ion-item (click)="editSpreadPressed(spreadIndex)">
         <h2>01/01/1970</h2>
         <p>Cattle Slurry</p>
       </button>
       <ion-item-options side="right">
-        <button ion-button>Edit</button>
         <button ion-button color="danger">Delete</button>
       </ion-item-options>
     </ion-item-sliding>
@@ -39,9 +41,8 @@
         <p>Compost</p>
       </button>
       <ion-item-options side="right">
-        <button ion-button>Edit</button>
         <button ion-button color="danger">Delete</button>
       </ion-item-options>
-    </ion-item-sliding>
+    </ion-item-sliding-->
   </ion-list>
 </ion-content>

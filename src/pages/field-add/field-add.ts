@@ -140,7 +140,8 @@ export class FieldAddPage {
       soilTestK: this.soilDetailsForm.value.soilTestK,
       grassGrown: this.cropDetailsForm.value.grassGrown,
       oldCropType: this.cropDetailsForm.value.oldCropType,
-      newCropType: this.cropDetailsForm.value.newCropType
+      newCropType: this.cropDetailsForm.value.newCropType,
+      spreads: []
     };
     // Add field to fields list
     this.fieldProvider.add(field);

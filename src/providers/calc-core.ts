@@ -13,13 +13,17 @@ export class CalcCore {
   soilNitrogenSupplyTree: any;
   previousGrassSoilNitrogenSupplyTree: any;
   cropRequirementsNitrogenTree: any;
-  cropRequirementsPhosphorousPotassium: any;
+  cropRequirementsPhosphorousPotassiumTree: any;
+  nitrogenTotalTree: any;
+  manureTree: any;
   
   grasslandHighSNS: number = 100;
   grasslandMedSNS: number = 101;
   grasslandLowSNS: number = 102;
 
-  constructor(public http: Http) {
+  constructor(public http: Http) {}
+
+  load() {
     // Load SNS dataset
     this.http.get('assets/json/soil-nitrogen-supply.json')
     .map(res => res.json())
@@ -42,7 +46,19 @@ export class CalcCore {
     this.http.get('assets/json/crop-requirements-pk.json')
     .map(res => res.json())
     .subscribe(data => {
-      this.cropRequirementsPhosphorousPotassium = data;
+      this.cropRequirementsPhosphorousPotassiumTree = data;
+    });
+    // Load nitrogen totals dataset
+    this.http.get('assets/json/n-total.json')
+    .map(res => res.json())
+    .subscribe(data => {
+      this.nitrogenTotalTree = data;
+    });
+    // Load manure dataset
+    this.http.get('assets/json/manure.json')
+    .map(res => res.json())
+    .subscribe(data => {
+      this.manureTree = data;
     });
   }
 
@@ -114,8 +130,8 @@ export class CalcCore {
     // add/subtract based on table on pp188
     if (sns === this.grasslandHighSNS) nitrogenRequirement -= 30;
     if (sns === this.grasslandLowSNS) nitrogenRequirement += 30;
-    let phosphorousRequirement = this.decision(this.cropRequirementsPhosphorousPotassium, Object.assign({nutrient: 'phosphorous'}, choices));
-    let potassiumRequirement = this.decision(this.cropRequirementsPhosphorousPotassium, Object.assign({nutrient: 'potassium'}, choices));
+    let phosphorousRequirement = this.decision(this.cropRequirementsPhosphorousPotassiumTree, Object.assign({nutrient: 'phosphorous'}, choices));
+    let potassiumRequirement = this.decision(this.cropRequirementsPhosphorousPotassiumTree, Object.assign({nutrient: 'potassium'}, choices));
     return {
       nitrogenRequirement: nitrogenRequirement,
       phosphorousRequirement: phosphorousRequirement,
@@ -124,8 +140,52 @@ export class CalcCore {
     }
   }
 
-  getNutrients(type, amount, quality, season, crop, soil, application, soilTest) {
-    
+  getNutrients(type, amount, quality, season, crop, soil, application, soilTestP, soilTestK): Object {
+    console.log('getNutrients: START');
+    let params = {
+      type: type,
+      quality: quality,
+      season: season,
+      // IMPORTANT: we have to convert crop from the field types to send to manure
+      crop: crop === 'grass-oilseed' || crop === 'grass' ? 'grass-oilseed' : 'normal',
+		  // also we have to convert soil to the two types in manure (pp 66, note b)
+      soil: soil === 'sandyshallow' || 'mediumshallow' ? 'sandyshallow' : 'mediumheavy',
+      application: application
+    };
+    // get the total for pig or cattle slurry or poultry, then we apply the 
+    // percent value later to get the crop available
+    let total = type === 'pig' || type === 'cattle' || type === 'poultry' ? this.decision(this.nitrogenTotalTree, params) : 0;
+    // high soil test means we're adding total
+    let phosphorous = soilTestP === 'soil-p-2' || soilTestP === 'soil-p-3' ? 'p-total' : 'p-avail';
+    let potassium = soilTestK === 'soil-k-2-' || soilTestK === 'soil-k-2+' || soilTestK === 'soil-k-3' ? 'k-total' : 'k-avail';
+    console.log('getNutrients: STAGE 1', total, phosphorous, potassium);
+    // if pig or cattle slurry, then this is the percent value
+    let n = String(this.decision(this.manureTree, params)); // TODO: (let ((n (decision manure-tree (append (quote ((nutrient nitrogen))) params))))
+    // N/A Value
+    if (n !== 'NA') {
+      // Apply percent or return straight value
+      if (total !== 0) {
+        // TODO: (if (zero? total) n (pc total n)))) NOT SURE IF BELOW IS CORRECT
+         n = '%' + total + n;
+      }
+    }
+    return this.processNutrients(
+      amount,
+      [
+        n,
+        this.decision(this.manureTree, Object.assign({nutrient: 'phosphorous'}, params)),
+        this.decision(this.manureTree, Object.assign({nutrient: 'potassium'}, params))
+      ]
+    );
+  }
+
+  processNutrients(amount, nutrients) {
+    for (let nutrientIndex in nutrients) {
+      if (!isNaN(nutrients[nutrientIndex])) {
+        nutrients[nutrientIndex] = amount * nutrients[nutrientIndex];
+      }
+    }
+    return nutrients;
   }
 
   // Searches through dataset tree with specified parameters
@@ -143,6 +203,7 @@ export class CalcCore {
           }
         }
       }
+      console.log('cannot find', choice);
     }
     // Start recursive search using first tree decision
     let end = getBranch(sourceTree, params[sourceTree.decision]);
