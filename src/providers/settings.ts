@@ -28,6 +28,9 @@ export class Settings {
   private _customManureKey: string = 'fca.settings.manures';
   private _customManure: Object[];
 
+  private _disclaimerAcceptedKey: string = 'fca.settings.disclaimer';
+  private _disclaimerAccepted: Boolean;
+
   constructor(private localStorageService: LocalStorageService) {}
 
   /**
@@ -179,6 +182,23 @@ export class Settings {
     this._customManure[customManureIndex] = manureObject;
     // Save to localStorage
     this.localStorageService.set(this._customManureKey, this._customManure);
+  }
+
+  public get disclaimerAccepted(): Boolean {
+    // Get from localStorage if undefined
+    if (this._disclaimerAccepted === undefined) {
+      this._disclaimerAccepted = <Boolean>this.localStorageService.get(this._disclaimerAcceptedKey);
+    }
+    // Default to false
+    if (!this._disclaimerAccepted) {
+      this._disclaimerAccepted = false;
+    }
+    return this._disclaimerAccepted;
+  }
+
+  public set disclaimerAccepted(newValue) {
+    this._disclaimerAccepted = newValue;
+    this.localStorageService.set(this._disclaimerAcceptedKey, newValue);
   }
 
 }

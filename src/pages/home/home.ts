@@ -1,15 +1,16 @@
 import { Component } from '@angular/core';
-import { NavController, PopoverController } from 'ionic-angular';
-import { ItemSliding } from 'ionic-angular';
+import { NavController, PopoverController, ItemSliding, ModalController } from 'ionic-angular';
 
 import { Field } from '../../providers/field';
 
 import { FieldAddPage } from '../field-add/field-add';
 import { FieldEditPage } from '../field-edit/field-edit';
 import { FieldDetailPage } from '../field-detail/field-detail';
+import { DisclaimerPage } from '../disclaimer/disclaimer';
 import { AboutPage } from '../about/about';
 import { CalculatorPage } from '../calculator/calculator';
 import { SettingsPage } from '../settings/settings';
+import { Settings } from '../../providers/settings';
 
 @Component({
   selector: 'page-home',
@@ -18,8 +19,13 @@ import { SettingsPage } from '../settings/settings';
 export class HomePage {
   public fields:Object[];
 
-  constructor(public navCtrl: NavController, public popoverCtrl: PopoverController, private fieldProvider: Field) {
+  constructor(public navCtrl: NavController, public popoverCtrl: PopoverController, private fieldProvider: Field, private settingsProvider:Settings, private modalCtrl:ModalController) {
+    // Get fields
     this.fields = this.fieldProvider.fields;
+    // Show disclaimer if not accepted
+    if (!settingsProvider.disclaimerAccepted) {
+      this.showDisclaimerModal();
+    }
   }
 
   deleteField(fieldIndex) {
@@ -50,6 +56,11 @@ export class HomePage {
     popover.present({
       ev: touchEvent
     });
+  }
+
+  showDisclaimerModal() {
+    let disclaimerModal = this.modalCtrl.create(DisclaimerPage);
+    disclaimerModal.present();
   }
 
 }
