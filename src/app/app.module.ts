@@ -19,6 +19,7 @@ import { LocalStorageModule, LocalStorageService } from 'angular-2-local-storage
 import { Strings } from '../providers/strings';
 import { CalcCore } from '../providers/calc-core';
 import { KeysPipe } from '../pipes/keys';
+import { orderBy } from '../pipes/orderBy';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { KeysPipe } from '../pipes/keys';
     SpreadEditPage,
     ManureAddPage,
     ManureEditPage,
-    KeysPipe
+    KeysPipe,
+    orderBy
   ],
   imports: [
     IonicModule.forRoot(MyApp),

@@ -26,23 +26,14 @@
     <ion-item *ngIf="!field.spreads.length" no-lines>
       <p>No spreading events</p>
     </ion-item>
-    <!--ion-item-sliding *ngFor="let spread of field.spreads; let spreadIndex = index;" #slidingItem>
+    <ion-item-sliding *ngFor="let spread of field.spreads | orderBy: ['-spreadDate']; let spreadIndex = index;" #slidingItem>
       <button ion-item (click)="editSpreadPressed(spreadIndex)">
-        <h2>01/01/1970</h2>
-        <p>Cattle Slurry</p>
+        <h2>{{spread.spreadDate | date: 'shortDate'}}</h2>
+        <p>{{strings.type[spread.manureType]}}</p>
       </button>
       <ion-item-options side="right">
-        <button ion-button color="danger">Delete</button>
+        <button ion-button color="danger" (click)="deleteSpreadPressed(spreadIndex)">Delete</button>
       </ion-item-options>
     </ion-item-sliding>
-    <ion-item-sliding>
-      <button ion-item (click)="addSpreadPressed()">
-        <h2>01/01/1970</h2>
-        <p>Compost</p>
-      </button>
-      <ion-item-options side="right">
-        <button ion-button color="danger">Delete</button>
-      </ion-item-options>
-    </ion-item-sliding-->
   </ion-list>
 </ion-content>

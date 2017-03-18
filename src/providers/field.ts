@@ -11,7 +11,7 @@ import { LocalStorageService } from 'angular-2-local-storage';
 export class Field {
 
   private _fieldsKey: string = 'fields';
-  private _fields: Object[];
+  private _fields: any[];
 
   constructor(private localStorageService: LocalStorageService) {}
 
@@ -42,6 +42,27 @@ export class Field {
   public deleteField(fieldIndex) {
     // Splice field object from field array
     this._fields.splice(fieldIndex, 1);
+    // Save to localStorage
+    this.localStorageService.set(this._fieldsKey, this._fields);
+  }
+
+  public addSpread(fieldIndex, spread) {
+    // Add spread object to field object
+    this._fields[fieldIndex].spreads.push(spread);
+    // Save to localStorage
+    this.localStorageService.set(this._fieldsKey, this._fields);
+  }
+
+  public setSpread(fieldIndex, spreadIndex, spread) {
+    // Overwrite spread object on field object
+    this._fields[fieldIndex].spreads[spreadIndex] = spread;
+    // Save to localStorage
+    this.localStorageService.set(this._fieldsKey, this._fields);
+  }
+
+  public deleteSpread(fieldIndex, spreadIndex) {
+    // Splice spread object from field object
+    this._fields[fieldIndex].spreads.splice(spreadIndex, 1);
     // Save to localStorage
     this.localStorageService.set(this._fieldsKey, this._fields);
   }

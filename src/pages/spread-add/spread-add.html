@@ -105,5 +105,5 @@
   </ion-slides>
   <button ion-button clear small class="prev" ion-fixed (click)="prevPressed()" *ngIf="slides.getActiveIndex() !== 0">Previous</button>
   <button ion-button clear small class="next" ion-fixed (click)="nextPressed()" *ngIf="slides.getActiveIndex() !== 1">Next</button>
-  <button ion-button clear small class="next" ion-fixed (click)="finishPressed()" *ngIf="slides.getActiveIndex() == 1">Finish</button>
+  <button ion-button clear small class="next" ion-fixed (click)="addPressed()" *ngIf="slides.getActiveIndex() == 1">Add</button>
 </ion-content>

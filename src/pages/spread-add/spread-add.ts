@@ -110,8 +110,19 @@ export class SpreadAddPage {
     );
   }
 
-  // Finish button handler
-  finishPressed() {
+  // Add button handler
+  addPressed() {
+    // Create spread Object
+    let spread = {
+      spreadDate: this.spreadDate,
+      manureType: this.manureType,
+      manureQuality: this.manureQuality,
+      manureApplicationType: this.manureApplicationType,
+      manureDensity: this.manureDensity
+    };
+    // Add spread to field spread list
+    this.fieldProvider.addSpread(this.navParams.data.fieldIndex, spread);
+    // Navigate back to home
     this.navCtrl.pop();
   }
 
