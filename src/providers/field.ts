@@ -19,6 +19,9 @@ export class Field {
     if (this._fields === undefined) {
       this._fields = <Object[]>this.localStorageService.get(this._fieldsKey);
     }
+    if (!this._fields) {
+      this._fields = [];
+    }
     return this._fields;
   }
 
