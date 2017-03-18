@@ -141,7 +141,6 @@ export class CalcCore {
   }
 
   getNutrients(type, amount, quality, season, crop, soil, application, soilTestP, soilTestK): Object {
-    console.log('getNutrients: START');
     let params = {
       type: type,
       quality: quality,
@@ -158,25 +157,27 @@ export class CalcCore {
     // high soil test means we're adding total
     let phosphorous = soilTestP === 'soil-p-2' || soilTestP === 'soil-p-3' ? 'p-total' : 'p-avail';
     let potassium = soilTestK === 'soil-k-2-' || soilTestK === 'soil-k-2+' || soilTestK === 'soil-k-3' ? 'k-total' : 'k-avail';
-    console.log('getNutrients: STAGE 1', total, phosphorous, potassium);
     // if pig or cattle slurry, then this is the percent value
-    let n = String(this.decision(this.manureTree, params)); // TODO: (let ((n (decision manure-tree (append (quote ((nutrient nitrogen))) params))))
-    // N/A Value
-    if (n !== 'NA') {
+    let n = this.decision(this.manureTree, Object.assign({nutrient: 'nitrogen'}, params));
+    // N/A value
+    if (n !== 'na') {
       // Apply percent or return straight value
       if (total !== 0) {
-        // TODO: (if (zero? total) n (pc total n)))) NOT SURE IF BELOW IS CORRECT
-         n = '%' + total + n;
+         n = this.pc(total, n);
       }
     }
     return this.processNutrients(
       amount,
       [
         n,
-        this.decision(this.manureTree, Object.assign({nutrient: 'phosphorous'}, params)),
-        this.decision(this.manureTree, Object.assign({nutrient: 'potassium'}, params))
+        this.decision(this.manureTree, Object.assign({nutrient: phosphorous}, params)),
+        this.decision(this.manureTree, Object.assign({nutrient: potassium}, params))
       ]
     );
+  }
+
+  pc (v, p) {
+    return (v / 100) * p;
   }
 
   processNutrients(amount, nutrients) {
@@ -189,14 +190,14 @@ export class CalcCore {
   }
 
   // Searches through dataset tree with specified parameters
-  decision(sourceTree, params): number {
+  decision(sourceTree, params) {
     function getBranch(tree, choice) {
       // Loop through current depth choices
       for (let index in tree.choices) {
         // Find correct choice node
         if (tree.choices[index].choice === choice) {
           // Check if final number or another layer
-          if (isNaN(tree.choices[index].value)) {
+          if (typeof tree.choices[index].value === 'object') {
             return getBranch(tree.choices[index].value, params[tree.choices[index].value.decision]);
           } else {
             return tree.choices[index].value;

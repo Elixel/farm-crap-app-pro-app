@@ -23,12 +23,13 @@ export class SpreadAddPage {
   strings: Object;
   customManureList: Object[];
   cropRequirementsSupply: Object;
+  cropAvailable: Object;
 
   spreadDate: string;
   manureType: string = 'cattle';
   manureQuality:string = 'dm2';
   manureApplicationType: string = 'splash-surface';
-  manureDensity = 1;
+  manureDensity = 50;
 
   constructor(
     public navCtrl: NavController,
@@ -47,14 +48,6 @@ export class SpreadAddPage {
     // Get custom manure
     this.customManureList = settingsProvider.customManure;
     // Get and display crop supply/requirements
-    console.log(this.settingsProvider.rainfall,
-      this.field.newCropType,
-      this.field.soilType,
-      this.field.oldCropType,
-      this.field.organicManures,
-      this.field.soilTestP,
-      this.field.soilTestK,
-      this.field.grassGrown);
     this.cropRequirementsSupply = this.calcCore.getCropRequirementsSupply(
       this.settingsProvider.rainfall,
       this.field.newCropType,
@@ -78,34 +71,33 @@ export class SpreadAddPage {
     this.calculate();
   }
 
-  calculate() {
-    // Calculate season from spread date
-    let season: string;
-    switch (new Date(this.spreadDate).getMonth() + 1) {
+  getSeason(month) {
+    switch (month) {
       case 12:
       case 1:
       case 2:
-        season = 'winter';
-        break;
+        return 'winter';
       case 3:
       case 4:
       case 5:
-        season = 'spring';
-        break;
+        return 'spring';
       case 6:
       case 7:
       case 8:
-        season = 'summer';
-        break;
+        return 'summer';
       case 9:
       case 10:
       case 11:
-        season = 'winter';
-        break;
+        return 'winter';
     };
+  }
+
+  calculate() {
+    // Calculate season from spread date
+    let season: string = this.getSeason(new Date(this.spreadDate).getMonth() + 1);
     
     // Perform calculations based on inputs
-    let calc = this.calcCore.getNutrients(
+    this.cropAvailable = this.calcCore.getNutrients(
       this.manureType,
       this.manureDensity,
       this.manureQuality,
@@ -116,9 +108,6 @@ export class SpreadAddPage {
       this.field.soilTestP,
       this.field.soilTestK
     );
-
-    // Spit out calculations to console
-    console.log(calc);
   }
 
   // Finish button handler
