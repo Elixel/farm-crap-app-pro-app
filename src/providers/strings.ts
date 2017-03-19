@@ -124,6 +124,14 @@ export class Strings {
       'poultry': null,
       'compost': null,
       'custom': null
+    },
+    'rangeMax': {
+      'cattle': 100,
+      'fym': 100,
+      'pig': 100,
+      'poultry': 15,
+      'compost': 100,
+      'custom': 100
     }
   };
 

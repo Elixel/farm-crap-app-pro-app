@@ -27,7 +27,7 @@
         <ion-list-header>Manure Details</ion-list-header>
         <ion-item>
           <ion-label>Type</ion-label>
-          <ion-select [(ngModel)]="manureType">
+          <ion-select [(ngModel)]="manureType" (ionChange)="manureTypeChanged()">
             <ion-option *ngFor="let manure of strings.type | keys" [value]="manure.key">{{manure.value}}</ion-option>
           </ion-select>
         </ion-item>
@@ -95,9 +95,9 @@
           <ion-badge item-right>{{manureDensity}} m&#179;/ha</ion-badge>
         </ion-list-header>
         <ion-item>
-          <ion-range min="1" max="99" [(ngModel)]="manureDensity" (ionChange)="calculate()">
-            <ion-label range-left>1</ion-label>
-            <ion-label range-right>99</ion-label>
+          <ion-range min="0" [max]="strings.rangeMax[manureType]" [(ngModel)]="manureDensity" (ionChange)="calculate()">
+            <ion-label range-left>0</ion-label>
+            <ion-label range-right>{{strings.rangeMax[manureType]}}</ion-label>
           </ion-range>
         </ion-item>
       </ion-list>

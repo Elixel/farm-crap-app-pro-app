@@ -21,7 +21,7 @@ export class SpreadEditPage {
   field: any;
   spread: any;
   @ViewChild(Slides) slides: Slides;
-  strings: Object;
+  strings: any;
   customManureList: Object[];
   cropRequirementsSupply: Object;
   cropAvailable: Object;
@@ -32,7 +32,7 @@ export class SpreadEditPage {
   manureType: string;
   manureQuality:string;
   manureApplicationType: string;
-  manureDensity = 50;
+  manureDensity: number;
 
   constructor(
     public navCtrl: NavController,
@@ -82,6 +82,12 @@ export class SpreadEditPage {
     this.calculate();
     // Slide to calculated values
     this.slides.slideNext();
+  }
+
+  // Manure choice has changed, so update some ranges
+  manureTypeChanged() {
+    // Reset slider to half way
+    this.manureDensity = this.strings.rangeMax[this.manureType] / 2;
   }
 
   getSeason(month) {

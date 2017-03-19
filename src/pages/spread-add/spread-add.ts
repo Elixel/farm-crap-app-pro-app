@@ -20,7 +20,7 @@ import { CalcCore } from '../../providers/calc-core';
 export class SpreadAddPage {
   field: any;
   @ViewChild(Slides) slides: Slides;
-  strings: Object;
+  strings: any;
   customManureList: Object[];
   cropRequirementsSupply: Object;
   cropAvailable: Object;
@@ -31,7 +31,7 @@ export class SpreadAddPage {
   manureType: string;
   manureQuality:string;
   manureApplicationType: string;
-  manureDensity = 50;
+  manureDensity: number;
 
   constructor(
     public navCtrl: NavController,
@@ -45,6 +45,8 @@ export class SpreadAddPage {
     this.field = fieldProvider.fields[navParams.data.fieldIndex];
     // Default to todays date for new spreading
     this.spreadDate = new Date().toISOString();
+    // Default to half way for density
+    this.manureDensity = 50;
     // Load strings
     this.strings = stringsProvider.data;
     // Get custom manure
@@ -71,6 +73,12 @@ export class SpreadAddPage {
   nextPressed() {
     this.slides.slideNext();
     this.calculate();
+  }
+
+  // Manure choice has changed, so update some ranges
+  manureTypeChanged() {
+    // Reset slider to half way
+    this.manureDensity = this.strings.rangeMax[this.manureType] / 2;
   }
 
   getSeason(month) {
