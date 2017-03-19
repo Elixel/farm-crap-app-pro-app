@@ -21,6 +21,8 @@ import { Strings } from '../providers/strings';
 import { CalcCore } from '../providers/calc-core';
 import { KeysPipe } from '../pipes/keys';
 import { orderBy } from '../pipes/orderBy';
+import 'chart.js/src/chart.js';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,8 @@ import { orderBy } from '../pipes/orderBy';
     LocalStorageModule.withConfig({
       prefix: 'fca',
       storageType: 'localStorage'
-    })
+    }),
+    ChartsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

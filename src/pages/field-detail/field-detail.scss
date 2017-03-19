@@ -1,9 +1,6 @@
 page-field-detail {
-    .map {
-        height: 200px;
-        overflow: hidden;
-    }
-    .graph {
-        padding: 20%;
+    .graph p {
+        margin: 20%;
+        text-align: center;
     }
 }

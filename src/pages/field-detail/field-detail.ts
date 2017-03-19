@@ -5,6 +5,7 @@ import { SpreadEditPage } from '../spread-edit/spread-edit';
 
 import { Field } from '../../providers/field';
 import { Strings } from '../../providers/strings';
+import { CalcCore } from '../../providers/calc-core';
 
 /*
   Generated class for the FieldDetail page.
@@ -22,16 +23,97 @@ export class FieldDetailPage {
   
   strings: Object;
 
+  public barChartLabels:string[];
+  public barChartData:any[];
+  public barChartOptions:any = {
+    responsive: true,
+    scales: {
+      xAxes: [{
+        barPercentage: 1,
+        categoryPercentage: 0.1,
+        type: 'time',
+        time: {
+          unit: 'month',
+          displayFormats: {
+            month: 'MMM \'YY'
+          }
+        }
+      }],
+      yAxes: [{
+        ticks: {
+          min: 0
+        }
+      }]
+    },
+    tooltips: {
+      enabled: false
+    },
+    layout: {
+      padding: {
+        top: 10,
+        right: 10,
+        left: 10,
+        bottom: 0
+      }
+    }
+  };
+
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private fieldProvider: Field,
-    private stringsProvider: Strings
+    private stringsProvider: Strings,
+    private calcCore: CalcCore
   ) {
     // Get field data
     this.field = this.fieldProvider.fields[navParams.data.fieldIndex];
     // Load strings
     this.strings = stringsProvider.data;
+    // Create graph
+    this.updateGraph();
+  }
+
+  ionViewWillEnter() {
+    // Update field data (fixes issue where graph won't upload when new spread is added)
+    this.field = this.fieldProvider.fields[this.navParams.data.fieldIndex];
+    // Update graph if data loaded
+    if (this.field) {
+      this.updateGraph();
+    }
+  }
+
+  updateGraph() {
+    // Create empty template for graphs
+    this.barChartLabels = [];
+    this.barChartData = [{
+      data: [],
+      label: 'N'
+    }, {
+      data: [],
+      label: 'P'
+    }, {
+      data: [],
+      label: 'K'
+    }];
+    // Loop through spreads to populate graph
+    for (let spreadIndex in this.field.spreads) {
+      // Calculate graph data
+      let cropAvailable = this.calcCore.calculateNutrients(
+        this.field.spreads[spreadIndex].manureType,
+        this.field.spreads[spreadIndex].manureDensity,
+        this.field.spreads[spreadIndex].manureQuality,
+        this.calcCore.getSeason(new Date(this.field.spreads[spreadIndex].spreadDate).getMonth() + 1),
+        this.field.newCropType,
+        this.field.soilType,
+        this.field.spreads[spreadIndex].manureApplicationType,
+        this.field.soilTestP,
+        this.field.soilTestK
+      );
+      this.barChartLabels.push(this.field.spreads[spreadIndex].spreadDate);
+      this.barChartData[0].data.push(cropAvailable[0]);
+      this.barChartData[1].data.push(cropAvailable[1]);
+      this.barChartData[2].data.push(cropAvailable[2]);
+    }
   }
 
   addSpreadPressed() {
@@ -49,6 +131,7 @@ export class FieldDetailPage {
 
   deleteSpreadPressed(spreadIndex) {
     this.fieldProvider.deleteSpread(this.navParams.data.fieldIndex, spreadIndex);
+    this.updateGraph();
   }
 
 }

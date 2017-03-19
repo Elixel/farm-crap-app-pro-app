@@ -81,36 +81,13 @@ export class SpreadAddPage {
     this.manureDensity = this.strings.rangeMax[this.manureType] / 2;
   }
 
-  getSeason(month) {
-    switch (month) {
-      case 12:
-      case 1:
-      case 2:
-        return 'winter';
-      case 3:
-      case 4:
-      case 5:
-        return 'spring';
-      case 6:
-      case 7:
-      case 8:
-        return 'summer';
-      case 9:
-      case 10:
-      case 11:
-        return 'winter';
-    };
-  }
-
   calculate() {
-    // Calculate season from spread date
-    let season: string = this.getSeason(new Date(this.spreadDate).getMonth() + 1);
     // Perform calculations based on inputs
     this.cropAvailable = this.calcCore.calculateNutrients(
       this.manureType,
       this.manureDensity,
       this.manureQuality,
-      season,
+      this.calcCore.getSeason(new Date(this.spreadDate).getMonth() + 1),
       this.field.newCropType,
       this.field.soilType,
       this.manureApplicationType,
