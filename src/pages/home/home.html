@@ -5,7 +5,7 @@
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="presentPopover($event)">
-        <ion-icon name="more"></ion-icon>
+        <ion-icon name="more" color="dark"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -13,7 +13,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-list-header>Fields<button ion-button item-right (click)="addField()">Add</button></ion-list-header>
+    <ion-list-header>Fields<button ion-button item-right (click)="addField()">Add Field</button></ion-list-header>
     <ion-item *ngIf="!fields.length" no-lines>
       <p>No fields</p>
     </ion-item>
