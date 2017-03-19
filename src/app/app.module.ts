@@ -1,7 +1,8 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { HomePage, PopoverPage } from '../pages/home/home';
+import { HomePage } from '../pages/home/home';
+import { PopoverPage } from '../pages/home/home-popover';
 import { FieldAddPage } from '../pages/field-add/field-add';
 import { FieldDetailPage } from '../pages/field-detail/field-detail';
 import { AboutPage } from '../pages/about/about';

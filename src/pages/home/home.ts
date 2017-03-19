@@ -7,9 +7,8 @@ import { FieldAddPage } from '../field-add/field-add';
 import { FieldEditPage } from '../field-edit/field-edit';
 import { FieldDetailPage } from '../field-detail/field-detail';
 import { DisclaimerPage } from '../disclaimer/disclaimer';
-import { AboutPage } from '../about/about';
-import { CalculatorPage } from '../calculator/calculator';
-import { SettingsPage } from '../settings/settings';
+import { PopoverPage } from './home-popover';
+
 import { Settings } from '../../providers/settings';
 import { CalcCore } from '../../providers/calc-core';
 
@@ -69,44 +68,6 @@ export class HomePage {
   showDisclaimerModal() {
     let disclaimerModal = this.modalCtrl.create(DisclaimerPage);
     disclaimerModal.present();
-  }
-
-}
-
-import { ViewController, App } from 'ionic-angular';
-
-@Component({
-  template: `
-    <ion-list>
-      <button ion-item (click)="about()">About</button>
-      <button ion-item (click)="settings()">Settings</button>
-      <button ion-item (click)="calculator()">Calculator</button>
-      <button ion-item (click)="export()">Export Data</button>
-    </ion-list>
-  `
-})
-export class PopoverPage {
-
-  constructor(public viewCtrl: ViewController, public appCtrl: App) {}
-
-  about() {
-    this.viewCtrl.dismiss();
-    this.appCtrl.getRootNav().push(AboutPage);
-  }
-
-  settings() {
-    this.viewCtrl.dismiss();
-    this.appCtrl.getRootNav().push(SettingsPage);
-  }
-
-  calculator() {
-    this.viewCtrl.dismiss();
-    this.appCtrl.getRootNav().push(CalculatorPage);
-  }
-
-  export() {
-    this.viewCtrl.dismiss();
-    // Export data here
   }
 
 }
