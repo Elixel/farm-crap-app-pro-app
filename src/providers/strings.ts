@@ -132,9 +132,31 @@ export class Strings {
       'poultry': 15,
       'compost': 100,
       'custom': 100
+    },
+    'units': {
+      'metric': {
+        'type': {
+          'cattle': 'm³',
+          'fym': 'tons',
+          'pig': 'm³',
+          'poultry': 'tons',
+          'compost': 'tons',
+          'custom': 'tons'
+        }
+      },
+      'imperial': {
+        'type': {
+          'cattle': 'gallons',
+          'fym': 'tons',
+          'pig': 'gallons',
+          'poultry': 'tons',
+          'compost': 'tons',
+          'custom': 'tons'
+        }
+      }
     }
   };
-
+  
   constructor() {}
 
 }

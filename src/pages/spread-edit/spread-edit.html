@@ -92,7 +92,7 @@
       <ion-list>
         <ion-list-header>
           <ion-label>Density</ion-label>
-          <ion-badge item-right>{{manureDensity}} m&#179;/ha</ion-badge>
+          <ion-badge item-right>{{manureDensity}} {{strings.units.metric.type[manureType]}}/ha</ion-badge>
         </ion-list-header>
         <ion-item>
           <ion-range min="0" [max]="strings.rangeMax[manureType]" [(ngModel)]="manureDensity" (ionChange)="calculate()">
