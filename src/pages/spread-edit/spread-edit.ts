@@ -66,18 +66,22 @@ export class SpreadEditPage {
       this.field.soilTestK,
       this.field.grassGrown
     );
+    // Pre-perform calculations to initalise view
     this.calculate();
   }
 
   // Previous button handler
   prevPressed() {
+    // Slide to values
     this.slides.slidePrev();
   }
 
   // Next button handler
   nextPressed() {
-    this.slides.slideNext();
+    // Perform calculations
     this.calculate();
+    // Slide to calculated values
+    this.slides.slideNext();
   }
 
   getSeason(month) {
