@@ -149,6 +149,17 @@ export class Settings {
   }
 
   /**
+   * Get all cost settings as array
+   */
+  public get costs(): number[] {
+    return [
+      this.fertiliserCostNitrogen,
+      this.fertiliserCostPhosphorous,
+      this.fertiliserCostPotassium
+    ];
+  }
+
+  /**
    * Get custom manure array setting
    */
   public get customManure(): Object[] {

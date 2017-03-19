@@ -24,6 +24,7 @@ export class SpreadAddPage {
   customManureList: Object[];
   cropRequirementsSupply: Object;
   cropAvailable: Object;
+  manureCosts: Object;
 
   spreadDate: string;
   manureType: string = 'cattle';
@@ -95,7 +96,6 @@ export class SpreadAddPage {
   calculate() {
     // Calculate season from spread date
     let season: string = this.getSeason(new Date(this.spreadDate).getMonth() + 1);
-    
     // Perform calculations based on inputs
     this.cropAvailable = this.calcCore.getNutrients(
       this.manureType,
@@ -108,6 +108,12 @@ export class SpreadAddPage {
       this.field.soilTestP,
       this.field.soilTestK
     );
+    // Calculate manure costs
+    this.manureCosts = [
+      this.calcCore.getCostStringFromNutrient(0, this.cropAvailable, this.field.hectares),
+      this.calcCore.getCostStringFromNutrient(1, this.cropAvailable, this.field.hectares),
+      this.calcCore.getCostStringFromNutrient(2, this.cropAvailable, this.field.hectares)
+    ];
   }
 
   // Add button handler

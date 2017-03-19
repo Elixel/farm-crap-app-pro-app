@@ -81,11 +81,11 @@
           <ion-col col-2 class="row-value">{{cropRequirementsSupply.phosphorousRequirement - cropAvailable[1] | number:'1.0-2'}}</ion-col>
           <ion-col col-2 class="row-value">{{cropRequirementsSupply.potassiumRequirement - cropAvailable[2] | number:'1.0-2'}}</ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row *ngIf="manureCosts">
           <ion-col col-6 class="row-title">Fertiliser savings (&pound;)</ion-col>
-          <ion-col col-2 class="row-value">-0.000</ion-col>
-          <ion-col col-2 class="row-value">-0.000</ion-col>
-          <ion-col col-2 class="row-value">-0.000</ion-col>
+          <ion-col col-2 class="row-value">{{manureCosts[0]}}</ion-col>
+          <ion-col col-2 class="row-value">{{manureCosts[1]}}</ion-col>
+          <ion-col col-2 class="row-value">{{manureCosts[2]}}</ion-col>
         </ion-row>
       </ion-grid>
       <!-- Density Slider -->

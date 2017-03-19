@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
+import { Settings } from '../providers/settings';
+
 /*
   Generated class for the CalcCore provider.
 
@@ -21,7 +23,7 @@ export class CalcCore {
   grasslandMedSNS: number = 101;
   grasslandLowSNS: number = 102;
 
-  constructor(public http: Http) {}
+  constructor(public http: Http, private settingsProvider: Settings) {}
 
   load() {
     // Load SNS dataset
@@ -209,6 +211,15 @@ export class CalcCore {
     // Start recursive search using first tree decision
     let end = getBranch(sourceTree, params[sourceTree.decision]);
     return end;
+  }
+
+  // Calculates the cost of a nutrient
+  getCostStringFromNutrient(nutrientIndex, amounts, multiplier): String {
+    if (!isNaN(amounts[nutrientIndex])) {
+      return String((amounts[nutrientIndex] * this.settingsProvider.costs[nutrientIndex] * multiplier).toFixed(2));
+    } else {
+      return 'N/A';
+    }
   }
 
 }
