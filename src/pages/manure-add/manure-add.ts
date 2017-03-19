@@ -24,9 +24,11 @@ export class ManureAddPage {
     // Add manure content to settings
     this.settingsProvider.addCustomManure({
       name: this.name,
-      nitrogenContent: this.nitrogenContent,
-      phosphorousContent: this.phosphorousContent,
-      potassiumContent: this.potassiumContent
+      content: [
+        this.nitrogenContent,
+        this.phosphorousContent,
+        this.potassiumContent
+      ]
     });
     // Go back to settings
     this.navCtrl.pop();

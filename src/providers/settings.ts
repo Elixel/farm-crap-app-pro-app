@@ -162,10 +162,10 @@ export class Settings {
   /**
    * Get custom manure array setting
    */
-  public get customManure(): Object[] {
+  public get customManure(): any[] {
     // Get from localStorage if undefined
     if (this._customManure === undefined) {
-      this._customManure = <Object[]>this.localStorageService.get(this._customManureKey);
+      this._customManure = <any[]>this.localStorageService.get(this._customManureKey);
     }
     // Default to empty array
     if (!this._customManure) {

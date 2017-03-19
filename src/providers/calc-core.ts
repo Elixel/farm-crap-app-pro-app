@@ -142,6 +142,14 @@ export class CalcCore {
     }
   }
 
+  calculateNutrients(type, amount, quality, season, crop, soil, application, soilTestP, soilTestK): Object {
+    if (type === 'custom') {
+      return this.processNutrients(amount, this.settingsProvider.customManure[quality].content)
+    } else {
+      return this.getNutrients(type, amount, quality, season, crop, soil, application, soilTestP, soilTestK);
+    }
+  }
+
   getNutrients(type, amount, quality, season, crop, soil, application, soilTestP, soilTestK): Object {
     let params = {
       type: type,
@@ -183,12 +191,13 @@ export class CalcCore {
   }
 
   processNutrients(amount, nutrients) {
+    let nutrientsArray: any[] = [];
     for (let nutrientIndex in nutrients) {
       if (!isNaN(nutrients[nutrientIndex])) {
-        nutrients[nutrientIndex] = amount * nutrients[nutrientIndex];
+        nutrientsArray.push(amount * nutrients[nutrientIndex]);
       }
     }
-    return nutrients;
+    return nutrientsArray;
   }
 
   // Searches through dataset tree with specified parameters

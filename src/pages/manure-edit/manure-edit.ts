@@ -21,18 +21,20 @@ export class ManureEditPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public settingsProvider:Settings) {
     let manure: any = settingsProvider.customManure[navParams.data.customManureIndex];
     this.name = manure.name;
-    this.nitrogenContent = manure.nitrogenContent;
-    this.phosphorousContent = manure.phosphorousContent;
-    this.potassiumContent = manure.potassiumContent;
+    this.nitrogenContent = manure.content[0];
+    this.phosphorousContent = manure.content[1];
+    this.potassiumContent = manure.content[2];
   }
 
   savePressed() {
     // Overwrite existing manure at this index
     this.settingsProvider.setCustomManure(this.navParams.data.customManureIndex, {
       name: this.name,
-      nitrogenContent: this.nitrogenContent,
-      phosphorousContent: this.phosphorousContent,
-      potassiumContent: this.potassiumContent
+      content: [
+        this.nitrogenContent,
+        this.phosphorousContent,
+        this.potassiumContent
+      ]
     });
     // Go back to settings
     this.navCtrl.pop();

@@ -115,7 +115,7 @@ export class SpreadEditPage {
     // Calculate season from spread date
     let season: string = this.getSeason(new Date(this.spreadDate).getMonth() + 1);
     // Perform calculations based on inputs
-    this.cropAvailable = this.calcCore.getNutrients(
+    this.cropAvailable = this.calcCore.calculateNutrients(
       this.manureType,
       this.manureDensity,
       this.manureQuality,
