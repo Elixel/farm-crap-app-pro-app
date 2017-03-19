@@ -26,6 +26,7 @@ export class SpreadEditPage {
   cropRequirementsSupply: Object;
   cropAvailable: Object;
   manureCosts: Object;
+  crapPicture: String;
 
   spreadDate: string;
   manureType: string = 'cattle';
@@ -65,6 +66,7 @@ export class SpreadEditPage {
       this.field.soilTestK,
       this.field.grassGrown
     );
+    this.calculate();
   }
 
   // Previous button handler
@@ -120,6 +122,8 @@ export class SpreadEditPage {
       this.calcCore.getCostStringFromNutrient(1, this.cropAvailable, this.field.hectares),
       this.calcCore.getCostStringFromNutrient(2, this.cropAvailable, this.field.hectares)
     ];
+    // Select image
+    this.crapPicture = this.calcCore.findImage(this.manureType, this.manureDensity);
   }
 
   // Save button handler

@@ -52,7 +52,7 @@
     <ion-slide>
       <!-- Calculations -->
       <ion-card>
-        <img src="assets/images/crap/compost/compost_10t.jpg" />
+        <img *ngIf="crapPicture" [src]="crapPicture" />
       </ion-card>
       <ion-grid no-padding>
         <ion-row>

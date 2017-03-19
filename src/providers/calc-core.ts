@@ -222,4 +222,58 @@ export class CalcCore {
     }
   }
 
+  findImage(type, amount) {
+    let img = '/assets/images/crap/';
+    switch(type) {
+      case 'cattle': {
+        img += 'cattle/';
+        if (amount < 25) img += '25m3';
+        else if (amount < 30) img += '30m3';
+        else if (amount < 50) img += '50m3';
+        else if (amount < 100) img += '100m3';
+        break;
+      }
+      case 'fym': {
+        img += 'fym/';
+        if (amount < 25) img += '25t';
+        else if (amount < 50) img += '50t';
+        break;
+      }
+      case 'pig': {
+        img += 'pig/';
+        if (amount < 25) img += '25m3';
+        else if (amount < 50) img += '50m3';
+        else if (amount < 75) img += '75m3';
+        break;
+      }
+      case 'poultry': {
+        img += 'poultry/';
+        if (amount < 5) img += '5t';
+        else if (amount < 10) img += '10t';
+        break;
+      }
+      case 'compost': {
+        img += 'compost/';
+        if (amount < 5) img += '5t';
+        else if (amount < 10) img += '10t';
+        else if (amount < 15) img += '15t';
+        else if (amount < 20) img += '20t';
+        else if (amount < 25) img += '25t';
+        else if (amount < 30) img += '30t';
+        else if (amount < 35) img += '35t';
+        else if (amount < 40) img += '40t';
+        else if (amount < 45) img += '45t';
+        else if (amount < 50) img += '50t';
+        break;
+
+      }
+      default: {
+        img += 'cattle/25m3';
+        break;
+      }
+    }
+    img += '.jpg';
+    return img;
+  }
+
 }
