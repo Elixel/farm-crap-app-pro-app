@@ -29,9 +29,9 @@ export class SpreadEditPage {
   crapPicture: String;
 
   spreadDate: string;
-  manureType: string = 'cattle';
-  manureQuality:string = 'dm2';
-  manureApplicationType: string = 'splash-surface';
+  manureType: string;
+  manureQuality:string;
+  manureApplicationType: string;
   manureDensity = 50;
 
   constructor(

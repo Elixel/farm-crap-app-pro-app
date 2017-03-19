@@ -33,7 +33,7 @@
         </ion-item>
         <ion-item>
           <ion-label>Quality</ion-label>
-          <ion-select *ngIf="manureType !== 'custom'" [(ngModel)]="manureQuality" [disabled]="!strings.quality[manureType]">
+          <ion-select *ngIf="manureType !== 'custom'" [(ngModel)]="manureQuality">
             <ion-option *ngFor="let quality of strings.quality[manureType] | keys" [value]="quality.key">{{quality.value}}</ion-option>
           </ion-select>
           <!-- Custom Manure List -->
@@ -52,7 +52,7 @@
     <ion-slide>
       <!-- Calculations -->
       <ion-card>
-        <img src="assets/images/crap/compost/compost_10t.jpg" />
+        <img *ngIf="crapPicture" [src]="crapPicture" />
       </ion-card>
       <ion-grid no-padding>
         <ion-row>

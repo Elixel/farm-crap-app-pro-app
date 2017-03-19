@@ -33,7 +33,7 @@
         </ion-item>
         <ion-item>
           <ion-label>Quality</ion-label>
-          <ion-select *ngIf="manureType !== 'custom'" [(ngModel)]="manureQuality" [disabled]="!strings.quality[manureType]">
+          <ion-select *ngIf="manureType !== 'custom'" [(ngModel)]="manureQuality">
             <ion-option *ngFor="let quality of strings.quality[manureType] | keys" [value]="quality.key">{{quality.value}}</ion-option>
           </ion-select>
           <!-- Custom Manure List -->

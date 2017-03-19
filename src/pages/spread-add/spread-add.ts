@@ -25,11 +25,12 @@ export class SpreadAddPage {
   cropRequirementsSupply: Object;
   cropAvailable: Object;
   manureCosts: Object;
+  crapPicture: String;
 
   spreadDate: string;
-  manureType: string = 'cattle';
-  manureQuality:string = 'dm2';
-  manureApplicationType: string = 'splash-surface';
+  manureType: string;
+  manureQuality:string;
+  manureApplicationType: string;
   manureDensity = 50;
 
   constructor(
@@ -114,6 +115,8 @@ export class SpreadAddPage {
       this.calcCore.getCostStringFromNutrient(1, this.cropAvailable, this.field.hectares),
       this.calcCore.getCostStringFromNutrient(2, this.cropAvailable, this.field.hectares)
     ];
+    // Select image
+    this.crapPicture = this.calcCore.findImage(this.manureType, this.manureDensity);
   }
 
   // Add button handler
