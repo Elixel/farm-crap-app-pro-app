@@ -71,8 +71,10 @@ export class SpreadAddPage {
 
   // Next button handler
   nextPressed() {
-    this.slides.slideNext();
+    // Perform calculations
     this.calculate();
+    // Slide to calculated values
+    this.slides.slideNext();
   }
 
   // Manure choice has changed, so update some ranges

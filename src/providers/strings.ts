@@ -154,6 +154,12 @@ export class Strings {
           'custom': 'tons'
         }
       }
+    },
+    'season': {
+      'autumn': 'Autumn',
+      'winter': 'Winter',
+      'spring': 'Spring',
+      'summer': 'Summer'
     }
   };
   
