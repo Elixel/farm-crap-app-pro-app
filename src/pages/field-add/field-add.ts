@@ -11,6 +11,8 @@ import { Settings } from '../../providers/settings';
 import { Strings } from '../../providers/strings';
 import { CalcCore } from '../../providers/calc-core';
 
+import { Geolocation } from 'ionic-native';
+
 /*
   Generated class for the FieldAdd page.
 
@@ -80,8 +82,8 @@ export class FieldAddPage {
     this.map = new mapboxgl.Map({
       container: 'map-add',
       style: 'mapbox://styles/mapbox/satellite-v9',
-      zoom: 12,
-      center: [-4.146236, 50.373528]
+      zoom: 3.75,
+      center: [-4, 54]
     });
     // Create draw tools
     this.draw = new MapboxDraw({
@@ -100,6 +102,18 @@ export class FieldAddPage {
     // When a polygon is removed
     this.map.on('draw.delete', () => {
       this.calculatePolygons(this.draw);
+    });
+    // Centre on user Geolocation
+    Geolocation.getCurrentPosition({
+      maximumAge: 60000, // Get a location from last minute
+      timeout: 15000 // Timeout getting location after 15 seconds
+    }).then((resp) => {
+      this.map.flyTo( {
+        center: [resp.coords.longitude, resp.coords.latitude],
+        zoom: 14
+      });
+    }).catch((error) => {
+      console.log('Error getting location', error);
     });
   }
 

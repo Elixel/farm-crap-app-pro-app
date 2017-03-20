@@ -86,8 +86,8 @@ export class FieldEditPage {
     this.map = new mapboxgl.Map({
       container: 'map-edit',
       style: 'mapbox://styles/mapbox/satellite-v9',
-      zoom: 12,
-      center: [-4.146236, 50.373528]
+      zoom: 3.75,
+      center: [-4, 54]
     });
     // Create draw tools
     this.draw = new MapboxDraw({
