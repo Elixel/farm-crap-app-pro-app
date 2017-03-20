@@ -30,6 +30,7 @@ export class FieldEditPage {
   private draw: any;
   private strings: Object;
   private units: string;
+  private kilogramHectareToUnitsAcre: Function;
 
   // Field Details
   private polygon: any;
@@ -54,10 +55,12 @@ export class FieldEditPage {
     mapboxgl.accessToken = 'pk.eyJ1IjoiY29va2llY29va3NvbiIsImEiOiJjaXp6b3dvZnEwMDNqMnFsdTdlbmJtcHY0In0.OeHfq5_gzEIW13JzzsZJEA';
     // Get field data
     this.field = this.fieldProvider.fields[this.navParams.data.fieldIndex];
+    // Load units
+    this.units = settingsProvider.units;
     // Create Basic Details Form
     this.basicDetailsForm = this.formBuilder.group({
       name: [this.field.name, Validators.required],
-      hectares: [this.field.hectares, Validators.required]
+      hectares: [(settingsProvider.units === 'imperial' ? this.calcCore.hectaresToAcres(this.field.hectares) : this.field.hectares).toFixed(2), Validators.required]
     });
     // Create Soil Details Form
     this.soilDetailsForm = this.formBuilder.group({
@@ -74,8 +77,8 @@ export class FieldEditPage {
     });
     // Load strings
     this.strings = stringsProvider.data;
-    // Load units
-    this.units = settingsProvider.units;
+    // Get converter helpers
+    this.kilogramHectareToUnitsAcre = this.calcCore.kilogramHectareToUnitsAcre;
   }
 
   ngOnInit() {
@@ -153,7 +156,8 @@ export class FieldEditPage {
     let field = {
       polygon: this.polygon,
       name: this.basicDetailsForm.value.name,
-      hectares: this.basicDetailsForm.value.hectares,
+      // When in imperial units mode, hectares is stored as acres temporarily so we are doing the correct conversion here
+      hectares: this.settingsProvider.units === 'imperial' ? this.calcCore.acresToHectares(this.basicDetailsForm.value.hectares) : this.basicDetailsForm.value.hectares,
       soilType: this.soilDetailsForm.value.soilType,
       organicManures: this.soilDetailsForm.value.organicManures,
       soilTestP: this.soilDetailsForm.value.soilTestP,

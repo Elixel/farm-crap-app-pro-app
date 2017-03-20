@@ -66,14 +66,26 @@ export class CalculatorPage {
   // Manure choice has changed, so update some ranges
   manureTypeChanged() {
     // Reset slider to half way
-    this.manureDensity = this.strings.rangeMax[this.manureType] / 2;
+    this.manureDensity = this.strings.rangeMax[this.settingsProvider.units][this.manureType] / 2;
   }
 
   calculate() {
+    let manureDensity;
+    // Convert back from imperial units
+    if (this.units === 'imperial') {
+      if (this.strings.units[this.units].type[this.manureType] === 'gallons') {
+        manureDensity = this.calcCore.gallonsAcreToMetresCubedHectare(this.manureDensity);
+      } else if (this.strings.units[this.units].type[this.manureType] === 'tons') {
+        manureDensity = this.calcCore.imperialTonToMetricTon(this.manureDensity);
+      }
+    } else {
+      // No conversion required
+      manureDensity = this.manureDensity;
+    }
     // Perform calculations based on inputs
     this.cropAvailable = this.calcCore.calculateNutrients(
       this.manureType,
-      this.manureDensity,
+      manureDensity,
       this.manureQuality,
       this.season,
       this.newCropType,
@@ -89,7 +101,7 @@ export class CalculatorPage {
       this.calcCore.getCostStringFromNutrient(2, this.cropAvailable, 1)
     ];
     // Select image
-    this.crapPicture = this.calcCore.findImage(this.manureType, this.manureDensity);
+    this.crapPicture = this.calcCore.findImage(this.manureType, manureDensity);
   }
 
 }

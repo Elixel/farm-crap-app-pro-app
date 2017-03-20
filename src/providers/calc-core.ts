@@ -306,4 +306,48 @@ export class CalcCore {
     };
   }
 
+  metricTonToImperialTon(metricTon) {
+    return metricTon * 0.984207;
+  }
+
+  imperialTonToMetricTon(imperialTon) {
+    return imperialTon / 0.984207;
+  }
+
+  tonsAcreToTonsHectare(tonsAcre) {
+    return tonsAcre * 2.4710538146717;
+  }
+
+  tonsHectareToTonsAcre(tonsHectare) {
+    return tonsHectare / 2.4710538146717;
+  }
+
+  gallonsAcreToMetresCubedHectare(gallonsAcre) {
+    return gallonsAcre * 0.0112336377;
+  }
+
+  metresCubedHectareToGallonsAcre(metresCubedHectare) {
+    return metresCubedHectare / 0.0112336377;
+  }
+
+  kilogramHectareToUnitsAcre(kilogramHectare) {
+    return kilogramHectare * 0.8;
+  }
+
+  unitsAcreToKilogramHectare(unitsAcre) {
+    return unitsAcre / 0.8;
+  }
+
+  hectaresToAcres(hectares) {
+    return hectares * 2.4710538146717;
+  }
+
+  acresToHectares(acres) {
+    return acres / 2.4710538146717;
+  }
+
+  metresCubedToGallons(metresCubed) {
+    return metresCubed * 219.969;
+  }
+
 }

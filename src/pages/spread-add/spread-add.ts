@@ -27,6 +27,7 @@ export class SpreadAddPage {
   private cropAvailable: Object;
   private manureCosts: Object;
   private crapPicture: String;
+  private kilogramHectareToUnitsAcre: Function;
 
   private spreadDate: string;
   private manureType: string;
@@ -46,12 +47,12 @@ export class SpreadAddPage {
     this.field = fieldProvider.fields[navParams.data.fieldIndex];
     // Default to todays date for new spreading
     this.spreadDate = new Date().toISOString();
-    // Default to half way for density
-    this.manureDensity = 50;
     // Load strings
     this.strings = stringsProvider.data;
     // Load units
     this.units = settingsProvider.units;
+    // Default to half way for density
+    this.manureDensity = 50;
     // Get custom manure
     this.customManureList = settingsProvider.customManure;
     // Get and display crop supply/requirements
@@ -65,6 +66,8 @@ export class SpreadAddPage {
       this.field.soilTestK,
       this.field.grassGrown
     );
+    // Get converter helpers
+    this.kilogramHectareToUnitsAcre = this.calcCore.kilogramHectareToUnitsAcre;
   }
 
   // Previous button handler
@@ -83,14 +86,26 @@ export class SpreadAddPage {
   // Manure choice has changed, so update some ranges
   manureTypeChanged() {
     // Reset slider to half way
-    this.manureDensity = this.strings.rangeMax[this.manureType] / 2;
+    this.manureDensity = this.strings.rangeMax[this.settingsProvider.units][this.manureType] / 2;
   }
 
   calculate() {
+    let manureDensity;
+    // Convert back from imperial units
+    if (this.units === 'imperial') {
+      if (this.strings.units[this.units].type[this.manureType] === 'gallons') {
+        manureDensity = this.calcCore.gallonsAcreToMetresCubedHectare(this.manureDensity);
+      } else if (this.strings.units[this.units].type[this.manureType] === 'tons') {
+        manureDensity = this.calcCore.imperialTonToMetricTon(this.manureDensity);
+      }
+    } else {
+      // No conversion required
+      manureDensity = this.manureDensity;
+    }
     // Perform calculations based on inputs
     this.cropAvailable = this.calcCore.calculateNutrients(
       this.manureType,
-      this.manureDensity,
+      manureDensity,
       this.manureQuality,
       this.calcCore.getSeason(new Date(this.spreadDate).getMonth() + 1),
       this.field.newCropType,
@@ -106,18 +121,30 @@ export class SpreadAddPage {
       this.calcCore.getCostStringFromNutrient(2, this.cropAvailable, this.field.hectares)
     ];
     // Select image
-    this.crapPicture = this.calcCore.findImage(this.manureType, this.manureDensity);
+    this.crapPicture = this.calcCore.findImage(this.manureType, manureDensity);
   }
 
   // Add button handler
   addPressed() {
+    let manureDensity;
+    // Convert back from imperial units
+    if (this.units === 'imperial') {
+      if (this.strings.units[this.units].type[this.manureType] === 'gallons') {
+        manureDensity = this.calcCore.gallonsAcreToMetresCubedHectare(this.manureDensity);
+      } else if (this.strings.units[this.units].type[this.manureType] === 'tons') {
+        manureDensity = this.calcCore.imperialTonToMetricTon(this.manureDensity);
+      }
+    } else {
+      // No conversion required
+      manureDensity = this.manureDensity;
+    }
     // Create spread Object
     let spread = {
       spreadDate: this.spreadDate,
       manureType: this.manureType,
       manureQuality: this.manureQuality,
       manureApplicationType: this.manureApplicationType,
-      manureDensity: this.manureDensity
+      manureDensity: manureDensity
     };
     // Add spread to field spread list
     this.fieldProvider.addSpread(this.navParams.data.fieldIndex, spread);

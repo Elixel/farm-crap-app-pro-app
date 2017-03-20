@@ -21,6 +21,7 @@ export class HomePage {
   public fields:Object[];
   private units: string;
   private strings: any;
+  private hectaresToAcres: Function;
 
   constructor(public navCtrl: NavController,
   public popoverCtrl: PopoverController,
@@ -41,6 +42,8 @@ export class HomePage {
     this.strings = stringsProvider.data;
     // Load units
     this.units = settingsProvider.units;
+    // Get converter helpers
+    this.hectaresToAcres = calcCore.hectaresToAcres;
   }
 
   deleteField(fieldIndex) {

@@ -92,12 +92,12 @@
       <ion-list>
         <ion-list-header>
           <ion-label>Density</ion-label>
-          <ion-badge item-right>{{manureDensity}} {{strings.units[units].type[manureType]}}/{{strings.units[units].fieldSize.short}}</ion-badge>
+          <ion-badge item-right>{{manureDensity | number: '1.0'}} {{strings.units[units].type[manureType]}}/{{strings.units[units].fieldSize.short}}</ion-badge>
         </ion-list-header>
         <ion-item>
-          <ion-range min="0" [max]="strings.rangeMax[manureType]" [(ngModel)]="manureDensity" (ionChange)="calculate()">
+          <ion-range min="0" [max]="strings.rangeMax[units][manureType]" [(ngModel)]="manureDensity" (ionChange)="calculate()">
             <ion-label range-left>0</ion-label>
-            <ion-label range-right>{{strings.rangeMax[manureType]}}</ion-label>
+            <ion-label range-right>{{strings.rangeMax[units][manureType]}}</ion-label>
           </ion-range>
         </ion-item>
       </ion-list>

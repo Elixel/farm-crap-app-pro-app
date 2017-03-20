@@ -27,6 +27,7 @@ export class FieldAddPage {
   private draw: any;
   private strings: Object;
   private units: string;
+  private kilogramHectareToUnitsAcre: Function;
 
   // Field Details
   private polygon: any;
@@ -70,6 +71,8 @@ export class FieldAddPage {
     this.strings = stringsProvider.data;
     // Load units
     this.units = settingsProvider.units;
+    // Get converter helpers
+    this.kilogramHectareToUnitsAcre = this.calcCore.kilogramHectareToUnitsAcre;
   }
 
   ngOnInit() {
@@ -108,11 +111,10 @@ export class FieldAddPage {
       // Get area size in hectares (rounded to two decimal places)
       let squareMetres = TurfArea(featureCollection);
       let hectares = squareMetres / 10000;
-      let roundedArea = Math.round(hectares * 100) / 100;
       // Save polygon shape
       this.polygon = featureCollection;
       // Update hectares form field for next view
-      this.basicDetailsForm.get('hectares').setValue(roundedArea);
+      this.basicDetailsForm.get('hectares').setValue(this.units === 'imperial' ? this.calcCore.hectaresToAcres(hectares) : hectares);
     } else {
       // Reset values
       this.polygon = null;
@@ -136,7 +138,8 @@ export class FieldAddPage {
     let field = {
       polygon: this.polygon,
       name: this.basicDetailsForm.value.name,
-      hectares: this.basicDetailsForm.value.hectares,
+      // When in imperial units mode, hectares is stored as acres temporarily so we are doing the correct conversion here
+      hectares: this.units === 'imperial' ? this.calcCore.acresToHectares(this.basicDetailsForm.value.hectares) : this.basicDetailsForm.value.hectares,
       soilType: this.soilDetailsForm.value.soilType,
       organicManures: this.soilDetailsForm.value.organicManures,
       soilTestP: this.soilDetailsForm.value.soilTestP,

@@ -119,7 +119,7 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col>{{strings.soilNutrientCodeToText[cropRequirementsSupply.nitrogenSupply]}}</ion-col>
+            <ion-col>{{strings.soilNutrientCodeToText[units][cropRequirementsSupply.nitrogenSupply]}}</ion-col>
           </ion-row>
         </ion-grid>
       </ion-list>
@@ -138,9 +138,9 @@
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col>{{cropRequirementsSupply.nitrogenRequirement}}</ion-col>
-            <ion-col>{{cropRequirementsSupply.phosphorousRequirement}}</ion-col>
-            <ion-col>{{cropRequirementsSupply.potassiumRequirement}}</ion-col>
+            <ion-col>{{units === 'imperial' ? kilogramHectareToUnitsAcre(cropRequirementsSupply.nitrogenRequirement) : cropRequirementsSupply.nitrogenRequirement}}</ion-col>
+            <ion-col>{{units === 'imperial' ? kilogramHectareToUnitsAcre(cropRequirementsSupply.phosphorousRequirement) : cropRequirementsSupply.phosphorousRequirement}}</ion-col>
+            <ion-col>{{units === 'imperial' ? kilogramHectareToUnitsAcre(cropRequirementsSupply.potassiumRequirement) : cropRequirementsSupply.potassiumRequirement}}</ion-col>
           </ion-row>
         </ion-grid>
       </ion-list>

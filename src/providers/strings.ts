@@ -43,28 +43,30 @@ export class Strings {
         'grass-other': 'Any other grass'
     },
     'soilNutrientCodeToText': {
-      '0': '<60',
-      '1': '61-80',
-      '2': '81-100',
-      '3': '101-120',
-      '4': '121-160',
-      '5': '161-240',
-      '6': '>240',
-      'grassland-high-sns': 'Grassland high SNS',
-      'grassland-med-sns': 'Grassland medium SNS',
-      'grassland-low-sns': 'Grassland low SNS'
-    },
-    'soilNutrientCodeToTextImperial': {
-      '0': '<48',
-      '1': '49-64',
-      '2': '65-80',
-      '3': '81-96',
-      '4': '97-128',
-      '5': '129-192',
-      '6': '>193',
-      'grassland-high-sns': 'Grassland high SNS',
-      'grassland-med-sns': 'Grassland medium SNS',
-      'grassland-low-sns': 'Grassland low SNS'
+      'metric': {
+        '0': '<60',
+        '1': '61-80',
+        '2': '81-100',
+        '3': '101-120',
+        '4': '121-160',
+        '5': '161-240',
+        '6': '>240',
+        'grassland-high-sns': 'Grassland high SNS',
+        'grassland-med-sns': 'Grassland medium SNS',
+        'grassland-low-sns': 'Grassland low SNS'
+      },
+      'imperial': {
+        '0': '<48',
+        '1': '49-64',
+        '2': '65-80',
+        '3': '81-96',
+        '4': '97-128',
+        '5': '129-192',
+        '6': '>193',
+        'grassland-high-sns': 'Grassland high SNS',
+        'grassland-med-sns': 'Grassland medium SNS',
+        'grassland-low-sns': 'Grassland low SNS'
+      }
     },
     'type': {
       'cattle': 'Cattle Slurry',
@@ -126,12 +128,22 @@ export class Strings {
       'custom': null
     },
     'rangeMax': {
-      'cattle': 100,
-      'fym': 100,
-      'pig': 100,
-      'poultry': 15,
-      'compost': 100,
-      'custom': 100
+      'metric': {
+        'cattle': 100,
+        'fym': 100,
+        'pig': 100,
+        'poultry': 15,
+        'compost': 100,
+        'custom': 100
+      },
+      'imperial': {
+        'cattle': 10000,
+        'fym': 100,
+        'pig': 10000,
+        'poultry': 10,
+        'compost': 100,
+        'custom': 100
+      }
     },
     'units': {
       'metric': {
