@@ -18,19 +18,20 @@ import { CalcCore } from '../../providers/calc-core';
 })
 export class CalculatorPage {
   @ViewChild(Slides) slides: Slides;
-  strings: any;
-  customManureList: Object[];
-  cropAvailable: Object;
-  manureCosts: Object;
-  crapPicture: String;
+  private strings: any;
+  private units: string;
+  private customManureList: Object[];
+  private cropAvailable: Object;
+  private manureCosts: Object;
+  private crapPicture: String;
   
-  season: string;
-  soilType: string;
-  newCropType: string;
-  manureType: string;
-  manureQuality:string;
-  manureApplicationType: string;
-  manureDensity: number;
+  private season: string;
+  private soilType: string;
+  private newCropType: string;
+  private manureType: string;
+  private manureQuality:string;
+  private manureApplicationType: string;
+  private manureDensity: number;
 
   constructor(
     public navCtrl: NavController,
@@ -41,6 +42,8 @@ export class CalculatorPage {
   ) {
     // Load strings
     this.strings = stringsProvider.data;
+    // Load units
+    this.units = settingsProvider.units;
     // Get custom manure
     this.customManureList = settingsProvider.customManure;
     // Default to half way for density

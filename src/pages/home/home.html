@@ -20,7 +20,7 @@
     <ion-item-sliding *ngFor="let field of fields; let fieldIndex = index;" #slidingItem>
       <button ion-item (click)="viewField(fieldIndex)">
         <h2>{{field.name}}</h2>
-        <p>{{field.hectares}} ha</p>
+        <p>{{field.hectares}} {{strings.units[units].fieldSize.long}}{{field.hectares > 1 ? 's' : ''}}</p>
       </button>
       <ion-item-options side="right">
         <button ion-button (click)="editField(slidingItem, fieldIndex)">Edit</button>

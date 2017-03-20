@@ -142,7 +142,12 @@ export class Strings {
           'poultry': 'tons',
           'compost': 'tons',
           'custom': 'tons'
-        }
+        },
+        'fieldSize': {
+          'short': 'ha',
+          'long': 'hectare'
+        },
+        'density': 'kg'
       },
       'imperial': {
         'type': {
@@ -152,7 +157,12 @@ export class Strings {
           'poultry': 'tons',
           'compost': 'tons',
           'custom': 'tons'
-        }
+        },
+        'fieldSize': {
+          'short': 'ac',
+          'long': 'acre'
+        },
+        'density': 'units'
       }
     },
     'season': {

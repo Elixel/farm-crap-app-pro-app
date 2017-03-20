@@ -23,15 +23,16 @@ import { CalcCore } from '../../providers/calc-core';
   templateUrl: 'field-edit.html'
 })
 export class FieldEditPage {
-  field: any;
+  private field: any;
 
   @ViewChild(Slides) slides: Slides;
-  map: any;
-  draw: any;
-  strings: Object;
+  private map: any;
+  private draw: any;
+  private strings: Object;
+  private units: string;
 
   // Field Details
-  polygon: any;
+  private polygon: any;
   private basicDetailsForm: FormGroup;
   private soilDetailsForm: FormGroup;
   private cropDetailsForm: FormGroup;
@@ -73,6 +74,8 @@ export class FieldEditPage {
     });
     // Load strings
     this.strings = stringsProvider.data;
+    // Load units
+    this.units = settingsProvider.units;
   }
 
   ngOnInit() {

@@ -81,7 +81,7 @@
           <ion-col col-2>K&#x2082;O</ion-col>
         </ion-row>
         <ion-row *ngIf="cropAvailable">
-          <ion-col col-6 class="row-title">Crop available (Kg/ha)</ion-col>
+          <ion-col col-6 class="row-title">Crop available ({{strings.units[units].density}}/{{strings.units[units].fieldSize.short}})</ion-col>
           <ion-col col-2 class="row-value" *ngIf="cropAvailable[0] !== 'na'">{{cropAvailable[0] | number:'1.0-2'}}</ion-col>
           <ion-col col-2 class="row-value" *ngIf="cropAvailable[0] == 'na'">N/A</ion-col>
           <ion-col col-2 class="row-value">{{cropAvailable[1] | number:'1.0-2'}}</ion-col>
@@ -98,7 +98,7 @@
       <ion-list>
         <ion-list-header>
           <ion-label>Density</ion-label>
-          <ion-badge item-right>{{manureDensity}} {{strings.units.metric.type[manureType]}}/ha</ion-badge>
+          <ion-badge item-right>{{manureDensity}} {{strings.units[units].type[manureType]}}/{{strings.units[units].fieldSize.short}}</ion-badge>
         </ion-list-header>
         <ion-item>
           <ion-range min="0" [max]="strings.rangeMax[manureType]" [(ngModel)]="manureDensity" (ionChange)="calculate()">

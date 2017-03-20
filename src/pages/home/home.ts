@@ -9,6 +9,7 @@ import { FieldDetailPage } from '../field-detail/field-detail';
 import { DisclaimerPage } from '../disclaimer/disclaimer';
 import { PopoverPage } from './home-popover';
 
+import { Strings } from '../../providers/strings';
 import { Settings } from '../../providers/settings';
 import { CalcCore } from '../../providers/calc-core';
 
@@ -18,11 +19,14 @@ import { CalcCore } from '../../providers/calc-core';
 })
 export class HomePage {
   public fields:Object[];
+  private units: string;
+  private strings: any;
 
   constructor(public navCtrl: NavController,
   public popoverCtrl: PopoverController,
   private fieldProvider: Field,
   private settingsProvider: Settings,
+  private stringsProvider: Strings,
   private modalCtrl: ModalController,
   private calcCore: CalcCore) {
     // Get fields
@@ -33,6 +37,10 @@ export class HomePage {
     }
     // Pre-load all JSON datasets
     calcCore.load();
+    // Load strings
+    this.strings = stringsProvider.data;
+    // Load units
+    this.units = settingsProvider.units;
   }
 
   deleteField(fieldIndex) {

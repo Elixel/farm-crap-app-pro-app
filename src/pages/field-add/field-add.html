@@ -35,7 +35,7 @@
             <ion-input type="text" formControlName="name" placeholder="My Field"></ion-input>
           </ion-item>
           <ion-item>
-            <ion-label stacked>Hectares</ion-label>
+            <ion-label stacked class="capitalize">{{strings.units[units].fieldSize.long}}s</ion-label>
             <ion-input type="number" formControlName="hectares"></ion-input>
           </ion-item>
         </ion-list>
@@ -115,7 +115,7 @@
         <ion-grid>
           <ion-row>
             <ion-col>
-              <h1>N Kg/ha</h1>
+              <h1>N {{strings.units[units].density}}/{{strings.units[units].fieldSize.short}}</h1>
             </ion-col>
           </ion-row>
           <ion-row>
@@ -128,13 +128,13 @@
         <ion-grid>
           <ion-row>
             <ion-col>
-              <h1>N Kg/ha</h1>
+              <h1>N<br />{{strings.units[units].density}}/{{strings.units[units].fieldSize.short}}</h1>
             </ion-col>
             <ion-col>
-              <h1>P&#x2082;O&#x2085; Kg/ha</h1>
+              <h1>P&#x2082;O&#x2085;<br />{{strings.units[units].density}}/{{strings.units[units].fieldSize.short}}</h1>
             </ion-col>
             <ion-col>
-              <h1>K&#x2082;O Kg/ha</h1>
+              <h1>K&#x2082;O<br />{{strings.units[units].density}}/{{strings.units[units].fieldSize.short}}</h1>
             </ion-col>
           </ion-row>
           <ion-row>

@@ -18,20 +18,21 @@ import { CalcCore } from '../../providers/calc-core';
   templateUrl: 'spread-add.html'
 })
 export class SpreadAddPage {
-  field: any;
+  private field: any;
   @ViewChild(Slides) slides: Slides;
-  strings: any;
-  customManureList: Object[];
-  cropRequirementsSupply: Object;
-  cropAvailable: Object;
-  manureCosts: Object;
-  crapPicture: String;
+  private strings: any;
+  private units: string;
+  private customManureList: Object[];
+  private cropRequirementsSupply: Object;
+  private cropAvailable: Object;
+  private manureCosts: Object;
+  private crapPicture: String;
 
-  spreadDate: string;
-  manureType: string;
-  manureQuality:string;
-  manureApplicationType: string;
-  manureDensity: number;
+  private spreadDate: string;
+  private manureType: string;
+  private manureQuality:string;
+  private manureApplicationType: string;
+  private manureDensity: number;
 
   constructor(
     public navCtrl: NavController,
@@ -49,6 +50,8 @@ export class SpreadAddPage {
     this.manureDensity = 50;
     // Load strings
     this.strings = stringsProvider.data;
+    // Load units
+    this.units = settingsProvider.units;
     // Get custom manure
     this.customManureList = settingsProvider.customManure;
     // Get and display crop supply/requirements
