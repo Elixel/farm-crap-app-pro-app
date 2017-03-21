@@ -185,7 +185,6 @@ export class Settings {
 
   public deleteCustomManure(customManureIndex) {
     // Check through all spread events to make sure it isn't being used
-    let found = false;
     for (let fieldIndex in this.fieldProvider.fields) {
       let spreads = (<any>this.fieldProvider.fields[fieldIndex]).spreads;
       for (let spreadIndex in spreads) {
