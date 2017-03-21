@@ -27,7 +27,7 @@
     </ion-item>
     <ion-item-sliding *ngFor="let spread of field.spreads | orderBy: ['-spreadDate']; let spreadIndex = index;" #slidingItem>
       <button ion-item (click)="editSpreadPressed(spreadIndex)">
-        <h1>{{spread.spreadDate | date: 'd/M/y'}}</h1>
+        <h2>{{spread.spreadDate | date: 'd/M/y'}}</h2>
         <p>{{strings.type[spread.manureType]}}</p>
       </button>
       <ion-item-options side="right">
