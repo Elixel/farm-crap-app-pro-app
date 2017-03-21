@@ -45,6 +45,7 @@ export class PopoverPage {
     this.viewCtrl.dismiss();
     // Export data here
     let csvData = this.calcCore.toCSV(this.fieldProvider.fields);
+    console.log(csvData);
     // Create csv file from data
 
     // Share csv file via email
