@@ -59,7 +59,8 @@ export class SpreadEditPage {
       spreadDate: [this.spread.spreadDate, Validators.required],
       manureType: [this.spread.manureType, Validators.required],
       manureQuality: [this.spread.manureQuality, Validators.required],
-      manureApplicationType: [this.spread.manureApplicationType, Validators.required],
+      // Check if existing application type is there, if so then it is a required field unless manure type changes
+      manureApplicationType: [this.spread.manureApplicationType, this.spread.manureApplicationType ? Validators.required : null],
     });
     // Convert units if imperial units
     if (this.units === 'imperial') {
