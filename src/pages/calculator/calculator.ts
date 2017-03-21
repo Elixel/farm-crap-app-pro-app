@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, NavParams, Slides } from 'ionic-angular';
 import { ViewChild } from '@angular/core';
 
@@ -25,17 +26,13 @@ export class CalculatorPage {
   private manureCosts: Object;
   private crapPicture: String;
   
-  private season: string;
-  private soilType: string;
-  private newCropType: string;
-  private manureType: string;
-  private manureQuality:string;
-  private manureApplicationType: string;
+  private calculatorForm: FormGroup;
   private manureDensity: number;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
+    private formBuilder: FormBuilder,
     private stringsProvider: Strings,
     private settingsProvider: Settings,
     private calcCore: CalcCore
@@ -46,6 +43,16 @@ export class CalculatorPage {
     this.units = settingsProvider.units;
     // Get custom manure
     this.customManureList = settingsProvider.customManure;
+    // Create Calculator Form
+    this.calculatorForm = this.formBuilder.group({
+      // Default to todays date for new spreading
+      season: [new Date().toISOString(), Validators.required],
+      soilType: ['', Validators.required],
+      newCropType: ['', Validators.required],
+      manureType: ['', Validators.required],
+      manureQuality: ['', Validators.required],
+      manureApplicationType: ['', Validators.required]
+    });
     // Default to half way for density
     this.manureDensity = 50;
   }
@@ -66,16 +73,25 @@ export class CalculatorPage {
   // Manure choice has changed, so update some ranges
   manureTypeChanged() {
     // Reset slider to half way
-    this.manureDensity = this.strings.rangeMax[this.settingsProvider.units][this.manureType] / 2;
+    this.manureDensity = this.strings.rangeMax[this.settingsProvider.units][this.calculatorForm.value.manureType] / 2;
+    // Clear form controls
+    this.calculatorForm.patchValue({manureQuality: '', manureApplicationType: ''});
+    // Change Validators
+    if (!this.strings.application[this.calculatorForm.value.manureType]) { // If application is empty, do not require it
+      this.calculatorForm.controls['manureApplicationType'].setValidators(null);
+    } else { // Application is not empty, require it
+      this.calculatorForm.controls['manureApplicationType'].setValidators([Validators.required]);
+    }
+    this.calculatorForm.controls['manureApplicationType'].updateValueAndValidity();
   }
 
   calculate() {
     let manureDensity;
     // Convert back from imperial units
     if (this.units === 'imperial') {
-      if (this.strings.units[this.units].type[this.manureType] === 'gallons') {
+      if (this.strings.units[this.units].type[this.calculatorForm.value.manureType] === 'gallons') {
         manureDensity = this.calcCore.gallonsAcreToMetresCubedHectare(this.manureDensity);
-      } else if (this.strings.units[this.units].type[this.manureType] === 'tons') {
+      } else if (this.strings.units[this.units].type[this.calculatorForm.value.manureType] === 'tons') {
         manureDensity = this.calcCore.imperialTonToMetricTon(this.manureDensity);
       }
     } else {
@@ -84,13 +100,13 @@ export class CalculatorPage {
     }
     // Perform calculations based on inputs
     this.cropAvailable = this.calcCore.calculateNutrients(
-      this.manureType,
+      this.calculatorForm.value.manureType,
       manureDensity,
-      this.manureQuality,
-      this.season,
-      this.newCropType,
-      this.soilType,
-      this.manureApplicationType,
+      this.calculatorForm.value.manureQuality,
+      this.calculatorForm.value.season,
+      this.calculatorForm.value.newCropType,
+      this.calculatorForm.value.soilType,
+      this.calculatorForm.value.manureApplicationType,
       0,
       0
     );
@@ -101,7 +117,7 @@ export class CalculatorPage {
       this.calcCore.getCostStringFromNutrient(2, this.cropAvailable, 1)
     ];
     // Select image
-    this.crapPicture = this.calcCore.findImage(this.manureType, manureDensity);
+    this.crapPicture = this.calcCore.findImage(this.calculatorForm.value.manureType, manureDensity);
   }
 
 }
