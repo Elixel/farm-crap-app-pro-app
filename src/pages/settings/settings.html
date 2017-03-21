@@ -53,7 +53,10 @@
       <p>No items</p>
     </ion-item>
     <ion-item-sliding *ngFor="let manure of customManure; let customManureIndex = index;" #slidingItem>
-      <button ion-item (click)="editCustomManure(customManureIndex)">{{manure.name}}</button>
+      <button ion-item (click)="editCustomManure(customManureIndex)">
+        <h1>{{manure.name}}</h1>
+        <ion-badge color="dark">N: {{manure.content[0]}}</ion-badge> <ion-badge color="dark">P&#x2082;O&#x2085;: {{manure.content[1]}}</ion-badge> <ion-badge color="dark">K&#x2082;O: {{manure.content[2]}}</ion-badge>
+      </button>
       <ion-item-options side="right">
         <button ion-button color="danger" (click)="deleteCustomManure(slidingItem, customManureIndex)">Delete</button>
       </ion-item-options>
