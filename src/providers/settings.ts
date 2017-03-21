@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from 'angular-2-local-storage';
 
+import { Field } from './field';
+
 /*
   Generated class for the Settings provider.
 
@@ -31,7 +33,7 @@ export class Settings {
   private _disclaimerAcceptedKey: string = 'fca.settings.disclaimer';
   private _disclaimerAccepted: Boolean;
 
-  constructor(private localStorageService: LocalStorageService) {}
+  constructor(private localStorageService: LocalStorageService, private fieldProvider: Field) {}
 
   /**
    * Get units of measurement setting
@@ -182,10 +184,24 @@ export class Settings {
   }
 
   public deleteCustomManure(customManureIndex) {
+    // Check through all spread events to make sure it isn't being used
+    let found = false;
+    for (let fieldIndex in this.fieldProvider.fields) {
+      let spreads = (<any>this.fieldProvider.fields[fieldIndex]).spreads;
+      for (let spreadIndex in spreads) {
+        let spread = spreads[spreadIndex];
+        if (spread.manureType === 'custom' && spread.manureQuality === customManureIndex) {
+          // the manure to be deleted has been found in a spread, return false as delete is unsuccessful
+          return false;
+        }
+      }
+    }
     // Splice manure object from manure array
     this._customManure.splice(customManureIndex, 1);
     // Save to localStorage
     this.localStorageService.set(this._customManureKey, this._customManure);
+    // Return delete successful
+    return true;
   }
 
   public setCustomManure(customManureIndex, manureObject) {

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, AlertController, ItemSliding } from 'ionic-angular';
 import { ManureAddPage } from '../manure-add/manure-add';
 import { ManureEditPage } from '../manure-edit/manure-edit';
 import { Settings } from '../../providers/settings';
@@ -22,7 +22,7 @@ export class SettingsPage {
   fertiliserCostPotassium: number;
   customManure: Object[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public settingsProvider:Settings) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public settingsProvider:Settings, private alertCtrl: AlertController) {
     this.units = settingsProvider.units;
     this.rainfall = settingsProvider.rainfall;
     this.fertiliserCostNitrogen = settingsProvider.fertiliserCostNitrogen;
@@ -61,8 +61,20 @@ export class SettingsPage {
     });
   }
 
-  deleteCustomManure(index) {
-    this.settingsProvider.deleteCustomManure(index);
+  deleteCustomManure(slidingItem: ItemSliding, index) {
+    ;
+    let deleted = this.settingsProvider.deleteCustomManure(index);
+    if (!deleted) {
+      // Delete was unsuccessful, manure is being used in a spread
+      let alert = this.alertCtrl.create({
+        title: 'Cannot Delete Manure',
+        subTitle: 'This custom manure is being used in a spread, please remove the spread before deleting.',
+        buttons: ['Ok']
+      });
+      alert.present();
+      // Close sliding drawer
+      slidingItem.close();
+    } 
   }
 
 }
