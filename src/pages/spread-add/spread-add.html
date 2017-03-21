@@ -16,38 +16,40 @@
 <ion-content>
   <ion-slides ion-fixed pager class="swiper-no-swiping">
     <ion-slide>
-      <ion-list>
-        <ion-list-header>Basic Details</ion-list-header>
-        <ion-item>
-          <ion-label>Date</ion-label>
-          <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="spreadDate"></ion-datetime>
-        </ion-item>
-      </ion-list>
-      <ion-list>
-        <ion-list-header>Manure Details</ion-list-header>
-        <ion-item>
-          <ion-label>Type</ion-label>
-          <ion-select [(ngModel)]="manureType" (ionChange)="manureTypeChanged()">
-            <ion-option *ngFor="let manure of strings.type | keys" [value]="manure.key">{{manure.value}}</ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label>Quality</ion-label>
-          <ion-select *ngIf="manureType !== 'custom'" [(ngModel)]="manureQuality">
-            <ion-option *ngFor="let quality of strings.quality[manureType] | keys" [value]="quality.key">{{quality.value}}</ion-option>
-          </ion-select>
-          <!-- Custom Manure List -->
-          <ion-select *ngIf="manureType == 'custom'" [(ngModel)]="manureQuality" [disabled]="!customManureList.length">
-            <ion-option *ngFor="let quality of customManureList; let manureIndex = index;" [value]="manureIndex">{{quality.name}}</ion-option>
-          </ion-select>
-        </ion-item>
-        <ion-item>
-          <ion-label>Application Type</ion-label>
-          <ion-select [(ngModel)]="manureApplicationType" [disabled]="!strings.application[manureType]">
-            <ion-option *ngFor="let application of strings.application[manureType] | keys" [value]="application.key">{{application.value}}</ion-option>
-          </ion-select>
-        </ion-item>
-      </ion-list>
+      <form [formGroup]="spreadForm">
+        <ion-list>
+          <ion-list-header>Basic Details</ion-list-header>
+          <ion-item>
+            <ion-label>Date</ion-label>
+            <ion-datetime displayFormat="DD/MM/YYYY" formControlName="spreadDate"></ion-datetime>
+          </ion-item>
+        </ion-list>
+        <ion-list>
+          <ion-list-header>Manure Details</ion-list-header>
+          <ion-item>
+            <ion-label>Type</ion-label>
+            <ion-select formControlName="manureType" (ionChange)="manureTypeChanged()">
+              <ion-option *ngFor="let manure of strings.type | keys" [value]="manure.key">{{manure.value}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Quality</ion-label>
+            <ion-select *ngIf="spreadForm.value.manureType !== 'custom'" formControlName="manureQuality" [disabled]="!strings.quality[spreadForm.value.manureType]">
+              <ion-option *ngFor="let quality of strings.quality[spreadForm.value.manureType] | keys" [value]="quality.key">{{quality.value}}</ion-option>
+            </ion-select>
+            <!-- Custom Manure List -->
+            <ion-select *ngIf="spreadForm.value.manureType == 'custom'" formControlName="manureQuality" [disabled]="!customManureList.length">
+              <ion-option *ngFor="let quality of customManureList; let manureIndex = index;" [value]="manureIndex">{{quality.name}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label>Application Type</ion-label>
+            <ion-select formControlName="manureApplicationType" [disabled]="!strings.application[spreadForm.value.manureType]">
+              <ion-option *ngFor="let application of strings.application[spreadForm.value.manureType] | keys" [value]="application.key">{{application.value}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      </form>
     </ion-slide>
     <ion-slide>
       <!-- Calculations -->
@@ -92,18 +94,18 @@
       <ion-list>
         <ion-list-header>
           <ion-label>Density</ion-label>
-          <ion-badge item-right>{{manureDensity | number: '1.0'}} {{strings.units[units].type[manureType]}}/{{strings.units[units].fieldSize.short}}</ion-badge>
+          <ion-badge item-right>{{manureDensity | number: '1.0'}} {{strings.units[units].type[spreadForm.value.manureType]}}/{{strings.units[units].fieldSize.short}}</ion-badge>
         </ion-list-header>
         <ion-item>
-          <ion-range min="0" [max]="strings.rangeMax[units][manureType]" [(ngModel)]="manureDensity" (ionChange)="calculate()">
+          <ion-range min="0" [max]="strings.rangeMax[units][spreadForm.value.manureType]" [(ngModel)]="manureDensity" (ionChange)="calculate()">
             <ion-label range-left>0</ion-label>
-            <ion-label range-right>{{strings.rangeMax[units][manureType]}}</ion-label>
+            <ion-label range-right>{{strings.rangeMax[units][spreadForm.value.manureType]}}</ion-label>
           </ion-range>
         </ion-item>
       </ion-list>
     </ion-slide>
   </ion-slides>
   <button ion-button clear small class="prev" ion-fixed (click)="prevPressed()" *ngIf="slides.getActiveIndex() !== 0">Previous</button>
-  <button ion-button clear small class="next" ion-fixed (click)="nextPressed()" *ngIf="slides.getActiveIndex() !== 1">Next</button>
+  <button ion-button clear small class="next" ion-fixed (click)="nextPressed()" *ngIf="slides.getActiveIndex() !== 1" [disabled]="!spreadForm.valid">Next</button>
   <button ion-button clear small class="next" ion-fixed (click)="addPressed()" *ngIf="slides.getActiveIndex() == 1">Add</button>
 </ion-content>
