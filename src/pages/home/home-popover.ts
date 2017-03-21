@@ -4,6 +4,8 @@ import { ViewController, App } from 'ionic-angular';
 import { AboutPage } from '../about/about';
 import { SettingsPage } from '../settings/settings';
 import { CalculatorPage } from '../calculator/calculator';
+import { CalcCore } from '../../providers/calc-core';
+import { Field } from '../../providers/field';
 
 @Component({
   template: `
@@ -17,7 +19,12 @@ import { CalculatorPage } from '../calculator/calculator';
 })
 export class PopoverPage {
 
-  constructor(public viewCtrl: ViewController, public appCtrl: App) {}
+  constructor(
+    public viewCtrl: ViewController,
+    public appCtrl: App,
+    private calcCore: CalcCore,
+    private fieldProvider: Field
+  ) {}
 
   about() {
     this.viewCtrl.dismiss();
@@ -37,6 +44,11 @@ export class PopoverPage {
   export() {
     this.viewCtrl.dismiss();
     // Export data here
+    let csvData = this.calcCore.toCSV(this.fieldProvider.fields);
+    // Create csv file from data
+
+    // Share csv file via email
+
   }
 
 }

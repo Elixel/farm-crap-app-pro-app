@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 import { Settings } from '../providers/settings';
+import { Strings } from '../providers/strings';
 
 /*
   Generated class for the CalcCore provider.
@@ -23,7 +25,12 @@ export class CalcCore {
   grasslandMedSNS: number = 101;
   grasslandLowSNS: number = 102;
 
-  constructor(public http: Http, private settingsProvider: Settings) {}
+  constructor(
+    public http: Http,
+    private settingsProvider: Settings,
+    private stringsProvider: Strings,
+    private datePipe: DatePipe
+  ) {}
 
   load() {
     // Load SNS dataset
@@ -348,6 +355,91 @@ export class CalcCore {
 
   metresCubedToGallons(metresCubed) {
     return metresCubed * 219.969;
+  }
+
+  public toCSV(fields) {
+    let csv = [
+      [
+        'Field name',
+        'Manure type',
+        'Date',
+        'Crop avail N',
+        'Crop avail P',
+        'Crop avail k',
+        'Crop req N',
+        'Crop req P',
+        'Crop req k',
+        'SNS',
+        'Soil',
+        'Field size',
+        'Rate',
+        'Manure quality',
+        'Manure application',
+        'Season',
+        'Crop'
+      ]
+    ];
+    // Loop through fields
+    for (let fieldIndex in fields) {
+      let field:any = fields[fieldIndex];
+      // Loop through spreads
+      for (let spreadIndex in field.spreads) {
+        let spread = field.spreads[spreadIndex];
+        // Do calculations
+        let cropAvail = this.getCropRequirementsSupply(
+          this.settingsProvider.rainfall,
+          field.newCropType,
+          field.soilType,
+          field.oldCropType,
+          field.organicManures,
+          field.soilTestP,
+          field.soilTestK,
+          field.grassGrown
+        );
+        let cropReq = this.calculateNutrients(
+          spread.manureType,
+          spread.manureDensity,
+          spread.manureQuality,
+          this.getSeason(new Date(field.spreads[spreadIndex].spreadDate).getMonth() + 1),
+          field.newCropType,
+          field.soilType,
+          spread.manureApplicationType,
+          field.soilTestP,
+          field.soilTestK
+        );
+        let sns = String(this.calculateSNS(
+          this.settingsProvider.rainfall,
+          field.soilType,
+          field.newCropType,
+          field.oldCropType,
+          field.organicManures,
+          field.grassGrown
+        ));
+        let season = this.getSeason(new Date(field.spreads[spreadIndex].spreadDate).getMonth() + 1);
+        // Create row in CSV
+        csv.push([
+          field.name,
+          this.stringsProvider.data.type[spread.manureType],
+          this.datePipe.transform(spread.spreadDate, 'dd/MM/yyyy'),
+          cropAvail.nitrogenRequirement,
+          cropAvail.phosphorousRequirement,
+          cropAvail.potassiumRequirement,
+          cropReq[0],
+          cropReq[1],
+          cropReq[2],
+          this.stringsProvider.data.soilNutrientCodeToText[this.settingsProvider.units][sns],
+          this.stringsProvider.data.soil[field.soilType],
+          field.hectares,
+          spread.manureDensity,
+          this.stringsProvider.data.quality[spread.manureType][spread.manureQuality],
+          this.stringsProvider.data.application[spread.manureType][spread.manureApplicationType],
+          this.stringsProvider.data.season[season],
+          this.stringsProvider.data.crop[field.newCropType]
+        ]);
+      }
+    }
+    // Convert array to csv and return it
+    return csv.join('\r\n');
   }
 
 }

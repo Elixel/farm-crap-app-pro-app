@@ -23,6 +23,7 @@ import { KeysPipe } from '../pipes/keys';
 import { orderBy } from '../pipes/orderBy';
 import 'chart.js/src/chart.js';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
   LocalStorageService,
   Settings,
   CalcCore,
-  Strings]
+  Strings,
+  DatePipe]
 })
 export class AppModule {}

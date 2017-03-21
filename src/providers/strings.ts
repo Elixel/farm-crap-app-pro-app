@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 */
 @Injectable()
 export class Strings {
-  data: Object = {
+  data: any = {
     'crop': {
         'spring-barley-incorporated': 'Spring barley, straw incorporated',
         'spring-barley-removed': 'Spring barley, straw removed',
