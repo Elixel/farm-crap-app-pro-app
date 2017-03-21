@@ -13,7 +13,7 @@ import { Field } from '../../providers/field';
       <button ion-item (click)="about()">About</button>
       <button ion-item (click)="settings()">Settings</button>
       <button ion-item (click)="calculator()">Calculator</button>
-      <button ion-item (click)="export()">Export Data</button>
+      <button ion-item (click)="export()" disabled="true">Export Data</button>
     </ion-list>
   `
 })
