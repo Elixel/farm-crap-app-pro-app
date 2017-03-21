@@ -239,7 +239,7 @@ export class CalcCore {
   }
 
   findImage(type, amount) {
-    let img = '/assets/images/crap/';
+    let img = 'assets/images/crap/';
     switch(type) {
       case 'cattle': {
         img += 'cattle/';
