@@ -24,6 +24,14 @@ h1 {
   font-size: 2.3rem !important;
 }
 
+ion-select {
+  max-width: 54% !important;
+}
+
+.alert-ios .alert-radio-label {
+  white-space: normal !important;
+}
+
 // Named Color Variables
 // --------------------------------------------------
 // Named colors makes it easy to reuse colors on various components.
