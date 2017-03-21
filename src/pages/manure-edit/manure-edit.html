@@ -32,5 +32,5 @@
       <ion-input [(ngModel)]="potassiumContent"></ion-input>
     </ion-item>
   </ion-list>
-  <button ion-button clear small class="next" ion-fixed (click)="savePressed()">Save</button>
+  <button ion-button clear small class="next" ion-fixed (click)="savePressed()" [disabled]="!name || !nitrogenContent || !phosphorousContent || !potassiumContent">Save</button>
 </ion-content>
