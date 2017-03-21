@@ -29,14 +29,18 @@ export class FieldDetailPage {
     responsive: true,
     scales: {
       xAxes: [{
-        barPercentage: 1,
-        categoryPercentage: 0.1,
+        barPercentage: 0.8,
+        categoryPercentage: 0.25,
         type: 'time',
         time: {
           unit: 'month',
           displayFormats: {
             month: 'MMM \'YY'
-          }
+          },
+          round: 'week'
+        },
+        ticks: {
+          minRotation: 45
         }
       }],
       yAxes: [{
@@ -50,9 +54,9 @@ export class FieldDetailPage {
     },
     layout: {
       padding: {
-        top: 10,
-        right: 10,
-        left: 10,
+        top: 0,
+        right: 20,
+        left: 20,
         bottom: 0
       }
     }
