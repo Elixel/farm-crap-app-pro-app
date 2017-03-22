@@ -42,10 +42,8 @@ ion-select {
       min-height: 44px !important;
     }
   }
-  ion-content {
-    .fixed-content, .scroll-content {
-      margin-top: 44px !important;
-    }
+  ion-content > .fixed-content, ion-content > .scroll-content {
+    margin-top: 44px !important;
   }
 }
 
