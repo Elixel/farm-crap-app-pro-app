@@ -51,4 +51,25 @@ page-spread-add {
     ion-badge {
         text-transform: none;
     }
+
+    ion-card {
+        position: absolute;
+        top: 0px;
+        bottom: 285px;
+        img {
+            object-fit: cover;
+            width: 100% !important;
+            height: 100% !important;
+        }
+    }
+    .bottom-fixed {
+        position: absolute;
+        right: 0px;
+        bottom: 50px;
+        left: 0px;
+        height: 245px;
+        ion-list {
+            margin-bottom: 0px;
+        }
+    }
 }
