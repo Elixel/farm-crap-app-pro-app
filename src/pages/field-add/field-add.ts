@@ -3,7 +3,7 @@ import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { NavController, NavParams, Slides } from 'ionic-angular';
 
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
-import MapboxDraw from '@mapbox/mapbox-gl-draw';
+import MapboxDraw from '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.js';
 import TurfArea from '@turf/area';
 
 import { Field } from '../../providers/field';
