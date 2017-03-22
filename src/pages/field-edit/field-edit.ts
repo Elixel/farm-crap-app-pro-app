@@ -31,6 +31,7 @@ export class FieldEditPage {
   private strings: Object;
   private units: string;
   private kilogramHectareToUnitsAcre: Function;
+  private boundaryText: string;
 
   // Field Details
   private polygon: any;
@@ -99,6 +100,17 @@ export class FieldEditPage {
     });
     // Add draw tools to map
     this.map.addControl(this.draw);
+    this.boundaryText = 'If this best represents your field, click Next; else click delete and try again.';
+    this.map.on('draw.modechange', (event) => {
+      // When a polygon has begun creation
+      if (event.mode === 'draw_polygon') {
+        this.boundaryText = 'Create the boundaries of your field below by creating points in a clockwise fashion.';
+      }
+      // If user exited out without creating boundaries
+      if (event.mode === 'simple_select' && this.draw.getAll().features.length === 0) {
+        this.boundaryText = 'Select the draw field button on the map below to start creating your field boundaries.';
+      }
+    });
     // Get existing field polygon
     this.polygon = this.field.polygon;
     this.map.on('load', () => {
@@ -114,10 +126,12 @@ export class FieldEditPage {
     // When a polygon is created
     this.map.on('draw.create', () => {
       this.calculatePolygons(this.draw);
+      this.boundaryText = 'If this best represents your field, click Next; else click delete and try again.';
     });
     // When a polygon is removed
     this.map.on('draw.delete', () => {
       this.calculatePolygons(this.draw);
+      this.boundaryText = 'Select the draw field button on the map below to start creating your field boundaries.';
     });
   }
 
@@ -126,14 +140,13 @@ export class FieldEditPage {
     // Get drawn polygons
     let featureCollection = draw.getAll();
     if (featureCollection.features.length > 0) {
-      // Get area size in hectares (rounded to two decimal places)
+      // Get area size in hectares
       let squareMetres = TurfArea(featureCollection);
       let hectares = squareMetres / 10000;
-      let roundedArea = Math.round(hectares * 100) / 100;
       // Save polygon shape
       this.polygon = featureCollection.features;
       // Update hectares form field for next view
-      this.basicDetailsForm.get('hectares').setValue(roundedArea);
+      this.basicDetailsForm.get('hectares').setValue(this.units === 'imperial' ? this.calcCore.hectaresToAcres(hectares).toFixed(2) : hectares.toFixed(2));
     } else {
       // Reset values
       this.polygon = null;

@@ -34,5 +34,13 @@ page-field-add {
         canvas.mapboxgl-canvas {
             left: 0px;
         }
+
+        button.active {
+            background-color: #CCC !important;
+        }
+
+        .mapboxgl-ctrl > button:hover {
+            background-color: transparent;
+        }
     }
 }

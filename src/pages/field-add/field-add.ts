@@ -30,6 +30,7 @@ export class FieldAddPage {
   private strings: Object;
   private units: string;
   private kilogramHectareToUnitsAcre: Function;
+  private boundaryText: string;
 
   // Field Details
   private polygon: any;
@@ -91,17 +92,32 @@ export class FieldAddPage {
       controls: {
           polygon: true,
           trash: true
-      }
+      },
+      clickBuffer: 25,
+      touchBuffer: 50
     });
     // Add draw tools to map
     this.map.addControl(this.draw);
+    this.boundaryText = 'Select the draw field button on the map below to start creating your field boundaries.';
+    this.map.on('draw.modechange', (event) => {
+      // When a polygon has begun creation
+      if (event.mode === 'draw_polygon') {
+        this.boundaryText = 'Create the boundaries of your field below by creating points in a clockwise fashion.';
+      }
+      // If user exited out without creating boundaries
+      if (event.mode === 'simple_select' && this.draw.getAll().features.length === 0) {
+        this.boundaryText = 'Select the draw field button on the map below to start creating your field boundaries.';
+      }
+    });
     // When a polygon is created
     this.map.on('draw.create', () => {
       this.calculatePolygons(this.draw);
+      this.boundaryText = 'If this best represents your field, click Next; else click delete and try again.';
     });
     // When a polygon is removed
     this.map.on('draw.delete', () => {
       this.calculatePolygons(this.draw);
+      this.boundaryText = 'Select the draw field button on the map below to start creating your field boundaries.';
     });
     // Centre on user Geolocation
     Geolocation.getCurrentPosition({
@@ -122,13 +138,13 @@ export class FieldAddPage {
     // Get drawn polygons
     let featureCollection = draw.getAll();
     if (featureCollection.features.length > 0) {
-      // Get area size in hectares (rounded to two decimal places)
+      // Get area size in hectares
       let squareMetres = TurfArea(featureCollection);
       let hectares = squareMetres / 10000;
       // Save polygon shape
       this.polygon = featureCollection;
       // Update hectares form field for next view
-      this.basicDetailsForm.get('hectares').setValue(this.units === 'imperial' ? this.calcCore.hectaresToAcres(hectares) : hectares);
+      this.basicDetailsForm.get('hectares').setValue(this.units === 'imperial' ? this.calcCore.hectaresToAcres(hectares).toFixed(2) : hectares.toFixed(2));
     } else {
       // Reset values
       this.polygon = null;
@@ -153,7 +169,7 @@ export class FieldAddPage {
       polygon: this.polygon,
       name: this.basicDetailsForm.value.name,
       // When in imperial units mode, hectares is stored as acres temporarily so we are doing the correct conversion here
-      hectares: this.units === 'imperial' ? this.calcCore.acresToHectares(this.basicDetailsForm.value.hectares) : this.basicDetailsForm.value.hectares,
+      hectares: this.settingsProvider.units === 'imperial' ? this.calcCore.acresToHectares(this.basicDetailsForm.value.hectares) : this.basicDetailsForm.value.hectares,
       soilType: this.soilDetailsForm.value.soilType,
       organicManures: this.soilDetailsForm.value.organicManures,
       soilTestP: this.soilDetailsForm.value.soilTestP,
