@@ -38,7 +38,7 @@
           <ion-list>
             <ion-list-header>Crop Details</ion-list-header>
             <ion-item>
-              <ion-label>New Crop Type</ion-label>
+              <ion-label>Current Crop Type</ion-label>
               <ion-select formControlName="newCropType">
                 <ion-option *ngFor="let crop of strings.crop | keys" [value]="crop.key">{{crop.value}}</ion-option>
               </ion-select>
