@@ -55,5 +55,31 @@ page-calculator {
     ion-badge {
         text-transform: none;
     }
-
+    ion-scroll {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 50px;
+        left: 0px;
+    }
+    ion-card {
+        position: absolute;
+        top: 0px;
+        bottom: 237px;
+        img {
+            object-fit: cover;
+            width: 100% !important;
+            height: 100% !important;
+        }
+    }
+    .bottom-fixed {
+        position: absolute;
+        right: 0px;
+        bottom: 50px;
+        left: 0px;
+        height: 197px;
+        ion-list {
+            margin-bottom: 0px;
+        }
+    }
 }
