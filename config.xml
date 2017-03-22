@@ -50,6 +50,7 @@
     <icon src="resources/ios/icon/icon-small@3x.png" />
     <preference name="target-device" value="handset" />
     <preference name="Orientation" value="portrait" />
+    <preference name="deployment-target" value="9.0" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
