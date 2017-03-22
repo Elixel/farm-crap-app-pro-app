@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.rothamsted.fcapro.alpha" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Farm Crap App Pro</name>
+    <name>CrapAppPro</name>
     <description />
     <author email="christian@elixel.co.uk" href="http://www.elixel.co.uk/">Elixel</author>
     <content src="index.html" />
