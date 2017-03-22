@@ -1,5 +1,11 @@
+// Core
+import { DatePipe } from '@angular/common';
+import 'intl'; // iOS 9 support for DatePipe
+import 'intl/locale-data/jsonp/en'; // iOS 9 support for DatePipe
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+
+// App Specific
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { PopoverPage } from '../pages/home/home-popover';
@@ -16,14 +22,15 @@ import { ManureAddPage } from '../pages/manure-add/manure-add';
 import { ManureEditPage } from '../pages/manure-edit/manure-edit';
 import { Field } from '../providers/field';
 import { Settings } from '../providers/settings';
-import { LocalStorageModule, LocalStorageService } from 'angular-2-local-storage';
 import { Strings } from '../providers/strings';
 import { CalcCore } from '../providers/calc-core';
 import { KeysPipe } from '../pipes/keys';
 import { orderBy } from '../pipes/orderBy';
+
+// External Dependencies
+import { LocalStorageModule, LocalStorageService } from 'angular-2-local-storage';
 import 'chart.js/src/chart.js';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
