@@ -15,7 +15,7 @@
 
 <ion-content>
   <!-- Graph -->
-  <div class="graph">
+  <div class="graph" *ngIf="graph">
     <canvas *ngIf="field.spreads.length" baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="true" chartType="bar" width="640" height="480"></canvas>
     <p *ngIf="!field.spreads.length">Not enough events for graph</p>
   </div>

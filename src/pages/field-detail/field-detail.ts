@@ -20,7 +20,7 @@ import { CalcCore } from '../../providers/calc-core';
 export class FieldDetailPage {
   field: any;
   fieldIndex: number;
-  
+  graph: Boolean = true;
   strings: Object;
 
   public barChartLabels:string[];
@@ -87,9 +87,13 @@ export class FieldDetailPage {
   }
 
   updateGraph() {
+    // Do not calculate if no spreads!
+    if (!this.field.spreads.length) {
+      return;
+    }
     // Create empty template for graphs
-    this.barChartLabels = [];
-    this.barChartData = [{
+    let barChartLabels = [];
+    let barChartData = [{
       data: [],
       label: 'N'
     }, {
@@ -99,6 +103,9 @@ export class FieldDetailPage {
       data: [],
       label: 'K'
     }];
+    // Pre-initialise min/max with first spread date
+    let minimumDate = this.field.spreads[0].spreadDate;
+    let maximumDate = this.field.spreads[0].spreadDate;
     // Loop through spreads to populate graph
     for (let spreadIndex in this.field.spreads) {
       // Calculate graph data
@@ -113,11 +120,33 @@ export class FieldDetailPage {
         this.field.soilTestP,
         this.field.soilTestK
       );
-      this.barChartLabels.push(this.field.spreads[spreadIndex].spreadDate);
-      this.barChartData[0].data.push(cropAvailable[0]);
-      this.barChartData[1].data.push(cropAvailable[1]);
-      this.barChartData[2].data.push(cropAvailable[2]);
+      barChartLabels.push(this.field.spreads[spreadIndex].spreadDate);
+      barChartData[0].data.push(cropAvailable[0]);
+      barChartData[1].data.push(cropAvailable[1]);
+      barChartData[2].data.push(cropAvailable[2]);
+      // Is this the highest or lowest date in the dataset?
+      if (this.field.spreads[spreadIndex].spreadDate < minimumDate) {
+        minimumDate = this.field.spreads[spreadIndex].spreadDate;
+      }
+      if (this.field.spreads[spreadIndex].spreadDate > maximumDate) {
+        maximumDate = this.field.spreads[spreadIndex].spreadDate;
+      }
     }
+    // Convert to date object
+    minimumDate = new Date(new Date(minimumDate).setDate(1));
+    maximumDate = new Date(new Date(maximumDate).setDate(1));
+    // Extend  max range by a month
+    maximumDate.setMonth(maximumDate.getMonth() + 2);
+    // Update graph options
+    this.barChartOptions.scales.xAxes[0].time.min = minimumDate;
+    this.barChartOptions.scales.xAxes[0].time.max = maximumDate;
+    // hacky fix to refresh the graph, bug where labels do not update after data change
+    this.graph = false;
+    setTimeout(() => {
+      this.barChartLabels = barChartLabels;
+      this.barChartData = barChartData;
+      this.graph = true;
+    });
   }
 
   addSpreadPressed() {
