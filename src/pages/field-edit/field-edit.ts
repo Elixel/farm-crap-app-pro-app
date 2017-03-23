@@ -56,12 +56,13 @@ export class FieldEditPage {
     mapboxgl.accessToken = 'pk.eyJ1IjoiY29va2llY29va3NvbiIsImEiOiJjaXp6b3dvZnEwMDNqMnFsdTdlbmJtcHY0In0.OeHfq5_gzEIW13JzzsZJEA';
     // Get field data
     this.field = this.fieldProvider.fields[this.navParams.data.fieldIndex];
+    console.log(this.field);
     // Load units
     this.units = settingsProvider.units;
     // Create Basic Details Form
     this.basicDetailsForm = this.formBuilder.group({
       name: [this.field.name, Validators.required],
-      hectares: [(settingsProvider.units === 'imperial' ? this.calcCore.hectaresToAcres(this.field.hectares) : this.field.hectares).toFixed(2), Validators.required]
+      hectares: [parseFloat((settingsProvider.units === 'imperial' ? this.calcCore.hectaresToAcres(this.field.hectares) : this.field.hectares).toFixed(2)), Validators.required]
     });
     // Create Soil Details Form
     this.soilDetailsForm = this.formBuilder.group({
@@ -98,30 +99,68 @@ export class FieldEditPage {
           trash: true
       }
     });
-    // Add draw tools to map
-    this.map.addControl(this.draw);
-    this.boundaryText = 'If this best represents your field, click Next; else click delete and try again.';
-    this.map.on('draw.modechange', (event) => {
-      // When a polygon has begun creation
-      if (event.mode === 'draw_polygon') {
-        this.boundaryText = 'Create the boundaries of your field below by creating points in a clockwise fashion.';
-      }
-      // If user exited out without creating boundaries
-      if (event.mode === 'simple_select' && this.draw.getAll().features.length === 0) {
-        this.boundaryText = 'Select the draw field button on the map below to start creating your field boundaries.';
-      }
-    });
     // Get existing field polygon
     this.polygon = this.field.polygon;
     this.map.on('load', () => {
       // Add field to draw
       this.draw.set(this.polygon);
+      // Select polygon
+      this.draw.changeMode('simple_select', {
+        featureIds: [this.draw.getAll().features[0].id]
+      });
       // Calculate field boundaries
       let bounds = TurfBbox(this.polygon);
       // Contain map within boundaries
       this.map.fitBounds(bounds, {
         padding: 50
       });
+    });
+    // Add draw tools to map
+    this.map.addControl(this.draw);
+    this.boundaryText = 'If this best represents your field, click Next; else click delete and try again.';
+    // Draw validation
+    this.map.on('draw.modechange', (event) => {
+      // Make sure the user hasn't exited prematurely
+      let features = this.draw.getAll().features;
+      if (features.length) {
+        let isFeature = features[0].geometry.coordinates[0][0];
+        // When a polygon has begun creation
+        if (event.mode === 'draw_polygon') {
+          // If user hasn't got a polygon drawn
+          if (!isFeature) {
+            this.boundaryText = 'Create the boundaries of your field below by creating points in a clockwise fashion.';
+          // If there is already a polygon on the map
+          } else {
+            // Force back to simple select mode, do not allow the user to draw another polygon
+            this.draw.changeMode('simple_select', {
+              featureIds: [features[0].id]
+            });
+          }
+        }
+        // If user exited out without creating boundaries
+        if (event.mode === 'simple_select' && !isFeature) {
+          this.boundaryText = 'Select the draw field button on the map below to start creating your field boundaries.';
+        }
+        // If user tries to edit the polygon (not supported)
+        if (event.mode === 'direct_select') {
+          // Go back to normal selection for the polygon
+          this.draw.changeMode('simple_select', {
+            featureIds: [features[0].id]
+          });
+        }
+      }
+    });
+    // When a polygon changes selection
+    this.map.on('draw.selectionchange', (event) => {
+      // If user deselects polygon
+      if (!event.features.length) {
+        // Re-select polygon
+        setTimeout(() => {
+          this.draw.changeMode('simple_select', {
+            featureIds: [this.draw.getAll().features[0].id]
+          });
+        });
+      }
     });
     // When a polygon is created
     this.map.on('draw.create', () => {
@@ -146,7 +185,7 @@ export class FieldEditPage {
       // Save polygon shape
       this.polygon = featureCollection.features;
       // Update hectares form field for next view
-      this.basicDetailsForm.get('hectares').setValue(this.units === 'imperial' ? this.calcCore.hectaresToAcres(hectares).toFixed(2) : hectares.toFixed(2));
+      this.basicDetailsForm.get('hectares').setValue(parseFloat((this.units === 'imperial' ? this.calcCore.hectaresToAcres(hectares) : hectares).toFixed(2)));
     } else {
       // Reset values
       this.polygon = null;
@@ -170,7 +209,7 @@ export class FieldEditPage {
       polygon: this.polygon,
       name: this.basicDetailsForm.value.name,
       // When in imperial units mode, hectares is stored as acres temporarily so we are doing the correct conversion here
-      hectares: this.settingsProvider.units === 'imperial' ? this.calcCore.acresToHectares(this.basicDetailsForm.value.hectares) : this.basicDetailsForm.value.hectares,
+      hectares: parseFloat(this.settingsProvider.units === 'imperial' ? this.calcCore.acresToHectares(this.basicDetailsForm.value.hectares) : this.basicDetailsForm.value.hectares),
       soilType: this.soilDetailsForm.value.soilType,
       organicManures: this.soilDetailsForm.value.organicManures,
       soilTestP: this.soilDetailsForm.value.soilTestP,
