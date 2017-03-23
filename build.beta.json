@@ -1,7 +1,7 @@
 {
     "ios": {
         "release": {
-            "codeSignIdentity": "iPhone Developer",
+            "codeSignIdentity": "iPhone Distribution",
             "provisioningProfile": "d71c8d16-bc1d-4782-ac5d-799863edefa7",
             "developmentTeam": "749ZSVB77M",
             "packageType": "enterprise"
