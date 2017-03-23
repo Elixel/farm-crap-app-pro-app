@@ -358,27 +358,27 @@ export class CalcCore {
   }
 
   public toCSV(fields) {
-    let csv = [
-      [
-        'Field name',
-        'Manure type',
-        'Date',
-        'Crop avail N',
-        'Crop avail P',
-        'Crop avail k',
-        'Crop req N',
-        'Crop req P',
-        'Crop req k',
-        'SNS',
-        'Soil',
-        'Field size',
-        'Rate',
-        'Manure quality',
-        'Manure application',
-        'Season',
-        'Crop'
-      ]
-    ];
+    let csv = [];
+    // Add headings
+    csv.push([
+      '"Field name"',
+      '"Manure type"',
+      '"Date"',
+      '"Crop avail N"',
+      '"Crop avail P"',
+      '"Crop avail K"',
+      '"Crop req N"',
+      '"Crop req P"',
+      '"Crop req K"',
+      '"SNS"',
+      '"Soil"',
+      '"Field size"',
+      '"Rate"',
+      '"Manure quality"',
+      '"Manure application"',
+      '"Season"',
+      '"Crop"'
+    ]);
     // Loop through fields
     for (let fieldIndex in fields) {
       let field:any = fields[fieldIndex];
@@ -418,28 +418,28 @@ export class CalcCore {
         let season = this.getSeason(new Date(field.spreads[spreadIndex].spreadDate).getMonth() + 1);
         // Create row in CSV
         csv.push([
-          field.name,
-          this.stringsProvider.data.type[spread.manureType],
-          this.datePipe.transform(spread.spreadDate, 'dd/MM/yyyy'),
-          cropAvail.nitrogenRequirement,
-          cropAvail.phosphorousRequirement,
-          cropAvail.potassiumRequirement,
-          cropReq[0],
-          cropReq[1],
-          cropReq[2],
-          this.stringsProvider.data.soilNutrientCodeToText[this.settingsProvider.units][sns],
-          this.stringsProvider.data.soil[field.soilType],
-          field.hectares,
-          spread.manureDensity,
-          this.stringsProvider.data.quality[spread.manureType][spread.manureQuality],
-          this.stringsProvider.data.application[spread.manureType][spread.manureApplicationType],
-          this.stringsProvider.data.season[season],
-          this.stringsProvider.data.crop[field.newCropType]
+          '"' + field.name + '"',
+          '"' + this.stringsProvider.data.type[spread.manureType] + '"',
+          '"' + this.datePipe.transform(spread.spreadDate, 'dd/MM/yyyy') + '"',
+          '"' + cropAvail.nitrogenRequirement + '"',
+          '"' + cropAvail.phosphorousRequirement + '"',
+          '"' + cropAvail.potassiumRequirement + '"',
+          '"' + cropReq[0] + '"',
+          '"' + cropReq[1] + '"',
+          '"' + cropReq[2] + '"',
+          '"' + this.stringsProvider.data.soilNutrientCodeToText[this.settingsProvider.units][sns] + '"',
+          '"' + this.stringsProvider.data.soil[field.soilType] + '"',
+          '"' + field.hectares + '"',
+          '"' + spread.manureDensity + '"',
+          '"' + this.stringsProvider.data.quality[spread.manureType][spread.manureQuality] + '"',
+          '"' + (spread.manureApplicationType ? this.stringsProvider.data.application[spread.manureType][spread.manureApplicationType] : 'N/A') + '"',
+          '"' + this.stringsProvider.data.season[season] + '"',
+          '"' + this.stringsProvider.data.crop[field.newCropType] + '"'
         ]);
       }
     }
     // Convert array to csv and return it
-    return csv.join('\r\n');
+    return csv.join('\n');
   }
 
 }

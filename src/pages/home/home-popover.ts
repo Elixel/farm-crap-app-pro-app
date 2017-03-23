@@ -7,15 +7,22 @@ import { CalculatorPage } from '../calculator/calculator';
 import { CalcCore } from '../../providers/calc-core';
 import { Field } from '../../providers/field';
 
+import { File } from '@ionic-native/file';
+import { SocialSharing } from '@ionic-native/social-sharing';
+
 @Component({
   template: `
     <ion-list>
       <button ion-item (click)="about()">About</button>
       <button ion-item (click)="settings()">Settings</button>
       <button ion-item (click)="calculator()">Calculator</button>
-      <button ion-item (click)="export()" disabled="true">Export Data</button>
+      <button ion-item (click)="export()">Export Data</button>
     </ion-list>
-  `
+  `,
+  providers: [
+    File,
+    SocialSharing
+  ]
 })
 export class PopoverPage {
 
@@ -23,7 +30,9 @@ export class PopoverPage {
     public viewCtrl: ViewController,
     public appCtrl: App,
     private calcCore: CalcCore,
-    private fieldProvider: Field
+    private fieldProvider: Field,
+    private file: File,
+    private SocialSharing: SocialSharing
   ) {}
 
   about() {
@@ -42,14 +51,16 @@ export class PopoverPage {
   }
 
   export() {
-    this.viewCtrl.dismiss();
     // Export data here
     let csvData = this.calcCore.toCSV(this.fieldProvider.fields);
-    console.log(csvData);
-    // Create csv file from data
-
-    // Share csv file via email
-
+    // Create/overwrite csv file from data and write to iOS tempDirectory
+    this.file.writeFile(this.file.tempDirectory, 'fields.csv', csvData, {replace: true}) 
+    .then((fileEntry) => {
+      // Share csv file via email
+      this.SocialSharing.shareViaEmail('', 'From your Crap Calculator', [], [], [], fileEntry.nativeURL);
+    });
+    // Hide popover
+    this.viewCtrl.dismiss();
   }
 
 }

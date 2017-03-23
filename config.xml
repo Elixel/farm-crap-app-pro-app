@@ -2,7 +2,7 @@
 <widget id="com.rothamsted.fcapro.alpha" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>CrapAppPro</name>
     <description />
-    <author email="christian@elixel.co.uk" href="http://www.elixel.co.uk/">Elixel</author>
+    <author email="contact@elixel.co.uk" href="https://www.elixel.co.uk/">Elixel</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
@@ -72,4 +72,6 @@
     <plugin name="cordova-plugin-geolocation" spec="~2.4.2">
         <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="This app uses your geolocation to show your rough location on the map" />
     </plugin>
+    <plugin name="cordova-plugin-file" spec="~4.3.2" />
+    <plugin name="cordova-plugin-x-socialsharing" spec="~5.1.6" />
 </widget>
