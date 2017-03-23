@@ -46,6 +46,11 @@ export class HomePage {
     this.hectaresToAcres = calcCore.hectaresToAcres;
   }
 
+  ionViewWillEnter() {
+    // Re-load units
+    this.units = this.settingsProvider.units;
+  }
+
   deleteField(fieldIndex) {
     this.fieldProvider.deleteField(fieldIndex);
   }
