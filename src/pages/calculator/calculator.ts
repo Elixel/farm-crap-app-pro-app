@@ -46,7 +46,7 @@ export class CalculatorPage {
     // Create Calculator Form
     this.calculatorForm = this.formBuilder.group({
       // Default to todays date for new spreading
-      season: [new Date().toISOString(), Validators.required],
+      season: ['', Validators.required],
       soilType: ['', Validators.required],
       newCropType: ['', Validators.required],
       manureType: ['', Validators.required],
