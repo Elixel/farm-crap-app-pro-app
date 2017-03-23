@@ -56,7 +56,6 @@ export class FieldEditPage {
     mapboxgl.accessToken = 'pk.eyJ1IjoiY29va2llY29va3NvbiIsImEiOiJjaXp6b3dvZnEwMDNqMnFsdTdlbmJtcHY0In0.OeHfq5_gzEIW13JzzsZJEA';
     // Get field data
     this.field = this.fieldProvider.fields[this.navParams.data.fieldIndex];
-    console.log(this.field);
     // Load units
     this.units = settingsProvider.units;
     // Create Basic Details Form
