@@ -6,6 +6,7 @@
     <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
+    <allow-navigation href="http://localhost:8080/*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <allow-intent href="tel:*" />
@@ -59,6 +60,10 @@
     <preference name="SplashMaintainAspectRatio" value="true" />
     <preference name="FadeSplashScreenDuration" value="300" />
     <preference name="SplashShowOnlyFirstTime" value="false" />
+    <feature name="CDVWKWebViewEngine">
+        <param name="ios-package" value="CDVWKWebViewEngine" />
+    </feature>
+    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
     <engine name="ios" spec="~4.3.1" />
     <feature name="StatusBar">
         <param name="ios-package" onload="true" value="CDVStatusBar" />
@@ -74,4 +79,5 @@
     </plugin>
     <plugin name="cordova-plugin-file" spec="~4.3.2" />
     <plugin name="cordova-plugin-x-socialsharing" spec="~5.1.6" />
+    <plugin name="cordova-plugin-wkwebview-engine" spec="https://github.com/driftyco/cordova-plugin-wkwebview-engine" />
 </widget>
