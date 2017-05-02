@@ -171,7 +171,7 @@ export class Strings {
           'custom': 'tons'
         },
         'fieldSize': {
-          'short': 'ac',
+          'short': 'acre',
           'long': 'acre'
         },
         'density': 'units'
