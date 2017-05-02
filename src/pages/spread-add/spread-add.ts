@@ -56,7 +56,7 @@ export class SpreadAddPage {
       manureQuality: ['', Validators.required],
       manureApplicationType: ['', Validators.required],
     });
-    // Default to half way for density
+    // Default to half way for Application Rate
     this.manureDensity = 50;
     // Get and display crop supply/requirements
     this.cropRequirementsSupply = this.calcCore.getCropRequirementsSupply(

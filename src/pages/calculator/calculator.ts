@@ -48,7 +48,7 @@ export class CalculatorPage {
       manureQuality: ['', Validators.required],
       manureApplicationType: ['', Validators.required]
     });
-    // Default to half way for density
+    // Default to half way for application rate
     this.manureDensity = 50;
   }
 

@@ -43,11 +43,11 @@ page-spread-edit {
         font-size: 12px;
     }
 
-    // Force label heading to be left aligned (Density Label)
+    // Force label heading to be left aligned (Application Rate Label)
     ion-label {
         text-align: left;
     }
-    // Remove forced uppercase style (Density Value)
+    // Remove forced uppercase style (Application Rate Value)
     ion-badge {
         text-transform: none;
     }
