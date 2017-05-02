@@ -7,7 +7,10 @@ import { Strings } from '../../providers/strings';
 import { Settings } from '../../providers/settings';
 import { CalcCore } from '../../providers/calc-core';
 
-@IonicPage()
+@IonicPage({
+  defaultHistory: ['HomePage'],
+  segment: 'calculator'
+})
 @Component({
   selector: 'page-calculator',
   templateUrl: 'calculator.html'

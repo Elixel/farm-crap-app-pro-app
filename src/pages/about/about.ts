@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
-@IonicPage()
+@IonicPage({
+  defaultHistory: ['HomePage'],
+  segment: 'about'
+})
 @Component({
   selector: 'page-about',
   templateUrl: 'about.html'

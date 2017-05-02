@@ -2,7 +2,10 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ItemSliding } from 'ionic-angular';
 import { Settings } from '../../providers/settings';
 
-@IonicPage()
+@IonicPage({
+  defaultHistory: ['HomePage'],
+  segment: 'settings'
+})
 @Component({
   selector: 'page-settings',
   templateUrl: 'settings.html'
