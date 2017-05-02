@@ -32,7 +32,8 @@ ion-select {
   white-space: normal !important;
 }
 
-.ios.platform-ipad {
+/* Fixes white-space above header on iPad 2 simulated 1x view (Breaks on retina iPad) */
+/*.ios.platform-ipad {
   ion-nav ion-navbar {
     min-height: 44px !important;
     padding-top: 4px !important;
@@ -45,7 +46,7 @@ ion-select {
   ion-content > .fixed-content, ion-content > .scroll-content {
     margin-top: 44px !important;
   }
-}
+}*/
 
 // Named Color Variables
 // --------------------------------------------------
