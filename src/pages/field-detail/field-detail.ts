@@ -1,18 +1,14 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
-import { SpreadAddPage } from '../spread-add/spread-add';
-import { SpreadEditPage } from '../spread-edit/spread-edit';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Field } from '../../providers/field';
 import { Strings } from '../../providers/strings';
 import { CalcCore } from '../../providers/calc-core';
 
-/*
-  Generated class for the FieldDetail page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+@IonicPage({
+  defaultHistory: ['HomePage'],
+  segment: 'field-detail/:fieldIndex'
+})
 @Component({
   selector: 'page-field-detail',
   templateUrl: 'field-detail.html'
@@ -150,13 +146,13 @@ export class FieldDetailPage {
   }
 
   addSpreadPressed() {
-    this.navCtrl.push(SpreadAddPage, {
+    this.navCtrl.push('SpreadAddPage', {
       fieldIndex: this.navParams.data.fieldIndex
     });
   }
 
   editSpreadPressed(spreadIndex) {
-    this.navCtrl.push(SpreadEditPage, {
+    this.navCtrl.push('SpreadEditPage', {
       fieldIndex: this.navParams.data.fieldIndex,
       spreadIndex: spreadIndex
     });

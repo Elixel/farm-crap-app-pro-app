@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
-import { ViewController, App } from 'ionic-angular';
+import { IonicPage, ViewController, App } from 'ionic-angular';
 
-import { AboutPage } from '../about/about';
-import { SettingsPage } from '../settings/settings';
-import { CalculatorPage } from '../calculator/calculator';
 import { CalcCore } from '../../providers/calc-core';
 import { Field } from '../../providers/field';
 
 import { File } from '@ionic-native/file';
 import { SocialSharing } from '@ionic-native/social-sharing';
 
+@IonicPage()
 @Component({
   template: `
     <ion-list>
@@ -37,17 +35,17 @@ export class PopoverPage {
 
   about() {
     this.viewCtrl.dismiss();
-    this.appCtrl.getRootNav().push(AboutPage);
+    this.appCtrl.getRootNav().push('AboutPage');
   }
 
   settings() {
     this.viewCtrl.dismiss();
-    this.appCtrl.getRootNav().push(SettingsPage);
+    this.appCtrl.getRootNav().push('SettingsPage');
   }
 
   calculator() {
     this.viewCtrl.dismiss();
-    this.appCtrl.getRootNav().push(CalculatorPage);
+    this.appCtrl.getRootNav().push('CalculatorPage');
   }
 
   export() {

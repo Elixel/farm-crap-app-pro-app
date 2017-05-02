@@ -1,13 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
-import { DisclaimerPage } from '../disclaimer/disclaimer';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
-/*
-  Generated class for the About page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+@IonicPage()
 @Component({
   selector: 'page-about',
   templateUrl: 'about.html'
@@ -21,7 +15,7 @@ export class AboutPage {
   }
 
   showDisclaimerModal() {
-    let disclaimerModal = this.modalCtrl.create(DisclaimerPage);
+    let disclaimerModal = this.modalCtrl.create('DisclaimerPage');
     disclaimerModal.present();
   }
 

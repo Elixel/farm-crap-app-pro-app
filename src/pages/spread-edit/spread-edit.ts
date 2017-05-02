@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { NavController, NavParams, Slides } from 'ionic-angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
 import { ViewChild } from '@angular/core';
 
 import { Field } from '../../providers/field';
@@ -8,12 +8,10 @@ import { Strings } from '../../providers/strings';
 import { Settings } from '../../providers/settings';
 import { CalcCore } from '../../providers/calc-core';
 
-/*
-  Generated class for the SpreadEdit page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+@IonicPage({
+  defaultHistory: ['HomePage', 'FieldDetailPage'],
+  segment: 'field-detail/:fieldIndex/spreads/:spreadIndex'
+})
 @Component({
   selector: 'page-spread-edit',
   templateUrl: 'spread-edit.html'
@@ -57,7 +55,7 @@ export class SpreadEditPage {
     this.spreadForm = this.formBuilder.group({
       // Default to todays date for new spreading
       spreadDate: [this.spread.spreadDate, Validators.required],
-      manureType: [this.spread.manureType, Validators.required],
+      manureType: ['cattle', Validators.required],
       manureQuality: [this.spread.manureQuality, Validators.required],
       // Check if existing application type is there, if so then it is a required field unless manure type changes
       manureApplicationType: [this.spread.manureApplicationType, this.spread.manureApplicationType ? Validators.required : null],

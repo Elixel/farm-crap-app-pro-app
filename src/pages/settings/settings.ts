@@ -1,15 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams, AlertController, ItemSliding } from 'ionic-angular';
-import { ManureAddPage } from '../manure-add/manure-add';
-import { ManureEditPage } from '../manure-edit/manure-edit';
+import { IonicPage, NavController, NavParams, AlertController, ItemSliding } from 'ionic-angular';
 import { Settings } from '../../providers/settings';
 
-/*
-  Generated class for the Settings page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+@IonicPage()
 @Component({
   selector: 'page-settings',
   templateUrl: 'settings.html'
@@ -52,11 +45,11 @@ export class SettingsPage {
   }
 
   addCustomManurePressed() {
-    this.navCtrl.push(ManureAddPage);
+    this.navCtrl.push('ManureAddPage');
   }
 
   editCustomManure(index) {
-    this.navCtrl.push(ManureEditPage, {
+    this.navCtrl.push('ManureEditPage', {
       customManureIndex: index
     });
   }

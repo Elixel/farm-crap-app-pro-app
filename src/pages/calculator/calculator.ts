@@ -1,18 +1,13 @@
 import { Component } from '@angular/core';
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { NavController, NavParams, Slides } from 'ionic-angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
 import { ViewChild } from '@angular/core';
 
 import { Strings } from '../../providers/strings';
 import { Settings } from '../../providers/settings';
 import { CalcCore } from '../../providers/calc-core';
 
-/*
-  Generated class for the Calculator page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+@IonicPage()
 @Component({
   selector: 'page-calculator',
   templateUrl: 'calculator.html'

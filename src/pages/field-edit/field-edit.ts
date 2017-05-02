@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { NavController, NavParams, Slides } from 'ionic-angular';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
+import { IonicPage, NavController, NavParams, Slides } from 'ionic-angular';
 
 import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 import MapboxDraw from '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.js';
@@ -12,12 +12,7 @@ import { Settings } from '../../providers/settings';
 import { Strings } from '../../providers/strings';
 import { CalcCore } from '../../providers/calc-core';
 
-/*
-  Generated class for the FieldEdit page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
+@IonicPage()
 @Component({
   selector: 'page-field-edit',
   templateUrl: 'field-edit.html'

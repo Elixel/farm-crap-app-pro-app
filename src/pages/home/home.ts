@@ -1,18 +1,13 @@
 import { Component } from '@angular/core';
-import { NavController, PopoverController, ItemSliding, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, PopoverController, ItemSliding, ModalController } from 'ionic-angular';
 
 import { Field } from '../../providers/field';
-
-import { FieldAddPage } from '../field-add/field-add';
-import { FieldEditPage } from '../field-edit/field-edit';
-import { FieldDetailPage } from '../field-detail/field-detail';
-import { DisclaimerPage } from '../disclaimer/disclaimer';
-import { PopoverPage } from './home-popover';
 
 import { Strings } from '../../providers/strings';
 import { Settings } from '../../providers/settings';
 import { CalcCore } from '../../providers/calc-core';
 
+@IonicPage()
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -36,8 +31,6 @@ export class HomePage {
     if (!settingsProvider.disclaimerAccepted) {
       this.showDisclaimerModal();
     }
-    // Pre-load all JSON datasets
-    calcCore.load();
     // Load strings
     this.strings = stringsProvider.data;
     // Load units
@@ -56,33 +49,33 @@ export class HomePage {
   }
 
   addField() {
-    this.navCtrl.push(FieldAddPage);
+    this.navCtrl.push('FieldAddPage');
   }
 
   editField(slidingItem: ItemSliding, fieldIndex) {
     // Close sliding drawer
     slidingItem.close();
     // Go to edit view
-    this.navCtrl.push(FieldEditPage, {
+    this.navCtrl.push('FieldEditPage', {
       fieldIndex: fieldIndex
     })
   }
 
   viewField(fieldIndex) {
-    this.navCtrl.push(FieldDetailPage, {
+    this.navCtrl.push('FieldDetailPage', {
       fieldIndex: fieldIndex
     });
   }
 
   presentPopover(touchEvent) {
-    let popover = this.popoverCtrl.create(PopoverPage);
+    let popover = this.popoverCtrl.create('PopoverPage');
     popover.present({
       ev: touchEvent
     });
   }
 
   showDisclaimerModal() {
-    let disclaimerModal = this.modalCtrl.create(DisclaimerPage);
+    let disclaimerModal = this.modalCtrl.create('DisclaimerPage');
     disclaimerModal.present();
   }
 
