@@ -94,21 +94,23 @@ export class FieldEditPage {
       }
     });
     // Get existing field polygon
-    this.polygon = this.field.polygon;
-    this.map.on('load', () => {
-      // Add field to draw
-      this.draw.set(this.polygon);
-      // Select polygon
-      this.draw.changeMode('simple_select', {
-        featureIds: [this.draw.getAll().features[0].id]
+    if (this.field.polygon) {
+      this.polygon = this.field.polygon;
+      this.map.on('load', () => {
+        // Add field to draw
+        this.draw.set(this.polygon);
+        // Select polygon
+        this.draw.changeMode('simple_select', {
+          featureIds: [this.draw.getAll().features[0].id]
+        });
+        // Calculate field boundaries
+        let bounds = TurfBbox(this.polygon);
+        // Contain map within boundaries
+        this.map.fitBounds(bounds, {
+          padding: 50
+        });
       });
-      // Calculate field boundaries
-      let bounds = TurfBbox(this.polygon);
-      // Contain map within boundaries
-      this.map.fitBounds(bounds, {
-        padding: 50
-      });
-    });
+    }
     // Add draw tools to map
     this.map.addControl(this.draw);
     this.boundaryText = 'If this best represents your field, click Next; else click delete and try again.';
