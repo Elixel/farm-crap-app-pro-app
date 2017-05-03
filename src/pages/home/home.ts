@@ -7,6 +7,8 @@ import { Strings } from '../../providers/strings';
 import { Settings } from '../../providers/settings';
 import { CalcCore } from '../../providers/calc-core';
 
+import { LocalStorageService } from 'angular-2-local-storage';
+
 @IonicPage()
 @Component({
   selector: 'page-home',
@@ -17,14 +19,20 @@ export class HomePage {
   private units: string;
   private strings: any;
   private hectaresToAcres: Function;
+  private dismissSettingsPrompt: boolean;
 
-  constructor(public navCtrl: NavController,
-  public popoverCtrl: PopoverController,
-  private fieldProvider: Field,
-  private settingsProvider: Settings,
-  private stringsProvider: Strings,
-  private modalCtrl: ModalController,
-  private calcCore: CalcCore) {
+  constructor(
+    public navCtrl: NavController,
+    public popoverCtrl: PopoverController,
+    private fieldProvider: Field,
+    private settingsProvider: Settings,
+    private stringsProvider: Strings,
+    private modalCtrl: ModalController,
+    private calcCore: CalcCore,
+    private localStorageService: LocalStorageService
+  ) {
+    // Check if settings prompt has been dismissed
+    this.dismissSettingsPrompt = <boolean>this.localStorageService.get('fca.settings.dismissSettingsPrompt');
     // Get fields
     this.fields = this.fieldProvider.fields;
     // Show disclaimer if not accepted
@@ -77,6 +85,15 @@ export class HomePage {
   showDisclaimerModal() {
     let disclaimerModal = this.modalCtrl.create('DisclaimerPage');
     disclaimerModal.present();
+  }
+
+  openSettings() {
+    this.navCtrl.push('SettingsPage');
+  }
+
+  dismissSettings() {
+    this.dismissSettingsPrompt = true;
+    this.localStorageService.set('fca.settings.dismissSettingsPrompt', true);
   }
 
 }

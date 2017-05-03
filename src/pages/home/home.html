@@ -12,6 +12,19 @@
 </ion-header>
 
 <ion-content>
+  <ion-card *ngIf="!dismissSettingsPrompt">
+    <button class="close-button" ion-button icon-right clear (click)="dismissSettings()">
+      Dismiss
+      <ion-icon name="close"></ion-icon>
+    </button>
+    <ion-card-content>
+      <ion-card-title>
+        Personalise
+      </ion-card-title>
+      <p>To change your farm's rainfall, fertiliser cost, custom manures or units of measure, go to the settings page.</p>
+      <button ion-button block small (click)="openSettings()">View Settings</button>
+    </ion-card-content>
+  </ion-card>
   <ion-list>
     <ion-list-header>Fields<button ion-button item-right (click)="addField()">Add Field</button></ion-list-header>
     <ion-item *ngIf="!fields.length" no-lines>
