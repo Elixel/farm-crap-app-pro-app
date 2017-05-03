@@ -12,9 +12,9 @@ $font-path: "../assets/fonts";
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
 
-button.swiper-pagination-bullet-active {
+/*button.swiper-pagination-bullet-active {
   background: #32db64;
-}
+}*/
 
 .capitalize {
   text-transform: capitalize;
@@ -22,10 +22,6 @@ button.swiper-pagination-bullet-active {
 
 h1 {
   font-size: 2.3rem !important;
-}
-
-ion-select {
-  max-width: 50% !important;
 }
 
 .alert-ios .alert-radio-label {
