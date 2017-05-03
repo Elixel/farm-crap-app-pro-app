@@ -54,8 +54,16 @@ export class PopoverPage {
     // Create/overwrite csv file from data and write to iOS tempDirectory
     this.file.writeFile(this.file.tempDirectory, 'fields.csv', csvData, {replace: true}) 
     .then((fileEntry) => {
-      // Share csv file via email
-      this.SocialSharing.shareViaEmail('', 'From your Crap Calculator', [], [], [], fileEntry.nativeURL);
+      // Check user can share via email
+      this.SocialSharing.canShareViaEmail().then(() => {
+        // Share csv file via email
+        this.SocialSharing.shareViaEmail('', 'From your Crap Calculator', [], [], [], fileEntry.nativeURL);
+      }, () => {
+        // Try sharing using the share sheet
+        this.SocialSharing.share('From your Crap Calculator', '', fileEntry.nativeURL);
+      });
+    }, (error) => {
+      console.error(error);
     });
     // Hide popover
     this.viewCtrl.dismiss();
