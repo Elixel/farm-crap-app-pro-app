@@ -13,7 +13,10 @@ import { CalcCore } from '../../providers/calc-core';
 
 import { Geolocation } from 'ionic-native';
 
-@IonicPage()
+@IonicPage({
+  defaultHistory: ['HomePage'],
+  segment: 'field-add'
+})
 @Component({
   selector: 'page-field-add',
   templateUrl: 'field-add.html'
