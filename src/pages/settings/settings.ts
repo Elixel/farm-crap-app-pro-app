@@ -2,13 +2,23 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ItemSliding } from 'ionic-angular';
 import { Settings } from '../../providers/settings';
 
+import { CalcCore } from '../../providers/calc-core';
+import { Field } from '../../providers/field';
+
+import { File } from '@ionic-native/file';
+import { SocialSharing } from '@ionic-native/social-sharing';
+
 @IonicPage({
   defaultHistory: ['HomePage'],
   segment: 'settings'
 })
 @Component({
   selector: 'page-settings',
-  templateUrl: 'settings.html'
+  templateUrl: 'settings.html',
+  providers: [
+    File,
+    SocialSharing
+  ]
 })
 export class SettingsPage {
   units: string;
@@ -18,7 +28,16 @@ export class SettingsPage {
   fertiliserCostPotassium: number;
   customManure: Object[];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public settingsProvider:Settings, private alertCtrl: AlertController) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public settingsProvider:Settings,
+    private alertCtrl: AlertController,
+    private calcCore: CalcCore,
+    private fieldProvider: Field,
+    private file: File,
+    private SocialSharing: SocialSharing
+  ) {
     this.units = settingsProvider.units;
     this.rainfall = settingsProvider.rainfall;
     this.fertiliserCostNitrogen = settingsProvider.fertiliserCostNitrogen;
@@ -71,6 +90,29 @@ export class SettingsPage {
       // Close sliding drawer
       slidingItem.close();
     } 
+  }
+
+  about() {
+    this.navCtrl.push('AboutPage');
+  }
+
+  export() {
+    // Export data here
+    let csvData = this.calcCore.toCSV(this.fieldProvider.fields);
+    // Create/overwrite csv file from data and write to iOS tempDirectory
+    this.file.writeFile(this.file.tempDirectory, 'fields.csv', csvData, {replace: true}) 
+    .then((fileEntry) => {
+      // Check user can share via email
+      this.SocialSharing.canShareViaEmail().then(() => {
+        // Share csv file via email
+        this.SocialSharing.shareViaEmail('', 'From your Crap Calculator', [], [], [], fileEntry.nativeURL);
+      }, () => {
+        // Try sharing using the share sheet
+        this.SocialSharing.share('From your Crap Calculator', '', fileEntry.nativeURL);
+      });
+    }, (error) => {
+      console.error(error);
+    });
   }
 
 }

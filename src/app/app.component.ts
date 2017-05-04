@@ -9,7 +9,7 @@ import { CalcCore } from '../providers/calc-core';
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = 'HomePage';
+  rootPage:any = 'TabsPage';
 
   constructor(
     platform: Platform,

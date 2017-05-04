@@ -38,43 +38,45 @@
 
     <!-- Collect soil details (Soil type, whether organic manures have been used and results of soil tests) -->
     <ion-slide>
-      <form [formGroup]="soilDetailsForm">
-        <ion-list>
-          <ion-list-header>Soil Details</ion-list-header>
-          <ion-item>
-            <ion-label>Soil Type</ion-label>
-            <ion-select formControlName="soilType" placeholder="Unselected">
-              <ion-option *ngFor="let soil of strings.soil | keys" [value]="soil.key">{{soil.value}}</ion-option>
-            </ion-select>
-          </ion-item>
-          <ion-item>
-            <ion-label>Organic Manures<p>Do you regularly add organic manures?</p></ion-label>
-            <ion-checkbox formControlName="organicManures"></ion-checkbox>
-          </ion-item>
-        </ion-list>
-        <ion-list>
-          <ion-list-header>Results of soil tests (if available)</ion-list-header>
-          <ion-item>
-            <ion-label>Phosphorous (P)</ion-label>
-            <ion-select formControlName="soilTestP">
-              <ion-option value="soil-p-0">0</ion-option>
-              <ion-option value="soil-p-1">1</ion-option>
-              <ion-option value="soil-p-2">2</ion-option>
-              <ion-option value="soil-p-3">3</ion-option>
-            </ion-select>
-          </ion-item>
-          <ion-item>
-            <ion-label>Potash (K)</ion-label>
-            <ion-select formControlName="soilTestK">
-              <ion-option value="soil-k-0">0</ion-option>
-              <ion-option value="soil-k-1">1</ion-option>
-              <ion-option value="soil-k-2-">2-</ion-option>
-              <ion-option value="soil-k-2+">2+</ion-option>
-              <ion-option value="soil-k-3">3</ion-option>
-            </ion-select>
-          </ion-item>
-        </ion-list>
-      </form>
+      <ion-scroll scrollY="true">
+        <form [formGroup]="soilDetailsForm">
+          <ion-list>
+            <ion-list-header>Soil Details</ion-list-header>
+            <ion-item>
+              <ion-label>Soil Type</ion-label>
+              <ion-select formControlName="soilType" placeholder="Unselected">
+                <ion-option *ngFor="let soil of strings.soil | keys" [value]="soil.key">{{soil.value}}</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label>Organic Manures<p>Do you regularly add organic manures?</p></ion-label>
+              <ion-checkbox formControlName="organicManures"></ion-checkbox>
+            </ion-item>
+          </ion-list>
+          <ion-list>
+            <ion-list-header>Results of soil tests (if available)</ion-list-header>
+            <ion-item>
+              <ion-label>Phosphorous (P)</ion-label>
+              <ion-select formControlName="soilTestP">
+                <ion-option value="soil-p-0">0</ion-option>
+                <ion-option value="soil-p-1">1</ion-option>
+                <ion-option value="soil-p-2">2</ion-option>
+                <ion-option value="soil-p-3">3</ion-option>
+              </ion-select>
+            </ion-item>
+            <ion-item>
+              <ion-label>Potash (K)</ion-label>
+              <ion-select formControlName="soilTestK">
+                <ion-option value="soil-k-0">0</ion-option>
+                <ion-option value="soil-k-1">1</ion-option>
+                <ion-option value="soil-k-2-">2-</ion-option>
+                <ion-option value="soil-k-2+">2+</ion-option>
+                <ion-option value="soil-k-3">3</ion-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+        </form>
+      </ion-scroll>
     </ion-slide>
 
     <!-- Collect crop details (Has grass grown in the last 3 years on the soil, the previous crops grown and the new crops to be grown) -->

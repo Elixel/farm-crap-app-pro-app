@@ -11,11 +11,11 @@ import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angu
 })
 export class AboutPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl:ModalController) {}
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AboutPage');
-  }
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    public modalCtrl:ModalController
+  ) {}
 
   showDisclaimerModal() {
     let disclaimerModal = this.modalCtrl.create('DisclaimerPage');

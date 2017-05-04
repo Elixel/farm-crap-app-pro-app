@@ -75,20 +75,14 @@ export class HomePage {
     });
   }
 
-  presentPopover(touchEvent) {
-    let popover = this.popoverCtrl.create('PopoverPage');
-    popover.present({
-      ev: touchEvent
-    });
-  }
-
   showDisclaimerModal() {
     let disclaimerModal = this.modalCtrl.create('DisclaimerPage');
     disclaimerModal.present();
   }
 
   openSettings() {
-    this.navCtrl.push('SettingsPage');
+    // Select the settings tab
+    this.navCtrl.parent.select(2);
   }
 
   dismissSettings() {
