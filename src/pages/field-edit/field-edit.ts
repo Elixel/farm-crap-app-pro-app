@@ -12,7 +12,10 @@ import { Settings } from '../../providers/settings';
 import { Strings } from '../../providers/strings';
 import { CalcCore } from '../../providers/calc-core';
 
-@IonicPage()
+@IonicPage({
+  defaultHistory: ['HomePage'],
+  segment: 'field-edit/:fieldIndex'
+})
 @Component({
   selector: 'page-field-edit',
   templateUrl: 'field-edit.html'

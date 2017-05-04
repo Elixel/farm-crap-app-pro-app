@@ -109,7 +109,7 @@
         <ion-grid>
           <ion-row>
             <ion-col>
-              <h1>N {{strings.units[units].density}}/{{strings.units[units].fieldSize.short}}</h1>
+              <h1>N {{strings.units[units].density}} / {{strings.units[units].fieldSize.short}}</h1>
             </ion-col>
           </ion-row>
           <ion-row>
@@ -121,20 +121,20 @@
         <ion-list-header>Crop nutrient requirements</ion-list-header>
         <ion-grid>
           <ion-row>
-            <ion-col>
-              <h1>N<br />{{strings.units[units].density}}/{{strings.units[units].fieldSize.short}}</h1>
+            <ion-col col-4>
+              <h1>N<br />{{strings.units[units].density}} / {{strings.units[units].fieldSize.short}}</h1>
             </ion-col>
-            <ion-col>
-              <h1>P&#x2082;O&#x2085;<br />{{strings.units[units].density}}/{{strings.units[units].fieldSize.short}}</h1>
+            <ion-col col-4>
+              <h1>P&#x2082;O&#x2085;<br />{{strings.units[units].density}} / {{strings.units[units].fieldSize.short}}</h1>
             </ion-col>
-            <ion-col>
-              <h1>K&#x2082;O<br />{{strings.units[units].density}}/{{strings.units[units].fieldSize.short}}</h1>
+            <ion-col col-4>
+              <h1>K&#x2082;O<br />{{strings.units[units].density}} / {{strings.units[units].fieldSize.short}}</h1>
             </ion-col>
           </ion-row>
           <ion-row>
-            <ion-col>{{units === 'imperial' ? kilogramHectareToUnitsAcre(cropRequirementsSupply.nitrogenRequirement) : cropRequirementsSupply.nitrogenRequirement}}</ion-col>
-            <ion-col>{{units === 'imperial' ? kilogramHectareToUnitsAcre(cropRequirementsSupply.phosphorousRequirement) : cropRequirementsSupply.phosphorousRequirement}}</ion-col>
-            <ion-col>{{units === 'imperial' ? kilogramHectareToUnitsAcre(cropRequirementsSupply.potassiumRequirement) : cropRequirementsSupply.potassiumRequirement}}</ion-col>
+            <ion-col col-4>{{units === 'imperial' ? kilogramHectareToUnitsAcre(cropRequirementsSupply.nitrogenRequirement) : cropRequirementsSupply.nitrogenRequirement}}</ion-col>
+            <ion-col col-4>{{units === 'imperial' ? kilogramHectareToUnitsAcre(cropRequirementsSupply.phosphorousRequirement) : cropRequirementsSupply.phosphorousRequirement}}</ion-col>
+            <ion-col col-4>{{units === 'imperial' ? kilogramHectareToUnitsAcre(cropRequirementsSupply.potassiumRequirement) : cropRequirementsSupply.potassiumRequirement}}</ion-col>
           </ion-row>
         </ion-grid>
       </ion-list>
