@@ -43,6 +43,11 @@ page-spread-edit {
         font-size: 12px;
     }
 
+    ion-row.row-crop-available {
+        background: #DFDFFF;
+        font-weight: bold;
+    }
+
     // Force label heading to be left aligned (Application Rate Label)
     ion-label {
         text-align: left;
