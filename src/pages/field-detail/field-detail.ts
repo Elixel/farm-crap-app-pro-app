@@ -41,8 +41,6 @@ export class FieldDetailPage {
       maintainAspectRatio: false,
       scales: {
         xAxes: [{
-          // barPercentage: 0.8,
-          // categoryPercentage: 0.25,
           type: 'time',
           time: {
             unit: 'month',
