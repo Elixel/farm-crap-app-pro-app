@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Field } from '../../providers/field';
 import { Strings } from '../../providers/strings';
+import { Settings } from '../../providers/settings';
 import { CalcCore } from '../../providers/calc-core';
 
 @IonicPage({
@@ -19,56 +20,65 @@ export class FieldDetailPage {
   graph: Boolean = true;
   strings: Object;
 
+  public graphWidth = 100;
   public barChartLabels:string[];
   public barChartData:any[];
-  public barChartOptions:any = {
-    responsive: true,
-    scales: {
-      xAxes: [{
-        barPercentage: 0.8,
-        categoryPercentage: 0.25,
-        type: 'time',
-        time: {
-          unit: 'month',
-          displayFormats: {
-            month: 'MMM \'YY'
-          },
-          round: 'week'
-        },
-        ticks: {
-          minRotation: 45
-        }
-      }],
-      yAxes: [{
-        ticks: {
-          min: 0
-        }
-      }]
-    },
-    tooltips: {
-      enabled: false
-    },
-    layout: {
-      padding: {
-        top: 0,
-        right: 20,
-        left: 20,
-        bottom: 0
-      }
-    }
-  };
+  public barChartOptions:any;;
 
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
     private fieldProvider: Field,
     private stringsProvider: Strings,
-    private calcCore: CalcCore
+    private calcCore: CalcCore,
+    private settingsProvider: Settings
   ) {
-    // Get field data
-    this.field = this.fieldProvider.fields[navParams.data.fieldIndex];
     // Load strings
     this.strings = stringsProvider.data;
+    // Configure bar chart
+    this.barChartOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        xAxes: [{
+          // barPercentage: 0.8,
+          // categoryPercentage: 0.25,
+          type: 'time',
+          time: {
+            unit: 'month',
+            displayFormats: {
+              month: 'MM/YY'
+            },
+            round: 'month'
+          },
+          ticks: {
+            minRotation: 90
+          }
+        }],
+        yAxes: [{
+          ticks: {
+            min: 0
+          },
+          scaleLabel: {
+            display: true,
+            labelString: stringsProvider.data.units[settingsProvider.units].density + '/' + stringsProvider.data.units[settingsProvider.units].fieldSize.short
+          }
+        }]
+      },
+      tooltips: {
+        enabled: false
+      },
+      layout: {
+        padding: {
+          top: 0,
+          right: 20,
+          left: 10,
+          bottom: 0
+        }
+      }
+    };
+    // Get field data
+    this.field = this.fieldProvider.fields[navParams.data.fieldIndex];
     // Create graph
     this.updateGraph();
   }
@@ -117,6 +127,7 @@ export class FieldDetailPage {
         this.field.soilTestK
       );
       barChartLabels.push(this.field.spreads[spreadIndex].spreadDate);
+      // TODO: This does not abide by the units
       barChartData[0].data.push(cropAvailable[0]);
       barChartData[1].data.push(cropAvailable[1]);
       barChartData[2].data.push(cropAvailable[2]);
@@ -128,11 +139,12 @@ export class FieldDetailPage {
         maximumDate = this.field.spreads[spreadIndex].spreadDate;
       }
     }
-    // Convert to date object
-    minimumDate = new Date(new Date(minimumDate).setDate(1));
-    maximumDate = new Date(new Date(maximumDate).setDate(1));
-    // Extend  max range by a month
-    maximumDate.setMonth(maximumDate.getMonth() + 2);
+    // Display full years (01/01/2XXX - 31/12/2XXX)
+    minimumDate = new Date(new Date(minimumDate).getFullYear(), 0, 1);
+    maximumDate = new Date(new Date(maximumDate).getFullYear(), 11, 31);
+    var years = 1 + maximumDate.getFullYear() - minimumDate.getFullYear();
+    // Resize graph container to display one year per display width
+    this.graphWidth = years * 100;
     // Update graph options
     this.barChartOptions.scales.xAxes[0].time.min = minimumDate;
     this.barChartOptions.scales.xAxes[0].time.max = maximumDate;

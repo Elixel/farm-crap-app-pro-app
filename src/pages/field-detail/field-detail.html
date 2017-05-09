@@ -9,9 +9,14 @@
 
 <ion-content>
   <!-- Graph -->
-  <div class="graph" *ngIf="graph">
-    <canvas *ngIf="field.spreads.length" baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="true" chartType="bar" width="640" height="480"></canvas>
-    <p *ngIf="!field.spreads.length">Not enough events for graph</p>
+  <div class="chartWrapper" *ngIf="graph">
+    <div class="chartAreaWrapper">
+      <div class="chartAreaWrapper2" [style.width.%]="graphWidth">
+        <canvas *ngIf="field.spreads.length" baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="true" chartType="bar"></canvas>
+        <p *ngIf="!field.spreads.length">Not enough events for graph</p>
+      </div>
+    </div>
+    <canvas id="myChartAxis" height="300" width="0"></canvas>
   </div>
   <!-- Spreading Events -->
   <ion-list>
