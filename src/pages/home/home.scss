@@ -35,4 +35,9 @@ page-home {
     .card-ios p {
         margin-bottom: 8px;
     }
+
+    ion-thumbnail {
+        border-radius: 5px;
+        overflow: hidden;
+    }
 }

@@ -27,6 +27,9 @@
     </ion-item>
     <ion-item-sliding *ngFor="let field of fields; let fieldIndex = index;" #slidingItem>
       <button ion-item (click)="viewField(fieldIndex)">
+        <ion-thumbnail item-left *ngIf="field.thumb">
+          <img [src]="field.thumb" />
+        </ion-thumbnail>
         <h2>{{field.name}}</h2>
         <p>{{(units === 'imperial' ? hectaresToAcres(field.hectares) : field.hectares) | number:'1.0-2'}} {{strings.units[units].fieldSize.long}}{{field.hectares > 1 ? 's' : ''}}</p>
       </button>

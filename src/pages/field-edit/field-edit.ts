@@ -34,6 +34,7 @@ export class FieldEditPage {
 
   // Field Details
   private polygon: any;
+  private thumb: any;
   private basicDetailsForm: FormGroup;
   private soilDetailsForm: FormGroup;
   private cropDetailsForm: FormGroup;
@@ -87,7 +88,8 @@ export class FieldEditPage {
       container: 'map-edit',
       style: 'mapbox://styles/mapbox/satellite-v9',
       zoom: 3.75,
-      center: [-4, 54]
+      center: [-4, 54],
+      preserveDrawingBuffer: true
     });
     // Create draw tools
     this.draw = new MapboxDraw({
@@ -95,8 +97,77 @@ export class FieldEditPage {
       controls: {
           polygon: true,
           trash: true
+      },
+      clickBuffer: 25,
+      touchBuffer: 50,
+      styles: [
+      // ACTIVE (being drawn)
+      // line stroke
+      {
+          'id': 'gl-draw-line',
+          'type': 'line',
+          'filter': ['all', ['==', '$type', 'LineString'], ['!=', 'mode', 'static']],
+          'layout': {
+            'line-cap': 'round',
+            'line-join': 'round'
+          },
+          'paint': {
+            'line-color': '#FFFFFF',
+            'line-dasharray': [0.2, 2],
+            'line-width': 2
+          }
+      },
+      // polygon fill
+      {
+        'id': 'gl-draw-polygon-fill',
+        'type': 'fill',
+        'filter': ['all', ['==', '$type', 'Polygon'], ['!=', 'mode', 'static']],
+        'paint': {
+          'fill-color': '#387ef5',
+          'fill-outline-color': '#387ef5',
+          'fill-opacity': 0.5
+        }
+      },
+      // polygon outline stroke
+      // This doesn't style the first edge of the polygon, which uses the line stroke styling instead
+      {
+        'id': 'gl-draw-polygon-stroke-active',
+        'type': 'line',
+        'filter': ['all', ['==', '$type', 'Polygon'], ['!=', 'mode', 'static']],
+        'layout': {
+          'line-cap': 'round',
+          'line-join': 'round'
+        },
+        'paint': {
+          'line-color': '#FFFFFF',
+          'line-dasharray': [0.2, 2],
+          'line-width': 2
+        }
+      },
+      // vertex point halos
+      {
+        'id': 'gl-draw-polygon-and-line-vertex-halo-active',
+        'type': 'circle',
+        'filter': ['all', ['==', 'meta', 'vertex'], ['==', '$type', 'Point'], ['!=', 'mode', 'static']],
+        'paint': {
+          'circle-radius': 5,
+          'circle-color': '#FFFFFF'
+        }
+      },
+      // vertex points
+      {
+        'id': 'gl-draw-polygon-and-line-vertex-active',
+        'type': 'circle',
+        'filter': ['all', ['==', 'meta', 'vertex'], ['==', '$type', 'Point'], ['!=', 'mode', 'static']],
+        'paint': {
+          'circle-radius': 3,
+          'circle-color': '#387ef5',
+        }
       }
+    ]
     });
+    // Get thumbnail
+    this.thumb = this.field.thumb;
     // Get existing field polygon
     if (this.field.polygon) {
       this.polygon = this.field.polygon;
@@ -190,12 +261,15 @@ export class FieldEditPage {
       let squareMetres = TurfArea(featureCollection);
       let hectares = squareMetres / 10000;
       // Save polygon shape
-      this.polygon = featureCollection.features;
+      this.polygon = featureCollection;
+      // Save thumbnail image
+      this.thumb = this.map.getCanvas().toDataURL();
       // Update hectares form field for next view
       this.basicDetailsForm.get('hectares').setValue(parseFloat((this.units === 'imperial' ? this.calcCore.hectaresToAcres(hectares) : hectares).toFixed(2)));
     } else {
       // Reset values
       this.polygon = null;
+      this.thumb = null;
       this.basicDetailsForm.get('hectares').setValue(null);
     }
   }
@@ -214,6 +288,7 @@ export class FieldEditPage {
     // Create field object
     let field = {
       polygon: this.polygon,
+      thumb: this.thumb,
       name: this.basicDetailsForm.value.name,
       // When in imperial units mode, hectares is stored as acres temporarily so we are doing the correct conversion here
       hectares: parseFloat(this.settingsProvider.units === 'imperial' ? this.calcCore.acresToHectares(this.basicDetailsForm.value.hectares) : this.basicDetailsForm.value.hectares),
