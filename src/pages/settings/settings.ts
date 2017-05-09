@@ -48,10 +48,16 @@ export class SettingsPage {
 
   setUnits(newUnits) {
     this.settingsProvider.units = newUnits;
+    // Reload tabs with new units
+    this.navCtrl.parent.getByIndex(0).setRoot('HomePage');
+    this.navCtrl.parent.getByIndex(1).setRoot('CalculatorPage');
   }
 
   setRainfall(newRainfall) {
     this.settingsProvider.rainfall = newRainfall;
+    // Reload tabs with new settings
+    this.navCtrl.parent.getByIndex(0).setRoot('HomePage');
+    this.navCtrl.parent.getByIndex(1).setRoot('CalculatorPage');
   }
 
   setFertiliserCostNitrogen(newFertiliserCostNitrogen) {
