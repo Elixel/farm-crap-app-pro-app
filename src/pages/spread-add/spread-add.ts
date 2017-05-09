@@ -128,9 +128,9 @@ export class SpreadAddPage {
     );
     // Calculate manure costs
     this.manureCosts = [
-      this.calcCore.getCostStringFromNutrient(0, this.cropAvailable, this.field.hectares),
-      this.calcCore.getCostStringFromNutrient(1, this.cropAvailable, this.field.hectares),
-      this.calcCore.getCostStringFromNutrient(2, this.cropAvailable, this.field.hectares)
+      this.calcCore.getCostStringFromNutrient(0, this.cropAvailable[1], this.field.hectares),
+      this.calcCore.getCostStringFromNutrient(1, this.cropAvailable[1], this.field.hectares),
+      this.calcCore.getCostStringFromNutrient(2, this.cropAvailable[1], this.field.hectares)
     ];
     // Select image
     this.crapPicture = this.calcCore.findImage(this.spreadForm.value.manureType, manureDensity);

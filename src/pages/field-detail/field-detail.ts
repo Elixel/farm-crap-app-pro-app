@@ -125,10 +125,9 @@ export class FieldDetailPage {
         this.field.soilTestK
       );
       barChartLabels.push(this.field.spreads[spreadIndex].spreadDate);
-      // TODO: This does not abide by the units
-      barChartData[0].data.push(cropAvailable[0]);
-      barChartData[1].data.push(cropAvailable[1]);
-      barChartData[2].data.push(cropAvailable[2]);
+      barChartData[0].data.push(cropAvailable[1][0]);
+      barChartData[1].data.push(cropAvailable[1][1]);
+      barChartData[2].data.push(cropAvailable[1][2]);
       // Is this the highest or lowest date in the dataset?
       if (this.field.spreads[spreadIndex].spreadDate < minimumDate) {
         minimumDate = this.field.spreads[spreadIndex].spreadDate;

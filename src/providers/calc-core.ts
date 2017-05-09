@@ -6,12 +6,6 @@ import 'rxjs/add/operator/map';
 import { Settings } from '../providers/settings';
 import { Strings } from '../providers/strings';
 
-/*
-  Generated class for the CalcCore provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class CalcCore {
   soilNitrogenSupplyTree: any;
@@ -151,7 +145,13 @@ export class CalcCore {
 
   calculateNutrients(type, amount, quality, season, crop, soil, application, soilTestP, soilTestK): Object {
     if (type === 'custom') {
-      return this.processNutrients(amount, this.settingsProvider.customManure[quality].content)
+      let nutrients = this.processNutrients(amount, this.settingsProvider.customManure[quality].content);
+      return [
+        // total
+        nutrients,
+        // avail (duplicate)
+        nutrients
+      ]
     } else {
       return this.getNutrients(type, amount, quality, season, crop, soil, application, soilTestP, soilTestK);
     }
@@ -174,23 +174,41 @@ export class CalcCore {
     // high soil test means we're adding total
     let phosphorous = soilTestP === 'soil-p-2' || soilTestP === 'soil-p-3' ? 'p-total' : 'p-avail';
     let potassium = soilTestK === 'soil-k-2-' || soilTestK === 'soil-k-2+' || soilTestK === 'soil-k-3' ? 'k-total' : 'k-avail';
-    // if pig or cattle slurry, then this is the percent value
-    let n = this.decision(this.manureTree, Object.assign({nutrient: 'nitrogen'}, params));
-    // N/A value
-    if (n !== 'na') {
-      // Apply percent or return straight value
-      if (total !== 0) {
-         n = this.pc(total, n);
-      }
-    }
-    return this.processNutrients(
+
+
+    // Total values
+    let totalValues = this.processNutrients(
       amount,
       [
-        n,
+        // if pig or cattle slurry, then this is the percent value
+        total === 0 ? this.decision(this.manureTree, Object.assign({nutrient: 'n-total'}, params)) : total,
+        this.decision(this.manureTree, Object.assign({nutrient: 'p-total'}, params)),
+        this.decision(this.manureTree, Object.assign({nutrient: 'k-total'}, params))
+      ]
+    );
+
+    // Crop available values
+    let n2 = this.decision(this.manureTree, Object.assign({nutrient: 'nitrogen'}, params));
+    // N/A value
+    if (n2 !== 'na') {
+      // Apply percent or return straight value
+      if (total !== 0) {
+         n2 = this.pc(total, n2);
+      }
+    }
+    let cropAvailValues = this.processNutrients(
+      amount,
+      [
+        n2,
         this.decision(this.manureTree, Object.assign({nutrient: phosphorous}, params)),
         this.decision(this.manureTree, Object.assign({nutrient: potassium}, params))
       ]
     );
+
+    return [
+      totalValues,
+      cropAvailValues
+    ];
   }
 
   pc (v, p) {

@@ -110,9 +110,9 @@ export class CalculatorPage {
     );
     // Calculate manure costs
     this.manureCosts = [
-      this.calcCore.getCostStringFromNutrient(0, this.cropAvailable, 1),
-      this.calcCore.getCostStringFromNutrient(1, this.cropAvailable, 1),
-      this.calcCore.getCostStringFromNutrient(2, this.cropAvailable, 1)
+      this.calcCore.getCostStringFromNutrient(0, this.cropAvailable[1], 1),
+      this.calcCore.getCostStringFromNutrient(1, this.cropAvailable[1], 1),
+      this.calcCore.getCostStringFromNutrient(2, this.cropAvailable[1], 1)
     ];
     // Select image
     this.crapPicture = this.calcCore.findImage(this.calculatorForm.value.manureType, manureDensity);
