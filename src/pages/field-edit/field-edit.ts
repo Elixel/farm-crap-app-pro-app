@@ -30,6 +30,7 @@ export class FieldEditPage {
   private units: string;
   private kilogramHectareToUnitsAcre: Function;
   private boundaryText: string;
+  private drawing: boolean = false;
 
   // Field Details
   private polygon: any;
@@ -125,20 +126,23 @@ export class FieldEditPage {
         let isFeature = features[0].geometry.coordinates[0][0];
         // When a polygon has begun creation
         if (event.mode === 'draw_polygon') {
+          this.drawing = true;
           // If user hasn't got a polygon drawn
           if (!isFeature) {
-            this.boundaryText = 'Create the boundaries of your field below by creating points in a clockwise fashion.';
+            this.boundaryText = 'Create the boundaries of your field below by creating points in a clockwise fashion. Touch the first point to complete the boundary.';
           // If there is already a polygon on the map
           } else {
             // Force back to simple select mode, do not allow the user to draw another polygon
             this.draw.changeMode('simple_select', {
               featureIds: [features[0].id]
             });
+            this.drawing = false;
           }
         }
         // If user exited out without creating boundaries
         if (event.mode === 'simple_select' && !isFeature) {
           this.boundaryText = 'Select the draw field button on the map below to start creating your field boundaries.';
+          this.drawing = false;
         }
         // If user tries to edit the polygon (not supported)
         if (event.mode === 'direct_select') {
@@ -146,6 +150,7 @@ export class FieldEditPage {
           this.draw.changeMode('simple_select', {
             featureIds: [features[0].id]
           });
+          this.drawing = false;
         }
       }
     });
@@ -158,6 +163,7 @@ export class FieldEditPage {
           this.draw.changeMode('simple_select', {
             featureIds: [this.draw.getAll().features[0].id]
           });
+          this.drawing = false;
         });
       }
     });
@@ -165,11 +171,13 @@ export class FieldEditPage {
     this.map.on('draw.create', () => {
       this.calculatePolygons(this.draw);
       this.boundaryText = 'If this best represents your field, click Next; else click delete and try again.';
+      this.drawing = false;
     });
     // When a polygon is removed
     this.map.on('draw.delete', () => {
       this.calculatePolygons(this.draw);
       this.boundaryText = 'Select the draw field button on the map below to start creating your field boundaries.';
+      this.drawing = false;
     });
   }
 

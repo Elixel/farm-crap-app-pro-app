@@ -145,7 +145,7 @@
 
   <!-- Navigation controls to allow the user to advance to the next slide -->
   <button ion-button clear small class="prev" ion-fixed (click)="prevPressed()" *ngIf="slides.getActiveIndex() !== 0">Previous</button>
-  <button ion-button clear small class="next" ion-fixed (click)="nextPressed()" *ngIf="slides.getActiveIndex() == 0">Next</button>
+  <button ion-button clear small class="next" ion-fixed (click)="nextPressed()" *ngIf="slides.getActiveIndex() == 0" [disabled]="drawing">Next</button>
   <button ion-button clear small class="next" ion-fixed (click)="nextPressed()" *ngIf="slides.getActiveIndex() == 1" [disabled]="!basicDetailsForm.valid">Next</button>
   <button ion-button clear small class="next" ion-fixed (click)="nextPressed()" *ngIf="slides.getActiveIndex() == 2" [disabled]="!soilDetailsForm.valid">Next</button>
   <button ion-button clear small class="next" ion-fixed (click)="nextPressed()" *ngIf="slides.getActiveIndex() == 3" [disabled]="!cropDetailsForm.valid">Next</button>
