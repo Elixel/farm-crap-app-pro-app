@@ -228,6 +228,8 @@ export class CalcCore {
   // Searches through dataset tree with specified parameters
   decision(sourceTree, params) {
     function getBranch(tree, choice) {
+      // If a default is found in branch, store it in this
+      let defaultChoice;
       // Loop through current depth choices
       for (let index in tree.choices) {
         // Find correct choice node
@@ -238,9 +240,23 @@ export class CalcCore {
           } else {
             return tree.choices[index].value;
           }
+        // If a default choice is encountered, store it just incase
+        } else if (tree.choices[index].choice === 'default') {
+          if (typeof tree.choices[index].value === 'object') {
+            defaultChoice = getBranch(tree.choices[index].value, params[tree.choices[index].value.decision]);
+          } else {
+            defaultChoice = tree.choices[index].value;
+          }
         }
       }
-      console.log('cannot find', choice);
+      // If the exact value was not found and a default was found
+      if (defaultChoice) {
+        console.info('CalcCore.decision(): Cannot find ' + choice + ' but found default', defaultChoice);
+        return defaultChoice;
+      // Nothing was found!
+      } else {
+        console.error('CalcCore.decision(): Cannot find ' + choice + ' no default found - data missing!');
+      }
     }
     // Start recursive search using first tree decision
     let end = getBranch(sourceTree, params[sourceTree.decision]);
