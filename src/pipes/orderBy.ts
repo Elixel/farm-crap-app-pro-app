@@ -1,6 +1,9 @@
 import { PipeTransform, Pipe } from '@angular/core';
 
-@Pipe({name: 'orderBy'})
+@Pipe({
+    name: 'orderBy',
+    pure: false // This means the Pipe is fired WAY too many times, but it does order correctly after a new spreading is added
+})
 
 export class orderBy implements PipeTransform {
     transform(obj: any, orderFields: any): any {
