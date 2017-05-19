@@ -8,6 +8,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 
 // Ionic Native
+import { Geolocation } from '@ionic-native/geolocation';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { File } from '@ionic-native/file';
@@ -49,6 +50,7 @@ import 'chart.js/src/chart.js';
   SplashScreen,
   File,
   SocialSharing,
+  Geolocation,
   Field,
   LocalStorageService,
   Settings,

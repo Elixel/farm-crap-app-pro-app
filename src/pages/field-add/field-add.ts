@@ -11,7 +11,7 @@ import { Settings } from '../../providers/settings';
 import { Strings } from '../../providers/strings';
 import { CalcCore } from '../../providers/calc-core';
 
-import { Geolocation } from 'ionic-native';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @IonicPage({
   defaultHistory: ['HomePage'],
@@ -48,7 +48,8 @@ export class FieldAddPage {
     private fieldProvider: Field,
     private settingsProvider:Settings,
     private stringsProvider: Strings,
-    private calcCore: CalcCore
+    private calcCore: CalcCore,
+    private geolocation: Geolocation
     ) {
     // Set public access token
     mapboxgl.accessToken = 'pk.eyJ1IjoiY29va2llY29va3NvbiIsImEiOiJjaXp6b3dvZnEwMDNqMnFsdTdlbmJtcHY0In0.OeHfq5_gzEIW13JzzsZJEA';
@@ -228,7 +229,7 @@ export class FieldAddPage {
       this.drawing = false;
     });
     // Centre on user Geolocation
-    Geolocation.getCurrentPosition({
+    this.geolocation.getCurrentPosition({
       maximumAge: 60000, // Get a location from last minute
       timeout: 15000 // Timeout getting location after 15 seconds
     }).then((resp) => {
