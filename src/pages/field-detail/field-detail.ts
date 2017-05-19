@@ -20,7 +20,8 @@ export class FieldDetailPage {
   graph: Boolean = true;
   strings: Object;
 
-  public graphWidth = 100;
+  public graphWidth;
+  public graphReady = false;
   public barChartLabels:string[];
   public barChartData:any[];
   public barChartOptions:any;;
@@ -147,10 +148,14 @@ export class FieldDetailPage {
     this.barChartOptions.scales.xAxes[0].time.max = maximumDate;
     // hacky fix to refresh the graph, bug where labels do not update after data change
     this.graph = false;
+    this.graphReady = false;
     setTimeout(() => {
       this.barChartLabels = barChartLabels;
       this.barChartData = barChartData;
       this.graph = true;
+      setTimeout(() => {
+        this.graphReady = true;
+      });
     });
   }
 
