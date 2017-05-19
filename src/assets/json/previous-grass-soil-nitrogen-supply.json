@@ -1,141 +1,106 @@
 {
-   "decision":"soil",
-   "choices":[
-      {
-         "choice":"sandyshallow",
-         "value":{
-            "decision":"previous-crop",
-            "choices":[
-               {
-                  "choice":"grass-low-n",
-                  "value":0
-               },
-               {
-                  "choice":"grass-other",
-                  "value":1
-               },
-               {
-                  "choice":"grass-high-n",
-                  "value":3
-               }
-            ]
-         }
-      },
-      {
-         "choice":"deepclay",
-         "value":{
-            "decision":"rainfall",
-            "choices":[
-               {
-                  "choice":"low",
-                  "value":{
-                     "decision":"previous-crop",
-                     "choices":[
-                        {
-                           "choice":"grass-low-n",
-                           "value":2
-                        },
-                        {
-                           "choice":"grass-other",
-                           "value":3
-                        },
-                        {
-                           "choice":"grass-high-n",
-                           "value":5
-                        }
-                     ]
-                  }
-               },
-               {
-                  "choice":"default",
-                  "value":{
-                     "decision":"previous-crop",
-                     "choices":[
-                        {
-                           "choice":"grass-low-n",
-                           "value":1
-                        },
-                        {
-                           "choice":"grass-other",
-                           "value":3
-                        },
-                        {
-                           "choice":"grass-high-n",
-                           "value":4
-                        }
-                     ]
-                  }
-               }
-            ]
-         }
-      },
-      {
-         "choice":"deepsilt",
-         "value":{
-            "decision":"rainfall",
-            "choices":[
-               {
-                  "choice":"low",
-                  "value":{
-                     "decision":"previous-crop",
-                     "choices":[
-                        {
-                           "choice":"grass-low-n",
-                           "value":2
-                        },
-                        {
-                           "choice":"grass-other",
-                           "value":3
-                        },
-                        {
-                           "choice":"grass-high-n",
-                           "value":5
-                        }
-                     ]
-                  }
-               },
-               {
-                  "choice":"default",
-                  "value":{
-                     "decision":"previous-crop",
-                     "choices":[
-                        {
-                           "choice":"grass-low-n",
-                           "value":1
-                        },
-                        {
-                           "choice":"grass-other",
-                           "value":3
-                        },
-                        {
-                           "choice":"grass-high-n",
-                           "value":4
-                        }
-                     ]
-                  }
-               }
-            ]
-         }
-      },
-      {
-         "choice":"mediumshallow",
-         "value":{
-            "decision":"previous-crop",
-            "choices":[
-               {
-                  "choice":"grass-low-n",
-                  "value":1
-               },
-               {
-                  "choice":"grass-other",
-                  "value":2
-               },
-               {
-                  "choice":"grass-high-n",
-                  "value":3
-               }
-            ]
-         }
-      }
-   ]
+    "decision": "soil",
+    "choices": [{
+	"choice": "sandyshallow",
+	"value": {
+	    "decision": "previous-crop",
+	    "choices": [{
+		"choice": "grass-low-n",
+		"value": 0
+	    }, {
+		"choice": "grass-other",
+		"value": 1
+	    }, {
+		"choice": "grass-high-n",
+		"value": 3
+	    }]
+	}
+    }, {
+	"choice": "deepclay",
+	"value": {
+	    "decision": "rainfall",
+	    "choices": [{
+		"choice": "rain-low",
+		"value": {
+		    "decision": "previous-crop",
+		    "choices": [{
+			"choice": "grass-low-n",
+			"value": 2
+		    }, {
+			"choice": "grass-other",
+			"value": 3
+		    }, {
+			"choice": "grass-high-n",
+			"value": 5
+		    }]
+		}
+	    }, {
+		"choice": "default",
+		"value": {
+		    "decision": "previous-crop",
+		    "choices": [{
+			"choice": "grass-low-n",
+			"value": 1
+		    }, {
+			"choice": "grass-other",
+			"value": 3
+		    }, {
+			"choice": "grass-high-n",
+			"value": 4
+		    }]
+		}
+	    }]
+	}
+    }, {
+	"choice": "deepsilt",
+	"value": {
+	    "decision": "rainfall",
+	    "choices": [{
+		"choice": "rain-low",
+		"value": {
+		    "decision": "previous-crop",
+		    "choices": [{
+			"choice": "grass-low-n",
+			"value": 2
+		    }, {
+			"choice": "grass-other",
+			"value": 3
+		    }, {
+			"choice": "grass-high-n",
+			"value": 5
+		    }]
+		}
+	    }, {
+		"choice": "default",
+		"value": {
+		    "decision": "previous-crop",
+		    "choices": [{
+			"choice": "grass-low-n",
+			"value": 1
+		    }, {
+			"choice": "grass-other",
+			"value": 3
+		    }, {
+			"choice": "grass-high-n",
+			"value": 4
+		    }]
+		}
+	    }]
+	}
+    }, {
+	"choice": "mediumshallow",
+	"value": {
+	    "decision": "previous-crop",
+	    "choices": [{
+		"choice": "grass-low-n",
+		"value": 1
+	    }, {
+		"choice": "grass-other",
+		"value": 2
+	    }, {
+		"choice": "grass-high-n",
+		"value": 3
+	    }]
+	}
+    }]
 }

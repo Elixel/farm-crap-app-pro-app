@@ -68,7 +68,7 @@ export class Settings {
     }
     // Default to medium rainfall
     if (!this._rainfall) {
-      this._rainfall = 'medium';
+      this._rainfall = 'rain-medium';
     }
     return this._rainfall;
   }

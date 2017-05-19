@@ -1,677 +1,508 @@
 {
-   "decision":"rainfall",
-   "choices":[
-      {
-         "choice":"low",
-         "value":{
-            "decision":"soil",
-            "choices":[
-               {
-                  "choice":"sandyshallow",
-                  "value":{
-                     "decision":"previous-crop",
-                     "choices":[
-                        {
-                           "choice":"cereals",
-                           "value":0
-                        },
-                        {
-                           "choice":"low-n-veg",
-                           "value":0
-                        },
-                        {
-                           "choice":"forage",
-                           "value":0
-                        },
-                        {
-                           "choice":"sugarbeet",
-                           "value":1
-                        },
-                        {
-                           "choice":"oilseed",
-                           "value":1
-                        },
-                        {
-                           "choice":"potatoes",
-                           "value":1
-                        },
-                        {
-                           "choice":"peas",
-                           "value":1
-                        },
-                        {
-                           "choice":"beans",
-                           "value":1
-                        },
-                        {
-                           "choice":"uncropped",
-                           "value":1
-                        },
-                        {
-                           "choice":"medium-n-veg",
-                           "value":1
-                        },
-                        {
-                           "choice":"high-n-veg",
-                           "value":2
-                        }
-                     ]
-                  }
-               },
-               {
-                  "choice":"mediumshallow",
-                  "value":{
-                     "decision":"previous-crop",
-                     "choices":[
-                        {
-                           "choice":"cereals",
-                           "value":1
-                        },
-                        {
-                           "choice":"low-n-veg",
-                           "value":1
-                        },
-                        {
-                           "choice":"forage",
-                           "value":1
-                        },
-                        {
-                           "choice":"sugarbeet",
-                           "value":2
-                        },
-                        {
-                           "choice":"oilseed",
-                           "value":2
-                        },
-                        {
-                           "choice":"potatoes",
-                           "value":2
-                        },
-                        {
-                           "choice":"peas",
-                           "value":2
-                        },
-                        {
-                           "choice":"beans",
-                           "value":2
-                        },
-                        {
-                           "choice":"uncropped",
-                           "value":2
-                        },
-                        {
-                           "choice":"medium-n-veg",
-                           "value":3
-                        },
-                        {
-                           "choice":"high-n-veg",
-                           "value":4
-                        }
-                     ]
-                  }
-               },
-               {
-                  "choice":"deepclay",
-                  "value":{
-                     "decision":"previous-crop",
-                     "choices":[
-                        {
-                           "choice":"cereals",
-                           "value":2
-                        },
-                        {
-                           "choice":"low-n-veg",
-                           "value":2
-                        },
-                        {
-                           "choice":"forage",
-                           "value":2
-                        },
-                        {
-                           "choice":"sugarbeet",
-                           "value":3
-                        },
-                        {
-                           "choice":"oilseed",
-                           "value":3
-                        },
-                        {
-                           "choice":"potatoes",
-                           "value":3
-                        },
-                        {
-                           "choice":"peas",
-                           "value":3
-                        },
-                        {
-                           "choice":"beans",
-                           "value":3
-                        },
-                        {
-                           "choice":"uncropped",
-                           "value":3
-                        },
-                        {
-                           "choice":"medium-n-veg",
-                           "value":3
-                        },
-                        {
-                           "choice":"high-n-veg",
-                           "value":4
-                        }
-                     ]
-                  }
-               },
-               {
-                  "choice":"deepsilt",
-                  "value":{
-                     "decision":"previous-crop",
-                     "choices":[
-                        {
-                           "choice":"cereals",
-                           "value":2
-                        },
-                        {
-                           "choice":"low-n-veg",
-                           "value":2
-                        },
-                        {
-                           "choice":"forage",
-                           "value":2
-                        },
-                        {
-                           "choice":"sugarbeet",
-                           "value":3
-                        },
-                        {
-                           "choice":"oilseed",
-                           "value":3
-                        },
-                        {
-                           "choice":"potatoes",
-                           "value":3
-                        },
-                        {
-                           "choice":"peas",
-                           "value":3
-                        },
-                        {
-                           "choice":"beans",
-                           "value":3
-                        },
-                        {
-                           "choice":"uncropped",
-                           "value":3
-                        },
-                        {
-                           "choice":"medium-n-veg",
-                           "value":3
-                        },
-                        {
-                           "choice":"high-n-veg",
-                           "value":4
-                        }
-                     ]
-                  }
-               },
-               {
-                  "choice":"organic",
-                  "value":4
-               },
-               {
-                  "choice":"peat",
-                  "value":5
-               }
-            ]
-         }
-      },
-      {
-         "choice":"medium",
-         "value":{
-            "decision":"soil",
-            "choices":[
-               {
-                  "choice":"sandyshallow",
-                  "value":{
-                     "decision":"previous-crop",
-                     "choices":[
-                        {
-                           "choice":"cereals",
-                           "value":0
-                        },
-                        {
-                           "choice":"low-n-veg",
-                           "value":0
-                        },
-                        {
-                           "choice":"forage",
-                           "value":0
-                        },
-                        {
-                           "choice":"sugarbeet",
-                           "value":0
-                        },
-                        {
-                           "choice":"oilseed",
-                           "value":0
-                        },
-                        {
-                           "choice":"potatoes",
-                           "value":0
-                        },
-                        {
-                           "choice":"peas",
-                           "value":1
-                        },
-                        {
-                           "choice":"beans",
-                           "value":1
-                        },
-                        {
-                           "choice":"uncropped",
-                           "value":1
-                        },
-                        {
-                           "choice":"medium-n-veg",
-                           "value":0
-                        },
-                        {
-                           "choice":"high-n-veg",
-                           "value":1
-                        }
-                     ]
-                  }
-               },
-               {
-                  "choice":"mediumshallow",
-                  "value":{
-                     "decision":"previous-crop",
-                     "choices":[
-                        {
-                           "choice":"cereals",
-                           "value":1
-                        },
-                        {
-                           "choice":"low-n-veg",
-                           "value":1
-                        },
-                        {
-                           "choice":"forage",
-                           "value":1
-                        },
-                        {
-                           "choice":"sugarbeet",
-                           "value":1
-                        },
-                        {
-                           "choice":"oilseed",
-                           "value":2
-                        },
-                        {
-                           "choice":"potatoes",
-                           "value":2
-                        },
-                        {
-                           "choice":"peas",
-                           "value":2
-                        },
-                        {
-                           "choice":"beans",
-                           "value":2
-                        },
-                        {
-                           "choice":"uncropped",
-                           "value":2
-                        },
-                        {
-                           "choice":"medium-n-veg",
-                           "value":2
-                        },
-                        {
-                           "choice":"high-n-veg",
-                           "value":3
-                        }
-                     ]
-                  }
-               },
-               {
-                  "choice":"deepclay",
-                  "value":{
-                     "decision":"previous-crop",
-                     "choices":[
-                        {
-                           "choice":"cereals",
-                           "value":1
-                        },
-                        {
-                           "choice":"low-n-veg",
-                           "value":1
-                        },
-                        {
-                           "choice":"forage",
-                           "value":1
-                        },
-                        {
-                           "choice":"sugarbeet",
-                           "value":1
-                        },
-                        {
-                           "choice":"oilseed",
-                           "value":2
-                        },
-                        {
-                           "choice":"potatoes",
-                           "value":2
-                        },
-                        {
-                           "choice":"peas",
-                           "value":2
-                        },
-                        {
-                           "choice":"beans",
-                           "value":2
-                        },
-                        {
-                           "choice":"uncropped",
-                           "value":2
-                        },
-                        {
-                           "choice":"medium-n-veg",
-                           "value":3
-                        },
-                        {
-                           "choice":"high-n-veg",
-                           "value":4
-                        }
-                     ]
-                  }
-               },
-               {
-                  "choice":"deepsilt",
-                  "value":{
-                     "decision":"previous-crop",
-                     "choices":[
-                        {
-                           "choice":"cereals",
-                           "value":1
-                        },
-                        {
-                           "choice":"low-n-veg",
-                           "value":1
-                        },
-                        {
-                           "choice":"forage",
-                           "value":1
-                        },
-                        {
-                           "choice":"sugarbeet",
-                           "value":1
-                        },
-                        {
-                           "choice":"oilseed",
-                           "value":2
-                        },
-                        {
-                           "choice":"potatoes",
-                           "value":2
-                        },
-                        {
-                           "choice":"peas",
-                           "value":2
-                        },
-                        {
-                           "choice":"beans",
-                           "value":2
-                        },
-                        {
-                           "choice":"uncropped",
-                           "value":2
-                        },
-                        {
-                           "choice":"medium-n-veg",
-                           "value":3
-                        },
-                        {
-                           "choice":"high-n-veg",
-                           "value":4
-                        }
-                     ]
-                  }
-               },
-               {
-                  "choice":"organic",
-                  "value":4
-               },
-               {
-                  "choice":"peat",
-                  "value":5
-               }
-            ]
-         }
-      },
-      {
-         "choice":"high",
-         "value":{
-            "decision":"soil",
-            "choices":[
-               {
-                  "choice":"sandyshallow",
-                  "value":{
-                     "decision":"previous-crop",
-                     "choices":[
-                        {
-                           "choice":"cereals",
-                           "value":0
-                        },
-                        {
-                           "choice":"low-n-veg",
-                           "value":0
-                        },
-                        {
-                           "choice":"forage",
-                           "value":0
-                        },
-                        {
-                           "choice":"sugarbeet",
-                           "value":0
-                        },
-                        {
-                           "choice":"oilseed",
-                           "value":0
-                        },
-                        {
-                           "choice":"potatoes",
-                           "value":0
-                        },
-                        {
-                           "choice":"peas",
-                           "value":0
-                        },
-                        {
-                           "choice":"beans",
-                           "value":0
-                        },
-                        {
-                           "choice":"uncropped",
-                           "value":0
-                        },
-                        {
-                           "choice":"medium-n-veg",
-                           "value":0
-                        },
-                        {
-                           "choice":"high-n-veg",
-                           "value":1
-                        }
-                     ]
-                  }
-               },
-               {
-                  "choice":"mediumshallow",
-                  "value":{
-                     "decision":"previous-crop",
-                     "choices":[
-                        {
-                           "choice":"cereals",
-                           "value":1
-                        },
-                        {
-                           "choice":"low-n-veg",
-                           "value":1
-                        },
-                        {
-                           "choice":"forage",
-                           "value":1
-                        },
-                        {
-                           "choice":"sugarbeet",
-                           "value":1
-                        },
-                        {
-                           "choice":"oilseed",
-                           "value":1
-                        },
-                        {
-                           "choice":"potatoes",
-                           "value":1
-                        },
-                        {
-                           "choice":"peas",
-                           "value":1
-                        },
-                        {
-                           "choice":"beans",
-                           "value":1
-                        },
-                        {
-                           "choice":"uncropped",
-                           "value":1
-                        },
-                        {
-                           "choice":"medium-n-veg",
-                           "value":1
-                        },
-                        {
-                           "choice":"high-n-veg",
-                           "value":2
-                        }
-                     ]
-                  }
-               },
-               {
-                  "choice":"deepclay",
-                  "value":{
-                     "decision":"previous-crop",
-                     "choices":[
-                        {
-                           "choice":"cereals",
-                           "value":1
-                        },
-                        {
-                           "choice":"low-n-veg",
-                           "value":1
-                        },
-                        {
-                           "choice":"forage",
-                           "value":1
-                        },
-                        {
-                           "choice":"sugarbeet",
-                           "value":1
-                        },
-                        {
-                           "choice":"oilseed",
-                           "value":1
-                        },
-                        {
-                           "choice":"potatoes",
-                           "value":1
-                        },
-                        {
-                           "choice":"peas",
-                           "value":2
-                        },
-                        {
-                           "choice":"beans",
-                           "value":2
-                        },
-                        {
-                           "choice":"uncropped",
-                           "value":1
-                        },
-                        {
-                           "choice":"medium-n-veg",
-                           "value":1
-                        },
-                        {
-                           "choice":"high-n-veg",
-                           "value":2
-                        }
-                     ]
-                  }
-               },
-               {
-                  "choice":"deepsilt",
-                  "value":{
-                     "decision":"previous-crop",
-                     "choices":[
-                        {
-                           "choice":"cereals",
-                           "value":1
-                        },
-                        {
-                           "choice":"low-n-veg",
-                           "value":1
-                        },
-                        {
-                           "choice":"forage",
-                           "value":1
-                        },
-                        {
-                           "choice":"sugarbeet",
-                           "value":1
-                        },
-                        {
-                           "choice":"oilseed",
-                           "value":2
-                        },
-                        {
-                           "choice":"potatoes",
-                           "value":2
-                        },
-                        {
-                           "choice":"peas",
-                           "value":2
-                        },
-                        {
-                           "choice":"beans",
-                           "value":2
-                        },
-                        {
-                           "choice":"uncropped",
-                           "value":2
-                        },
-                        {
-                           "choice":"medium-n-veg",
-                           "value":2
-                        },
-                        {
-                           "choice":"high-n-veg",
-                           "value":3
-                        }
-                     ]
-                  }
-               },
-               {
-                  "choice":"organic",
-                  "value":4
-               },
-               {
-                  "choice":"peat",
-                  "value":5
-               }
-            ]
-         }
-      }
-   ]
+	"decision": "rainfall",
+	"choices": [{
+		"choice": "rain-low",
+		"value": {
+			"decision": "soil",
+			"choices": [{
+				"choice": "sandyshallow",
+				"value": {
+					"decision": "previous-crop",
+					"choices": [{
+						"choice": "cereals",
+						"value": 0
+					}, {
+						"choice": "low-n-veg",
+						"value": 0
+					}, {
+						"choice": "forage",
+						"value": 0
+					}, {
+						"choice": "sugarbeet",
+						"value": 1
+					}, {
+						"choice": "oilseed",
+						"value": 1
+					}, {
+						"choice": "potatoes",
+						"value": 1
+					}, {
+						"choice": "peas",
+						"value": 1
+					}, {
+						"choice": "beans",
+						"value": 1
+					}, {
+						"choice": "uncropped",
+						"value": 1
+					}, {
+						"choice": "medium-n-veg",
+						"value": 1
+					}, {
+						"choice": "high-n-veg",
+						"value": 2
+					}]
+				}
+			}, {
+				"choice": "mediumshallow",
+				"value": {
+					"decision": "previous-crop",
+					"choices": [{
+						"choice": "cereals",
+						"value": 1
+					}, {
+						"choice": "low-n-veg",
+						"value": 1
+					}, {
+						"choice": "forage",
+						"value": 1
+					}, {
+						"choice": "sugarbeet",
+						"value": 2
+					}, {
+						"choice": "oilseed",
+						"value": 2
+					}, {
+						"choice": "potatoes",
+						"value": 2
+					}, {
+						"choice": "peas",
+						"value": 2
+					}, {
+						"choice": "beans",
+						"value": 2
+					}, {
+						"choice": "uncropped",
+						"value": 2
+					}, {
+						"choice": "medium-n-veg",
+						"value": 3
+					}, {
+						"choice": "high-n-veg",
+						"value": 4
+					}]
+				}
+			}, {
+				"choice": "deepclay",
+				"value": {
+					"decision": "previous-crop",
+					"choices": [{
+						"choice": "cereals",
+						"value": 2
+					}, {
+						"choice": "low-n-veg",
+						"value": 2
+					}, {
+						"choice": "forage",
+						"value": 2
+					}, {
+						"choice": "sugarbeet",
+						"value": 3
+					}, {
+						"choice": "oilseed",
+						"value": 3
+					}, {
+						"choice": "potatoes",
+						"value": 3
+					}, {
+						"choice": "peas",
+						"value": 3
+					}, {
+						"choice": "beans",
+						"value": 3
+					}, {
+						"choice": "uncropped",
+						"value": 3
+					}, {
+						"choice": "medium-n-veg",
+						"value": 3
+					}, {
+						"choice": "high-n-veg",
+						"value": 4
+					}]
+				}
+			}, {
+				"choice": "deepsilt",
+				"value": {
+					"decision": "previous-crop",
+					"choices": [{
+						"choice": "cereals",
+						"value": 2
+					}, {
+						"choice": "low-n-veg",
+						"value": 2
+					}, {
+						"choice": "forage",
+						"value": 2
+					}, {
+						"choice": "sugarbeet",
+						"value": 3
+					}, {
+						"choice": "oilseed",
+						"value": 3
+					}, {
+						"choice": "potatoes",
+						"value": 3
+					}, {
+						"choice": "peas",
+						"value": 3
+					}, {
+						"choice": "beans",
+						"value": 3
+					}, {
+						"choice": "uncropped",
+						"value": 3
+					}, {
+						"choice": "medium-n-veg",
+						"value": 3
+					}, {
+						"choice": "high-n-veg",
+						"value": 4
+					}]
+				}
+			}, {
+				"choice": "organic",
+				"value": 4
+			}, {
+				"choice": "peat",
+				"value": 5
+			}]
+		}
+	}, {
+		"choice": "rain-medium",
+		"value": {
+			"decision": "soil",
+			"choices": [{
+				"choice": "sandyshallow",
+				"value": {
+					"decision": "previous-crop",
+					"choices": [{
+						"choice": "cereals",
+						"value": 0
+					}, {
+						"choice": "low-n-veg",
+						"value": 0
+					}, {
+						"choice": "forage",
+						"value": 0
+					}, {
+						"choice": "sugarbeet",
+						"value": 0
+					}, {
+						"choice": "oilseed",
+						"value": 0
+					}, {
+						"choice": "potatoes",
+						"value": 0
+					}, {
+						"choice": "peas",
+						"value": 1
+					}, {
+						"choice": "beans",
+						"value": 1
+					}, {
+						"choice": "uncropped",
+						"value": 1
+					}, {
+						"choice": "medium-n-veg",
+						"value": 0
+					}, {
+						"choice": "high-n-veg",
+						"value": 1
+					}]
+				}
+			}, {
+				"choice": "mediumshallow",
+				"value": {
+					"decision": "previous-crop",
+					"choices": [{
+						"choice": "cereals",
+						"value": 1
+					}, {
+						"choice": "low-n-veg",
+						"value": 1
+					}, {
+						"choice": "forage",
+						"value": 1
+					}, {
+						"choice": "sugarbeet",
+						"value": 1
+					}, {
+						"choice": "oilseed",
+						"value": 2
+					}, {
+						"choice": "potatoes",
+						"value": 2
+					}, {
+						"choice": "peas",
+						"value": 2
+					}, {
+						"choice": "beans",
+						"value": 2
+					}, {
+						"choice": "uncropped",
+						"value": 2
+					}, {
+						"choice": "medium-n-veg",
+						"value": 2
+					}, {
+						"choice": "high-n-veg",
+						"value": 3
+					}]
+				}
+			}, {
+				"choice": "deepclay",
+				"value": {
+					"decision": "previous-crop",
+					"choices": [{
+						"choice": "cereals",
+						"value": 1
+					}, {
+						"choice": "low-n-veg",
+						"value": 1
+					}, {
+						"choice": "forage",
+						"value": 1
+					}, {
+						"choice": "sugarbeet",
+						"value": 1
+					}, {
+						"choice": "oilseed",
+						"value": 2
+					}, {
+						"choice": "potatoes",
+						"value": 2
+					}, {
+						"choice": "peas",
+						"value": 2
+					}, {
+						"choice": "beans",
+						"value": 2
+					}, {
+						"choice": "uncropped",
+						"value": 2
+					}, {
+						"choice": "medium-n-veg",
+						"value": 3
+					}, {
+						"choice": "high-n-veg",
+						"value": 4
+					}]
+				}
+			}, {
+				"choice": "deepsilt",
+				"value": {
+					"decision": "previous-crop",
+					"choices": [{
+						"choice": "cereals",
+						"value": 1
+					}, {
+						"choice": "low-n-veg",
+						"value": 1
+					}, {
+						"choice": "forage",
+						"value": 1
+					}, {
+						"choice": "sugarbeet",
+						"value": 1
+					}, {
+						"choice": "oilseed",
+						"value": 2
+					}, {
+						"choice": "potatoes",
+						"value": 2
+					}, {
+						"choice": "peas",
+						"value": 2
+					}, {
+						"choice": "beans",
+						"value": 2
+					}, {
+						"choice": "uncropped",
+						"value": 2
+					}, {
+						"choice": "medium-n-veg",
+						"value": 3
+					}, {
+						"choice": "high-n-veg",
+						"value": 4
+					}]
+				}
+			}, {
+				"choice": "organic",
+				"value": 4
+			}, {
+				"choice": "peat",
+				"value": 5
+			}]
+		}
+	}, {
+		"choice": "rain-high",
+		"value": {
+			"decision": "soil",
+			"choices": [{
+				"choice": "sandyshallow",
+				"value": {
+					"decision": "previous-crop",
+					"choices": [{
+						"choice": "cereals",
+						"value": 0
+					}, {
+						"choice": "low-n-veg",
+						"value": 0
+					}, {
+						"choice": "forage",
+						"value": 0
+					}, {
+						"choice": "sugarbeet",
+						"value": 0
+					}, {
+						"choice": "oilseed",
+						"value": 0
+					}, {
+						"choice": "potatoes",
+						"value": 0
+					}, {
+						"choice": "peas",
+						"value": 0
+					}, {
+						"choice": "beans",
+						"value": 0
+					}, {
+						"choice": "uncropped",
+						"value": 0
+					}, {
+						"choice": "medium-n-veg",
+						"value": 0
+					}, {
+						"choice": "high-n-veg",
+						"value": 1
+					}]
+				}
+			}, {
+				"choice": "mediumshallow",
+				"value": {
+					"decision": "previous-crop",
+					"choices": [{
+						"choice": "cereals",
+						"value": 1
+					}, {
+						"choice": "low-n-veg",
+						"value": 1
+					}, {
+						"choice": "forage",
+						"value": 1
+					}, {
+						"choice": "sugarbeet",
+						"value": 1
+					}, {
+						"choice": "oilseed",
+						"value": 1
+					}, {
+						"choice": "potatoes",
+						"value": 1
+					}, {
+						"choice": "peas",
+						"value": 1
+					}, {
+						"choice": "beans",
+						"value": 1
+					}, {
+						"choice": "uncropped",
+						"value": 1
+					}, {
+						"choice": "medium-n-veg",
+						"value": 1
+					}, {
+						"choice": "high-n-veg",
+						"value": 2
+					}]
+				}
+			}, {
+				"choice": "deepclay",
+				"value": {
+					"decision": "previous-crop",
+					"choices": [{
+						"choice": "cereals",
+						"value": 1
+					}, {
+						"choice": "low-n-veg",
+						"value": 1
+					}, {
+						"choice": "forage",
+						"value": 1
+					}, {
+						"choice": "sugarbeet",
+						"value": 1
+					}, {
+						"choice": "oilseed",
+						"value": 1
+					}, {
+						"choice": "potatoes",
+						"value": 1
+					}, {
+						"choice": "peas",
+						"value": 2
+					}, {
+						"choice": "beans",
+						"value": 2
+					}, {
+						"choice": "uncropped",
+						"value": 1
+					}, {
+						"choice": "medium-n-veg",
+						"value": 1
+					}, {
+						"choice": "high-n-veg",
+						"value": 2
+					}]
+				}
+			}, {
+				"choice": "deepsilt",
+				"value": {
+					"decision": "previous-crop",
+					"choices": [{
+						"choice": "cereals",
+						"value": 1
+					}, {
+						"choice": "low-n-veg",
+						"value": 1
+					}, {
+						"choice": "forage",
+						"value": 1
+					}, {
+						"choice": "sugarbeet",
+						"value": 1
+					}, {
+						"choice": "oilseed",
+						"value": 2
+					}, {
+						"choice": "potatoes",
+						"value": 2
+					}, {
+						"choice": "peas",
+						"value": 2
+					}, {
+						"choice": "beans",
+						"value": 2
+					}, {
+						"choice": "uncropped",
+						"value": 2
+					}, {
+						"choice": "medium-n-veg",
+						"value": 2
+					}, {
+						"choice": "high-n-veg",
+						"value": 3
+					}]
+				}
+			}, {
+				"choice": "organic",
+				"value": 4
+			}, {
+				"choice": "peat",
+				"value": 5
+			}]
+		}
+	}]
 }

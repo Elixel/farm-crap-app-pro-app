@@ -1,365 +1,274 @@
 {
-   "decision":"crop",
-   "choices":[
-      {
-         "choice":"winter-wheat-incorporated",
-         "value":{
-            "decision":"nutrient",
-            "choices":[
-               {
-                  "choice":"phosphorous",
-                  "value":{
-                     "decision":"p-index",
-                     "choices":[
-                        {
-                           "choice":"soil-p-0",
-                           "value":120
-                        },
-                        {
-                           "choice":"soil-p-1",
-                           "value":90
-                        },
-                        {
-                           "choice":"soil-p-2",
-                           "value":60
-                        },
-                        {
-                           "choice":"soil-p-3",
-                           "value":0
-                        }
-                     ]
-                  }
-               },
-               {
-                  "choice":"potassium",
-                  "value":{
-                     "decision":"k-index",
-                     "choices":[
-                        {
-                           "choice":"soil-k-0",
-                           "value":105
-                        },
-                        {
-                           "choice":"soil-k-1",
-                           "value":75
-                        },
-                        {
-                           "choice":"soil-k-2-",
-                           "value":45
-                        },
-                        {
-                           "choice":"soil-k-2+",
-                           "value":20
-                        },
-                        {
-                           "choice":"soil-k-3",
-                           "value":0
-                        }
-                     ]
-                  }
-               }
-            ]
-         }
-      },
-      {
-         "choice":"spring-barley-incorporated",
-         "value":{
-            "decision":"nutrient",
-            "choices":[
-               {
-                  "choice":"phosphorous",
-                  "value":{
-                     "decision":"p-index",
-                     "choices":[
-                        {
-                           "choice":"soil-p-0",
-                           "value":105
-                        },
-                        {
-                           "choice":"soil-p-1",
-                           "value":75
-                        },
-                        {
-                           "choice":"soil-p-2",
-                           "value":45
-                        },
-                        {
-                           "choice":"soil-p-3",
-                           "value":0
-                        }
-                     ]
-                  }
-               },
-               {
-                  "choice":"potassium",
-                  "value":{
-                     "decision":"k-index",
-                     "choices":[
-                        {
-                           "choice":"soil-k-0",
-                           "value":95
-                        },
-                        {
-                           "choice":"soil-k-1",
-                           "value":65
-                        },
-                        {
-                           "choice":"soil-k-2-",
-                           "value":35
-                        },
-                        {
-                           "choice":"soil-k-2+",
-                           "value":0
-                        },
-                        {
-                           "choice":"soil-k-3",
-                           "value":0
-                        }
-                     ]
-                  }
-               }
-            ]
-         }
-      },
-      {
-         "choice":"winter-wheat-removed",
-         "value":{
-            "decision":"nutrient",
-            "choices":[
-               {
-                  "choice":"phosphorous",
-                  "value":{
-                     "decision":"p-index",
-                     "choices":[
-                        {
-                           "choice":"soil-p-0",
-                           "value":125
-                        },
-                        {
-                           "choice":"soil-p-1",
-                           "value":95
-                        },
-                        {
-                           "choice":"soil-p-2",
-                           "value":65
-                        },
-                        {
-                           "choice":"soil-p-3",
-                           "value":0
-                        }
-                     ]
-                  }
-               },
-               {
-                  "choice":"potassium",
-                  "value":{
-                     "decision":"k-index",
-                     "choices":[
-                        {
-                           "choice":"soil-k-0",
-                           "value":145
-                        },
-                        {
-                           "choice":"soil-k-1",
-                           "value":115
-                        },
-                        {
-                           "choice":"soil-k-2-",
-                           "value":85
-                        },
-                        {
-                           "choice":"soil-k-2+",
-                           "value":55
-                        },
-                        {
-                           "choice":"soil-k-3",
-                           "value":0
-                        }
-                     ]
-                  }
-               }
-            ]
-         }
-      },
-      {
-         "choice":"spring-barley-removed",
-         "value":{
-            "decision":"nutrient",
-            "choices":[
-               {
-                  "choice":"phosphorous",
-                  "value":{
-                     "decision":"p-index",
-                     "choices":[
-                        {
-                           "choice":"soil-p-0",
-                           "value":110
-                        },
-                        {
-                           "choice":"soil-p-1",
-                           "value":80
-                        },
-                        {
-                           "choice":"soil-p-2",
-                           "value":50
-                        },
-                        {
-                           "choice":"soil-p-3",
-                           "value":0
-                        }
-                     ]
-                  }
-               },
-               {
-                  "choice":"potassium",
-                  "value":{
-                     "decision":"k-index",
-                     "choices":[
-                        {
-                           "choice":"soil-k-0",
-                           "value":130
-                        },
-                        {
-                           "choice":"soil-k-1",
-                           "value":100
-                        },
-                        {
-                           "choice":"soil-k-2-",
-                           "value":70
-                        },
-                        {
-                           "choice":"soil-k-2+",
-                           "value":40
-                        },
-                        {
-                           "choice":"soil-k-3",
-                           "value":0
-                        }
-                     ]
-                  }
-               }
-            ]
-         }
-      },
-      {
-         "choice":"grass-cut",
-         "value":{
-            "decision":"nutrient",
-            "choices":[
-               {
-                  "choice":"phosphorous",
-                  "value":{
-                     "decision":"p-index",
-                     "choices":[
-                        {
-                           "choice":"soil-p-0",
-                           "value":100
-                        },
-                        {
-                           "choice":"soil-p-1",
-                           "value":70
-                        },
-                        {
-                           "choice":"soil-p-2",
-                           "value":40
-                        },
-                        {
-                           "choice":"soil-p-3",
-                           "value":0
-                        }
-                     ]
-                  }
-               },
-               {
-                  "choice":"potassium",
-                  "value":{
-                     "decision":"k-index",
-                     "choices":[
-                        {
-                           "choice":"soil-k-0",
-                           "value":80
-                        },
-                        {
-                           "choice":"soil-k-1",
-                           "value":80
-                        },
-                        {
-                           "choice":"soil-k-2-",
-                           "value":80
-                        },
-                        {
-                           "choice":"soil-k-2+",
-                           "value":30
-                        },
-                        {
-                           "choice":"soil-k-3",
-                           "value":0
-                        }
-                     ]
-                  }
-               }
-            ]
-         }
-      },
-      {
-         "choice":"grass-grazed",
-         "value":{
-            "decision":"nutrient",
-            "choices":[
-               {
-                  "choice":"phosphorous",
-                  "value":{
-                     "decision":"p-index",
-                     "choices":[
-                        {
-                           "choice":"soil-p-0",
-                           "value":80
-                        },
-                        {
-                           "choice":"soil-p-1",
-                           "value":50
-                        },
-                        {
-                           "choice":"soil-p-2",
-                           "value":20
-                        },
-                        {
-                           "choice":"soil-p-3",
-                           "value":0
-                        }
-                     ]
-                  }
-               },
-               {
-                  "choice":"potassium",
-                  "value":{
-                     "decision":"k-index",
-                     "choices":[
-                        {
-                           "choice":"soil-k-0",
-                           "value":60
-                        },
-                        {
-                           "choice":"soil-k-1",
-                           "value":30
-                        },
-                        {
-                           "choice":"soil-k-2-",
-                           "value":0
-                        },
-                        {
-                           "choice":"soil-k-2+",
-                           "value":0
-                        },
-                        {
-                           "choice":"soil-k-3",
-                           "value":0
-                        }
-                     ]
-                  }
-               }
-            ]
-         }
-      }
-   ]
+	"decision": "crop",
+	"choices": [{
+		"choice": "winter-wheat-incorporated",
+		"value": {
+			"decision": "nutrient",
+			"choices": [{
+				"choice": "phosphorous",
+				"value": {
+					"decision": "p-index",
+					"choices": [{
+						"choice": "soil-p-0",
+						"value": 120
+					}, {
+						"choice": "soil-p-1",
+						"value": 90
+					}, {
+						"choice": "soil-p-2",
+						"value": 60
+					}, {
+						"choice": "soil-p-3",
+						"value": 0
+					}]
+				}
+			}, {
+				"choice": "potassium",
+				"value": {
+					"decision": "k-index",
+					"choices": [{
+						"choice": "soil-k-0",
+						"value": 105
+					}, {
+						"choice": "soil-k-1",
+						"value": 75
+					}, {
+						"choice": "soil-k-2-",
+						"value": 45
+					}, {
+						"choice": "soil-k-2+",
+						"value": 20
+					}, {
+						"choice": "soil-k-3",
+						"value": 0
+					}]
+				}
+			}]
+		}
+	}, {
+		"choice": "spring-barley-incorporated",
+		"value": {
+			"decision": "nutrient",
+			"choices": [{
+				"choice": "phosphorous",
+				"value": {
+					"decision": "p-index",
+					"choices": [{
+						"choice": "soil-p-0",
+						"value": 105
+					}, {
+						"choice": "soil-p-1",
+						"value": 75
+					}, {
+						"choice": "soil-p-2",
+						"value": 45
+					}, {
+						"choice": "soil-p-3",
+						"value": 0
+					}]
+				}
+			}, {
+				"choice": "potassium",
+				"value": {
+					"decision": "k-index",
+					"choices": [{
+						"choice": "soil-k-0",
+						"value": 95
+					}, {
+						"choice": "soil-k-1",
+						"value": 65
+					}, {
+						"choice": "soil-k-2-",
+						"value": 35
+					}, {
+						"choice": "soil-k-2+",
+						"value": 0
+					}, {
+						"choice": "soil-k-3",
+						"value": 0
+					}]
+				}
+			}]
+		}
+	}, {
+		"choice": "winter-wheat-removed",
+		"value": {
+			"decision": "nutrient",
+			"choices": [{
+				"choice": "phosphorous",
+				"value": {
+					"decision": "p-index",
+					"choices": [{
+						"choice": "soil-p-0",
+						"value": 125
+					}, {
+						"choice": "soil-p-1",
+						"value": 95
+					}, {
+						"choice": "soil-p-2",
+						"value": 65
+					}, {
+						"choice": "soil-p-3",
+						"value": 0
+					}]
+				}
+			}, {
+				"choice": "potassium",
+				"value": {
+					"decision": "k-index",
+					"choices": [{
+						"choice": "soil-k-0",
+						"value": 145
+					}, {
+						"choice": "soil-k-1",
+						"value": 115
+					}, {
+						"choice": "soil-k-2-",
+						"value": 85
+					}, {
+						"choice": "soil-k-2+",
+						"value": 55
+					}, {
+						"choice": "soil-k-3",
+						"value": 0
+					}]
+				}
+			}]
+		}
+	}, {
+		"choice": "spring-barley-removed",
+		"value": {
+			"decision": "nutrient",
+			"choices": [{
+				"choice": "phosphorous",
+				"value": {
+					"decision": "p-index",
+					"choices": [{
+						"choice": "soil-p-0",
+						"value": 110
+					}, {
+						"choice": "soil-p-1",
+						"value": 80
+					}, {
+						"choice": "soil-p-2",
+						"value": 50
+					}, {
+						"choice": "soil-p-3",
+						"value": 0
+					}]
+				}
+			}, {
+				"choice": "potassium",
+				"value": {
+					"decision": "k-index",
+					"choices": [{
+						"choice": "soil-k-0",
+						"value": 130
+					}, {
+						"choice": "soil-k-1",
+						"value": 100
+					}, {
+						"choice": "soil-k-2-",
+						"value": 70
+					}, {
+						"choice": "soil-k-2+",
+						"value": 40
+					}, {
+						"choice": "soil-k-3",
+						"value": 0
+					}]
+				}
+			}]
+		}
+	}, {
+		"choice": "grass-cut",
+		"value": {
+			"decision": "nutrient",
+			"choices": [{
+				"choice": "phosphorous",
+				"value": {
+					"decision": "p-index",
+					"choices": [{
+						"choice": "soil-p-0",
+						"value": 100
+					}, {
+						"choice": "soil-p-1",
+						"value": 70
+					}, {
+						"choice": "soil-p-2",
+						"value": 40
+					}, {
+						"choice": "soil-p-3",
+						"value": 0
+					}]
+				}
+			}, {
+				"choice": "potassium",
+				"value": {
+					"decision": "k-index",
+					"choices": [{
+						"choice": "soil-k-0",
+						"value": 80
+					}, {
+						"choice": "soil-k-1",
+						"value": 80
+					}, {
+						"choice": "soil-k-2-",
+						"value": 80
+					}, {
+						"choice": "soil-k-2+",
+						"value": 30
+					}, {
+						"choice": "soil-k-3",
+						"value": 0
+					}]
+				}
+			}]
+		}
+	}, {
+		"choice": "grass-grazed",
+		"value": {
+			"decision": "nutrient",
+			"choices": [{
+				"choice": "phosphorous",
+				"value": {
+					"decision": "p-index",
+					"choices": [{
+						"choice": "soil-p-0",
+						"value": 80
+					}, {
+						"choice": "soil-p-1",
+						"value": 50
+					}, {
+						"choice": "soil-p-2",
+						"value": 20
+					}, {
+						"choice": "soil-p-3",
+						"value": 0
+					}]
+				}
+			}, {
+				"choice": "potassium",
+				"value": {
+					"decision": "k-index",
+					"choices": [{
+						"choice": "soil-k-0",
+						"value": 60
+					}, {
+						"choice": "soil-k-1",
+						"value": 30
+					}, {
+						"choice": "soil-k-2-",
+						"value": 0
+					}, {
+						"choice": "soil-k-2+",
+						"value": 0
+					}, {
+						"choice": "soil-k-3",
+						"value": 0
+					}]
+				}
+			}]
+		}
+	}]
 }

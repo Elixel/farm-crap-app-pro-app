@@ -188,7 +188,7 @@ export class CalcCore {
     );
 
     // Crop available values
-    let n2 = this.decision(this.manureTree, Object.assign({nutrient: 'nitrogen'}, params));
+    let n2 = this.decision(this.manureTree, Object.assign({nutrient: 'n-avail'}, params));
     // N/A value
     if (n2 !== 'na') {
       // Apply percent or return straight value
