@@ -102,6 +102,9 @@ export class SpreadAddPage {
   }
 
   calculate() {
+    if (!this.spreadForm.valid) {
+      return;
+    }
     let manureDensity;
     // Convert back from imperial units
     if (this.units === 'imperial') {

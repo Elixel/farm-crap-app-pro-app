@@ -84,6 +84,9 @@ export class CalculatorPage {
   }
 
   calculate() {
+    if (!this.calculatorForm.valid) {
+      return;
+    }
     let manureDensity;
     // Convert back from imperial units
     if (this.units === 'imperial') {
