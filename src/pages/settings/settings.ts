@@ -117,7 +117,12 @@ export class SettingsPage {
         this.SocialSharing.share('From your Crap Calculator', '', fileEntry.nativeURL);
       });
     }, (error) => {
-      console.error(error);
+      let alert = this.alertCtrl.create({
+        title: 'Unable to export data',
+        subTitle: 'Unable to write to temporary directory. Please try freeing up some space on your device and try again.',
+        buttons: ['Ok']
+      });
+      alert.present();
     });
   }
 
