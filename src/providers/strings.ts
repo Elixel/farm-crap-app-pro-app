@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core';
 
-/*
-  Generated class for the Strings provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class Strings {
   data: any = {
@@ -14,8 +8,8 @@ export class Strings {
         'spring-barley-removed': 'Spring barley, straw removed',
         'winter-wheat-incorporated': 'Winter wheat, straw incorporated',
         'winter-wheat-removed': 'Winter wheat, straw removed',
-        'grass-cut': 'Grass cut (yield 6-8k, conc 1.5, stock med)',
-        'grass-grazed': 'Grass grazed (yield 6-8k, conc 1.5, stock med)'
+        'grass-cut': 'Grass (cut)',
+        'grass-grazed': 'Grass (grazed)'
     },
     'soil': {
         'sandyshallow': 'Sandy/Shallow',
