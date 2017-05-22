@@ -13,6 +13,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { File } from '@ionic-native/file';
 import { SocialSharing } from '@ionic-native/social-sharing';
+import { Camera } from '@ionic-native/camera';
 
 // App Specific
 import { MyApp } from './app.component';
@@ -51,6 +52,7 @@ import 'chart.js/src/chart.js';
   File,
   SocialSharing,
   Geolocation,
+  Camera,
   Field,
   LocalStorageService,
   Settings,

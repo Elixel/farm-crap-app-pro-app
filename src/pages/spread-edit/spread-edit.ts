@@ -8,6 +8,8 @@ import { Strings } from '../../providers/strings';
 import { Settings } from '../../providers/settings';
 import { CalcCore } from '../../providers/calc-core';
 
+import { Camera, CameraOptions } from '@ionic-native/camera';
+
 @IonicPage({
   defaultHistory: ['HomePage', 'FieldDetailPage'],
   segment: 'field-detail/:fieldIndex/spreads/:spreadIndex'
@@ -27,6 +29,7 @@ export class SpreadEditPage {
   private cropAvailable: Object;
   private manureCosts: Object;
   private crapPicture: String;
+  private customCrapPicture: String;
   private kilogramHectareToUnitsAcre: Function;
 
   private spreadForm: FormGroup;
@@ -39,7 +42,8 @@ export class SpreadEditPage {
     private stringsProvider: Strings,
     private fieldProvider: Field,
     private settingsProvider: Settings,
-    private calcCore: CalcCore
+    private calcCore: CalcCore,
+    private camera: Camera
   ) {
     // Get field data
     this.field = fieldProvider.fields[navParams.data.fieldIndex];
@@ -60,6 +64,10 @@ export class SpreadEditPage {
       // Check if existing application type is there, if so then it is a required field unless manure type changes
       manureApplicationType: [this.spread.manureApplicationType, this.spread.manureApplicationType ? Validators.required : null],
     });
+    // Get custom crap picture
+    if (this.spread.picture) {
+      this.customCrapPicture = this.spread.picture;
+    }
     // Convert units if imperial units
     if (this.units === 'imperial') {
       if (this.strings.units[this.units].type[this.spreadForm.value.manureType] === 'gallons') {
@@ -173,12 +181,29 @@ export class SpreadEditPage {
       manureType: this.spreadForm.value.manureType,
       manureQuality: this.spreadForm.value.manureQuality,
       manureApplicationType: this.spreadForm.value.manureApplicationType,
-      manureDensity: manureDensity
+      manureDensity: manureDensity,
+      picture: this.customCrapPicture || null
     };
+    console.log(spread);
     // Add spread to field spread list
     this.fieldProvider.setSpread(this.navParams.data.fieldIndex, this.navParams.data.spreadIndex, spread);
     // Navigate back to home
     this.navCtrl.pop();
+  }
+
+  setCrapPicture() {
+    const cameraOptions: CameraOptions = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      targetWidth: 640,
+      targetHeight: 640
+    }
+    this.camera.getPicture(cameraOptions).then((imageData) => {
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.customCrapPicture = base64Image;
+    });
   }
 
 }

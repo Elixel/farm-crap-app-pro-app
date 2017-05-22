@@ -77,6 +77,16 @@ page-spread-edit {
             width: 100% !important;
             height: 100% !important;
         }
+        .add-picture {
+            position: absolute;
+            top:0;
+            right: 0;
+            background: #387ef5;
+            width: 44px;
+            height: 36px;
+            color: #ffffff;
+            font-size: 2em;
+        }
     }
     .bottom-fixed {
         position: absolute;

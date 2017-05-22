@@ -50,7 +50,10 @@
     <ion-slide>
       <!-- Calculations -->
       <ion-card>
-        <img *ngIf="crapPicture" [src]="crapPicture" />
+        <img *ngIf="customCrapPicture || crapPicture" [src]="customCrapPicture || crapPicture" />
+        <div class="add-picture" (click)="setCrapPicture()">
+          <ion-icon name="camera"></ion-icon>
+        </div>
       </ion-card>
       <div class="bottom-fixed">
         <ion-grid no-padding>

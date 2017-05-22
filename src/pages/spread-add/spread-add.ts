@@ -8,6 +8,8 @@ import { Strings } from '../../providers/strings';
 import { Settings } from '../../providers/settings';
 import { CalcCore } from '../../providers/calc-core';
 
+import { Camera, CameraOptions } from '@ionic-native/camera';
+
 @IonicPage({
   defaultHistory: ['HomePage', 'FieldDetailPage'],
   segment: 'field-detail/:fieldIndex/spreads/add'
@@ -26,6 +28,7 @@ export class SpreadAddPage {
   private cropAvailable: Object;
   private manureCosts: Object;
   private crapPicture: String;
+  private customCrapPicture: String;
   private kilogramHectareToUnitsAcre: Function;
 
   private spreadForm: FormGroup;
@@ -38,7 +41,8 @@ export class SpreadAddPage {
     private stringsProvider: Strings,
     private fieldProvider: Field,
     private settingsProvider: Settings,
-    private calcCore: CalcCore
+    private calcCore: CalcCore,
+    private camera: Camera
   ) {
     // Get field data
     this.field = fieldProvider.fields[navParams.data.fieldIndex];
@@ -159,12 +163,29 @@ export class SpreadAddPage {
       manureType: this.spreadForm.value.manureType,
       manureQuality: this.spreadForm.value.manureQuality,
       manureApplicationType: this.spreadForm.value.manureApplicationType,
-      manureDensity: manureDensity
+      manureDensity: manureDensity,
+      picture: this.customCrapPicture || null
     };
+    console.log(spread);
     // Add spread to field spread list
     this.fieldProvider.addSpread(this.navParams.data.fieldIndex, spread);
     // Navigate back to home
     this.navCtrl.pop();
+  }
+
+  setCrapPicture() {
+    const cameraOptions: CameraOptions = {
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      targetWidth: 640,
+      targetHeight: 640
+    }
+    this.camera.getPicture(cameraOptions).then((imageData) => {
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.customCrapPicture = base64Image;
+    });
   }
 
 }

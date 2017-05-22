@@ -21,6 +21,7 @@
         "@angular/http": "4.1.0",
         "@angular/platform-browser": "4.1.0",
         "@angular/platform-browser-dynamic": "4.1.0",
+        "@ionic-native/camera": "^3.10.3",
         "@ionic-native/core": "3.8.1",
         "@ionic-native/file": "3.8.1",
         "@ionic-native/geolocation": "^3.9.2",
@@ -35,6 +36,7 @@
         "angular-2-local-storage": "^1.0.1",
         "chart.js": "^2.5.0",
         "cordova-ios": "^4.4.0",
+        "cordova-plugin-camera": "^2.4.1",
         "cordova-plugin-console": "^1.0.5",
         "cordova-plugin-device": "^1.1.4",
         "cordova-plugin-file": "~4.3.2",
@@ -90,7 +92,11 @@
                 "GEOLOCATION_USAGE_DESCRIPTION": "This app uses your geolocation to show your rough location on the map"
             },
             "cordova-plugin-wkwebview-engine": {},
-            "cordova-plugin-x-socialsharing": {}
+            "cordova-plugin-x-socialsharing": {},
+            "cordova-plugin-camera": {
+                "CAMERA_USAGE_DESCRIPTION": " ",
+                "PHOTOLIBRARY_USAGE_DESCRIPTION": " "
+            }
         },
         "platforms": [
             "ios"
