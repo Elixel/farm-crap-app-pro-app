@@ -28,5 +28,15 @@ npm install
 
 5. Serve the project locally
 ```bash
+# Do this before doing any cordova commands to generate WWW folder
 ionic serve
 ```
+
+6. Deploy to device
+```bash
+# Generate icons/splash
+ionic cordova resources 
+# Add iOS platform
+ionic cordova platform add ios
+# Build and run app
+ionic cordova run ios
