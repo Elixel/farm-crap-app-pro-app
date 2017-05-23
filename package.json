@@ -94,8 +94,8 @@
             "cordova-plugin-wkwebview-engine": {},
             "cordova-plugin-x-socialsharing": {},
             "cordova-plugin-camera": {
-                "CAMERA_USAGE_DESCRIPTION": " ",
-                "PHOTOLIBRARY_USAGE_DESCRIPTION": " "
+                "CAMERA_USAGE_DESCRIPTION": "This app uses your camera to take photos of the manure",
+                "PHOTOLIBRARY_USAGE_DESCRIPTION": "This app uses your photo library to take photos of the manure"
             }
         },
         "platforms": [
